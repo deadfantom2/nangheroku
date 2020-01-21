@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const chalk = require("chalk");
+const path = require("path");
 require("dotenv").config();
 
 // Init express
@@ -47,6 +48,9 @@ app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(logger("dev"));
 
 // Routes
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/dist/heroku/index.html"));
+});
 // app.use("/users", require("./routes/usersRoutes"));
 // app.use("/orders", require("./routes/ordersRoutes"));
 
