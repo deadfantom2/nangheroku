@@ -43,14 +43,12 @@ app.use((req, res, next) => {
 
 // Middlewares
 app.use(express.json({ limit: "50mb" }));
+app.use(express.static(__dirname + "/dist/heroku/index.html"));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 app.use(logger("dev"));
 
 // Routes
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/dist/heroku/index.html"));
-});
 // app.use("/users", require("./routes/usersRoutes"));
 // app.use("/orders", require("./routes/ordersRoutes"));
 
