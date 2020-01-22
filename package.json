@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "back": "nodemon ./bin/www",
+    "back": "node ./bin/www",
     "client": "ng serve",
-    "start": "concurrently \"npm run back\" \"npm run client\"",
+    "start": "concurrently  \"npm run client\" .\"npm run back\"",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
