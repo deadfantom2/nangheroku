@@ -15,7 +15,6 @@ mongoose.connect(process.env.MONGOLAB_URI || process.env.MONGODB_URI, {
 });
 mongoose.connection.on("open", () => {
   console.log("%s MongoDB is running.", chalk.green("✗"));
-  process.exit();
 });
 mongoose.connection.on("error", err => {
   console.error(err);
@@ -43,13 +42,27 @@ app.use((req, res, next) => {
 
 // Middlewares
 app.use(express.json({ limit: "50mb" }));
-app.use(express.static(__dirname + "/dist/heroku/index.html"));
+// app.use(express.static(__dirname + "/dist/heroku/index.html"));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 app.use(logger("dev"));
 
 // Routes
-// app.use("/users", require("./routes/usersRoutes"));
-// app.use("/orders", require("./routes/ordersRoutes"));
+app.use("/users", require("./routes/users"));
+
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+  console.log("err");
+});
+
+// error handler
+// app.use((err, req, res, next) => {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get("env") === "development" ? err : {};
+
+//   // render the error page
+//   res.status(err.status || 500);
+// });
 
 module.exports = app;
