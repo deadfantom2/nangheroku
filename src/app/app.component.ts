@@ -13,8 +13,13 @@ export class AppComponent implements OnInit {
     this.titleService.initTitle();
   }
 
+  navigateLogin() {
+    this.router.navigateByUrl("/login");
+  }
+  navigateRegister() {
+    this.router.navigateByUrl("/register");
+  }
   navigateToUsers() {
-    console.log("ed");
     this.router.navigateByUrl("/users");
   }
   navigateToOrders() {
