@@ -1,7 +1,7 @@
 const express = require("express");
 
-const User = require("../models/user");
-const Order = require("../models/order");
+const User = require("../models/User");
+const Order = require("../models/Order");
 
 const app = express();
 
@@ -14,10 +14,10 @@ app.post("/add", async (req, res) => {
     nameBook: req.body.nameBook,
     price: req.body.price
   };
-  console.log(body)
+  console.log(body);
 
   const createOrder = await Order.create(body);
-  console.log(createOrder)
+  console.log(createOrder);
   await User.update(
     { _id: fakeIdUser },
     {
