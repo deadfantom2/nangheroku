@@ -65,7 +65,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/dist/index.html"));
+  res.sendFile(path.join(__dirname + "/dist/heroku/index.html"));
 });
 
 module.exports = app;
