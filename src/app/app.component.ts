@@ -16,4 +16,7 @@ export class AppComponent implements OnInit {
   navigateToUsers() {
     this.router.navigateByUrl("/users");
   }
+  navigateToOrders() {
+    this.router.navigateByUrl("/orders");
+  }
 }
