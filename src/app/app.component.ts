@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 export class AppComponent implements OnInit {
   constructor(private titleService: TitleService, private router: Router) {}
   ngOnInit() {
-    this.titleService.initTitle();
+    // this.titleService.initTitle();
   }
 
   navigateLogin() {

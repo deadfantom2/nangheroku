@@ -47,8 +47,9 @@ app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(logger("dev"));
 
 // Routes
+app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/usersRoutes"));
-app.use("/orders", require("./routes/ordersRoutes"));
+app.use("/api/orders", require("./routes/ordersRoutes"));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
