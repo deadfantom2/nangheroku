@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AllUsersComponent } from './users/all-users/all-users.component';
+import { AllOrdersComponent } from './users/all-orders/all-orders.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AllUsersComponent
+    AllUsersComponent,
+    AllOrdersComponent
   ],
   imports: [
     BrowserModule,
