@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "back": "nodemon ./bin/www",
+    "nodemon": "nodemon ./bin/www",
+    "back": "node ./bin/www",
     "client": "ng serve",
     "start": "concurrently \"npm run back\" \"npm run client\"",
     "build": "ng build",
