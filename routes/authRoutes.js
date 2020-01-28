@@ -80,7 +80,9 @@ router.post("/login", async (req, res) => {
         { expiresIn: 1200 }
       ); // 300/ 60 = 5 minutes
       res.cookie("auth", token, {
-        expires: new Date(Date.now() + 10000)
+        expires: new Date(Date.now() + 10000),
+        secure: true,
+        httpOnly: true
       });
       // var decoded = await jwt.decode(token);
       // var payload = await jwt.verify(token, process.env.SECRET_KEY);
