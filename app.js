@@ -31,7 +31,7 @@ mongoose.connection.on("error", err => {
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
-    "[ http://localhost:4200, https://hnodeangular.herokuapp.com]"
+    "https://hnodeangular.herokuapp.com"
   );
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
