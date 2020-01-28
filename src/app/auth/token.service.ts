@@ -12,16 +12,16 @@ export class TokenService {
   }
 
   SetToken(token) {
-    //   this.cookieService.set(
-    //   "auth",
-    //   token,
-    //   new Date(Date.now() + 60000),
-    //   "/",
-    //   "/",
-    //   true,
-    //   "None"
-    // );
-    this.cookieService.set("auth", token, new Date(Date.now() + 300000));
+    this.cookieService.set(
+      "auth",
+      token,
+      new Date(Date.now() + 300000),
+      "/",
+      "/",
+      true,
+      "None"
+    );
+    // this.cookieService.set("auth", token, new Date(Date.now() + 300000));
   }
 
   DeleteToken() {
