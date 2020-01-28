@@ -7,8 +7,8 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class AuthService {
-  private urlPostLogin = "https://hnodeangular.herokuapp.com//api/auth/login";
-  private protect = "https://hnodeangular.herokuapp.com//api/toto";
+  private urlPostLogin = "https://hnodeangular.herokuapp.com/api/auth/login";
+  private protect = "https://hnodeangular.herokuapp.com/api/toto";
 
   constructor(private http: HttpClient, private router: Router) {}
 
