@@ -24,7 +24,7 @@ app.post("/add", async (req, res) => {
   res.status(201).json({
     message:
       "User:" +
-      req.body.name +
+      req.body.email +
       " created! in time: " +
       createDate(createUser.createdAt)
   });

@@ -77,13 +77,16 @@ router.post("/login", async (req, res) => {
           email: findUser.email
         },
         process.env.SECRET_KEY,
-        { expiresIn: 1200 }
+        { expiresIn: 300000 }
       ); // 300/ 60 = 5 minutes
       res.cookie("auth", token, {
-        expires: new Date(Date.now() + 60000),
-        secure: true,
-        httpOnly: true
+        expires: new Date(Date.now() + 300000)
       });
+      // res.cookie("auth", token, {
+      //   expires: new Date(Date.now() + 60000),
+      //   secure: true,
+      //   httpOnly: true
+      // });
       // var decoded = await jwt.decode(token);
       // var payload = await jwt.verify(token, process.env.SECRET_KEY);
       return res.status(200).json({
