@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { User } from "../../Models/User.interface";
+import { User } from "../../models/User";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthService } from "../auth.service";
+import { TokenService } from '../token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-login",
@@ -12,22 +14,16 @@ export class LoginComponent implements OnInit {
   user: User = new User();
   success: boolean;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private tokenService: TokenService, private router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   loginUser(user: User) {
-    this.authService.login(user).subscribe(
-      res => {
-        if (res.success) {
-          this.success = true;
-        } else {
-          this.success = false;
-        }
-      },
-      err => {
-        console.log(err);
-      }
+    this.authService.login(user).subscribe(res => {
+      console.log(res)
+      this.tokenService.SetToken(res.token);
+      this.router.navigate(['/protect']);
+    }
     );
   }
 }

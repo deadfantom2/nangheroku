@@ -4,6 +4,9 @@ import { AllUsersComponent } from "./users/all-users/all-users.component";
 import { AllOrdersComponent } from "./users/all-orders/all-orders.component";
 import { LoginComponent } from "./auth/login/login.component";
 import { RegisterComponent } from "./auth/register/register.component";
+import { TestrouteComponent } from './auth/testroute/testroute.component';
+import { AuthGuard } from './auth/auth.guard';
+
 
 const routes: Routes = [
   {
@@ -25,6 +28,12 @@ const routes: Routes = [
     path: "orders",
     component: AllOrdersComponent,
     data: { title: "Orders" }
+  },
+  {
+    path: "protect",
+    component: TestrouteComponent,
+    data: { title: "Protect" },
+    canActivate: [AuthGuard]
   }
 ];
 

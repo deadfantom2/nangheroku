@@ -25,4 +25,7 @@ export class AppComponent implements OnInit {
   navigateToOrders() {
     this.router.navigateByUrl("/orders");
   }
+  navigateToToto() {
+    this.router.navigateByUrl("/protect");
+  }
 }

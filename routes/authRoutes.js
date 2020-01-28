@@ -69,7 +69,7 @@ router.post("/login", async (req, res) => {
       findUser.password
     );
     if (isMatch && findUser.isVerified === true) {
-      var token = await jwt.sign(
+      const token = await jwt.sign(
         {
           id: findUser._id,
           prenom: findUser.prenom,
@@ -79,6 +79,9 @@ router.post("/login", async (req, res) => {
         process.env.SECRET_KEY,
         { expiresIn: 1200 }
       ); // 300/ 60 = 5 minutes
+      res.cookie("auth", token, {
+        expires: new Date(Date.now() + 10000)
+      });
       // var decoded = await jwt.decode(token);
       // var payload = await jwt.verify(token, process.env.SECRET_KEY);
       return res.status(200).json({
