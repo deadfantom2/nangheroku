@@ -19,7 +19,7 @@ export class TokenService {
       "/",
       "/",
       true,
-      "Strict"
+      "None"
     );
   }
 
@@ -29,13 +29,13 @@ export class TokenService {
 
   GetPayload() {
     const token = this.GetToken();
-    console.log(token);
+    console.log("token: ", token);
     let payload;
     if (token) {
       payload = token.split(".")[1];
       payload = JSON.parse(window.atob(payload));
     }
-    console.log(payload);
+    console.log("payload: ", payload);
     return payload;
   }
 }
