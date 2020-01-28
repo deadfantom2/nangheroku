@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const logger = require("morgan");
 const chalk = require("chalk");
 const path = require("path");
-const cookieParser = require('cookie-parser')
-const checkAuth = require('./middleware/check-auth');
+const cookieParser = require("cookie-parser");
+const checkAuth = require("./middleware/check-auth");
 require("dotenv").config();
 
 // Init express
@@ -29,7 +29,10 @@ mongoose.connection.on("error", err => {
 
 // CORS
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+  res.header(
+    "Access-Control-Allow-Origin",
+    "[ http://localhost:4200, https://hnodeangular.herokuapp.com]"
+  );
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Methods",
@@ -46,7 +49,7 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.static(__dirname + "/dist/heroku"));
-app.disable('x-powered-by');
+app.disable("x-powered-by");
 app.use(cookieParser());
 app.use(logger("dev"));
 
@@ -54,8 +57,8 @@ app.use(logger("dev"));
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/usersRoutes"));
 app.use("/api/orders", require("./routes/ordersRoutes"));
-app.get('/api/toto', checkAuth, (req, res) => {
-  res.status(200).json({ message: 'Le route toto' });
+app.get("/api/toto", checkAuth, (req, res) => {
+  res.status(200).json({ message: "Le route toto" });
 });
 
 // catch 404 and forward to error handler

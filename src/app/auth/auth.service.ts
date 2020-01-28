@@ -1,17 +1,16 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  private urlPostLogin = "http://localhost:3000/api/auth/login";
-  private protect = "http://localhost:3000/api/toto";
+  private urlPostLogin = "https://hnodeangular.herokuapp.com//api/auth/login";
+  private protect = "https://hnodeangular.herokuapp.com//api/toto";
 
-  constructor(private http: HttpClient, private router: Router) {
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(body): Observable<any> {
     return this.http.post(this.urlPostLogin, body);
@@ -20,5 +19,4 @@ export class AuthService {
   toto() {
     return this.http.get<any>(this.protect);
   }
-
 }
