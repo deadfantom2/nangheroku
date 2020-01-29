@@ -5,7 +5,7 @@ var crypto = bluebird.promisifyAll(require("crypto"));
 var sendMail = require("../utils/mail").mailMessage;
 const User = require("../models/User");
 const Token = require("../models/Token");
-const { encrypt, decrypt } = require('../utils/crypto');
+const { encrypt, decrypt } = require("../utils/crypto");
 
 const router = express.Router();
 
@@ -57,6 +57,10 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  var algorithm = "aes-256-gcm";
+  var password = "3zTvzr3p67VC61jmV54rIYu1545x4TlY";
+  var iv = "crypto";
+  // var iv = crypto.randomBytes(16).toString("hex");
   const findUser = await User.findOne({ email: req.body.email });
   if (!findUser) {
     return res.json({
@@ -83,7 +87,12 @@ router.post("/login", async (req, res) => {
       // res.cookie("auth", token, {
       //   expires: new Date(Date.now() + 300000)
       // });
-      res.cookie("auth", token, {
+      console.log("await jwt.sign: ", token);
+      console.log(
+        "await encrypt(token): ",
+        await encrypt(token, algorithm, password, iv)
+      );
+      res.cookie("auth", await encrypt(token, algorithm, password, iv), {
         expires: new Date(Date.now() + 60000),
         secure: false,
         httpOnly: false
@@ -92,7 +101,7 @@ router.post("/login", async (req, res) => {
       // var payload = await jwt.verify(token, process.env.SECRET_KEY);
       return res.status(200).json({
         success: true,
-        token: token,
+        token: encrypt(token, algorithm, password, iv),
         user: {
           name: findUser.name,
           email: findUser.email,
