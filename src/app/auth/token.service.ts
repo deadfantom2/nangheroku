@@ -19,7 +19,7 @@ export class TokenService {
       new Date(Date.now() + 300000),
       "/",
       "/",
-      true,
+      false,
       "None"
     );
     // this.cookieService.set("auth", token, new Date(Date.now() + 300000));
