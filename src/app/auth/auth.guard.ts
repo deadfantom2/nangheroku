@@ -27,6 +27,8 @@ export class AuthGuard implements CanActivate {
     const userPayload = this.tokenService.GetPayload();
     console.log("token: ", token);
     console.log("userPayload: ", userPayload);
+    // debugger
+    console.log("token debuger: ", token)
     if (token) {
       return true;
     } else {

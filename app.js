@@ -26,6 +26,7 @@ mongoose.connection.on("error", err => {
   );
   process.exit();
 });
+mongoose.set('useCreateIndex', true);
 
 // CORS
 app.use((req, res, next) => {
@@ -52,6 +53,7 @@ app.use(express.static(__dirname + "/dist/heroku"));
 app.disable("x-powered-by");
 app.use(cookieParser());
 app.use(logger("dev"));
+app.use(express.static(__dirname + '/'));
 
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));

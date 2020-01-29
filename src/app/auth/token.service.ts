@@ -16,7 +16,7 @@ export class TokenService {
     this.cookieService.set(
       "auth",
       token,
-      new Date(Date.now() + 6000),
+      new Date(Date.now() + 60000),
       "/",
       "/",
       true,

@@ -5,6 +5,7 @@ var crypto = bluebird.promisifyAll(require("crypto"));
 var sendMail = require("../utils/mail").mailMessage;
 const User = require("../models/User");
 const Token = require("../models/Token");
+const { encrypt, decrypt } = require('../utils/crypto');
 
 const router = express.Router();
 
@@ -77,15 +78,15 @@ router.post("/login", async (req, res) => {
           email: findUser.email
         },
         process.env.SECRET_KEY,
-        { expiresIn: 6000 }
+        { expiresIn: 60000 }
       ); // 300/ 60 = 5 minutes
       // res.cookie("auth", token, {
       //   expires: new Date(Date.now() + 300000)
       // });
       res.cookie("auth", token, {
-        expires: new Date(Date.now() + 6000),
-        secure: true,
-        httpOnly: true
+        expires: new Date(Date.now() + 60000),
+        secure: false,
+        httpOnly: false
       });
       // var decoded = await jwt.decode(token);
       // var payload = await jwt.verify(token, process.env.SECRET_KEY);
@@ -98,7 +99,7 @@ router.post("/login", async (req, res) => {
           age: findUser.age,
           roles: findUser.roles
         },
-        expiresIn: 1200,
+        expiresIn: 60000,
         message: "Authentication is succesfull !"
       });
     } else {
