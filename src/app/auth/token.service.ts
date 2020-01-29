@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
+import * as jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: "root"
@@ -12,16 +13,16 @@ export class TokenService {
   }
 
   SetToken(token) {
-    //   this.cookieService.set(
-    //   "auth",
-    //   token,
-    //   new Date(Date.now() + 60000),
-    //   "/",
-    //   "/",
-    //   true,
-    //   "None"
-    // );
-    this.cookieService.set("auth", token, new Date(Date.now() + 300000));
+      this.cookieService.set(
+      "auth",
+      token,
+      new Date(Date.now() + 300000),
+      "/",
+      "/",
+      true,
+      "None"
+    );
+    // this.cookieService.set("auth", token, new Date(Date.now() + 300000));
   }
 
   DeleteToken() {
@@ -30,13 +31,11 @@ export class TokenService {
 
   GetPayload() {
     const token = this.GetToken();
-    console.log("token: ", token);
     let payload;
     if (token) {
-      payload = token.split(".")[1];
-      payload = JSON.parse(window.atob(payload));
+      console.log("jwt_decode(token): ", jwt_decode(token))
+      payload = jwt_decode(token);
     }
-    console.log("payload: ", payload);
     return payload;
   }
 }
