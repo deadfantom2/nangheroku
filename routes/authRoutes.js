@@ -84,8 +84,8 @@ router.post("/login", async (req, res) => {
       // });
       res.cookie("auth", token, {
         expires: new Date(Date.now() + 300000),
-        secure: true,
-        httpOnly: true
+        secure: false,
+        httpOnly: false
       });
       // var decoded = await jwt.decode(token);
       // var payload = await jwt.verify(token, process.env.SECRET_KEY);
