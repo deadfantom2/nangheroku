@@ -6,14 +6,14 @@ import * as jwt_decode from "jwt-decode";
   providedIn: "root"
 })
 export class TokenService {
-  constructor(private cookieService: CookieService) {}
+  constructor(private cookieService: CookieService) { }
 
   GetToken() {
     return this.cookieService.get("auth");
   }
 
   SetToken(token) {
-      this.cookieService.set(
+    this.cookieService.set(
       "auth",
       token,
       new Date(Date.now() + 300000),
