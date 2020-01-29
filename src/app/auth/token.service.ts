@@ -16,10 +16,10 @@ export class TokenService {
     this.cookieService.set(
       "auth",
       token,
-      new Date(Date.now() + 300000),
+      new Date(Date.now() + 6000),
       "/",
       "/",
-      false,
+      true,
       "None"
     );
     // this.cookieService.set("auth", token, new Date(Date.now() + 300000));

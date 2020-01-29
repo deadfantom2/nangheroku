@@ -31,7 +31,6 @@ mongoose.connection.on("error", err => {
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
-    // "https://hnodeangular.herokuapp.com",
     req.headers.origin
   );
   res.header("Access-Control-Allow-Credentials", "true");
@@ -41,7 +40,7 @@ app.use((req, res, next) => {
   );
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization, Auth"
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
   next();
 });
@@ -62,12 +61,7 @@ app.get("/api/toto", checkAuth, (req, res) => {
   res.status(200).json({ message: "Le route toto" });
 });
 
-// catch 404 and forward to error handler
-// app.use((req, res, next) => {
-//   res.status(404).send('Page not found 404')
-// });
-
-// // error handler
+// error handler
 app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
