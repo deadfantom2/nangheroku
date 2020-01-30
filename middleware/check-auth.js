@@ -4,15 +4,12 @@ const { decrypt } = require("../utils/crypto");
 
 module.exports = (req, res, next) => {
   try {
-    var algorithm = "aes-256-gcm";
-    var password = "3zTvzr3p67VC61jmV54rIYu1545x4TlY";
-    var iv = "crypto";
-    const token = decrypt(req.cookies.auth, algorithm, password, iv);
-    console.log("req.cookiessss: ", req.cookies);
+    const ENCRYPTION_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpX"; // Must be 256 bits (32 characters)
+    const IV_LENGTH = 16; // For AES, this is always 16
+    const token = decrypt(req.cookies.auth, ENCRYPTION_KEY, IV_LENGTH);
+    console.log("req.cookiessss: ", token);
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     req.userData = { email: decoded.email, userId: decoded.userId };
-    // console.log("Check-auth node token: ", token)
-    // console.log("Check-auth node decoded: ", decoded)
     next();
   } catch (error) {
     console.log("Error: ", error);

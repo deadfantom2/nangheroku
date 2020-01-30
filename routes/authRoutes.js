@@ -5,7 +5,7 @@ var crypto = bluebird.promisifyAll(require("crypto"));
 var sendMail = require("../utils/mail").mailMessage;
 const User = require("../models/User");
 const Token = require("../models/Token");
-const { encrypt, decrypt } = require("../utils/crypto");
+const { encrypt } = require("../utils/crypto");
 
 const router = express.Router();
 
@@ -57,9 +57,8 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  var algorithm = "aes-256-gcm";
-  var password = "3zTvzr3p67VC61jmV54rIYu1545x4TlY";
-  var iv = "crypto";
+  const ENCRYPTION_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpX"; // Must be 256 bits (32 characters)
+  const IV_LENGTH = 16; // For AES, this is always 16
   // var iv = crypto.randomBytes(16).toString("hex");
   const findUser = await User.findOne({ email: req.body.email });
   if (!findUser) {
@@ -90,9 +89,9 @@ router.post("/login", async (req, res) => {
       console.log("await jwt.sign: ", token);
       console.log(
         "await encrypt(token): ",
-        await encrypt(token, algorithm, password, iv)
+        await encrypt(token, ENCRYPTION_KEY, IV_LENGTH)
       );
-      res.cookie("auth", await encrypt(token, algorithm, password, iv), {
+      res.cookie("auth", await encrypt(token, ENCRYPTION_KEY, IV_LENGTH), {
         expires: new Date(Date.now() + 60000),
         secure: false,
         httpOnly: false
@@ -101,7 +100,7 @@ router.post("/login", async (req, res) => {
       // var payload = await jwt.verify(token, process.env.SECRET_KEY);
       return res.status(200).json({
         success: true,
-        token: encrypt(token, algorithm, password, iv),
+        token: encrypt(token, ENCRYPTION_KEY, IV_LENGTH),
         user: {
           name: findUser.name,
           email: findUser.email,

@@ -67,26 +67,37 @@ app.get("/crypto", (req, res) => {
   // generate a new one for each encryption
   var word =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMzBiZjE0YmQ4OTNmMmE5Y2Q1Y2I5MSIsInJvbGVzIjoiVVNFUl9ST0xFIiwiZW1haWwiOiJjYW1lcmF0ZXN0ODExQGdtYWlsLmNvbSIsImlhdCI6MTU4MDMzNjc1MCwiZXhwIjoxNTgwMzk2NzUwfQ.2bbqkoX7qhyX7lyLjBtlGPe08-oHGjO83nNIPxAzHv8";
-  var algorithm = "aes-256-ct";
-  var password = "3zTvzr3p67VC61jmV54rIYu1545x4TlY";
-  var hw = encrypt(word, algorithm, password);
+  const ENCRYPTION_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpX"; // Must be 256 bits (32 characters)
+  const IV_LENGTH = 16; // For AES, this is always 16
+  var hw = encrypt(word, ENCRYPTION_KEY, IV_LENGTH);
   console.log("encrypt: ", hw);
-  console.log("decrypt: ", decrypt(hw, algorithm, password)); // outputs hello world
+  console.log("decrypt: ", decrypt(hw, ENCRYPTION_KEY)); // outputs hello world
 });
 
-function encrypt(text, algorithm, password) {
-  console.log("enter in encrypt: ", crypto.createCipheriv(algorithm, password));
-  var cipher = crypto.createCipheriv(algorithm, password);
-  var crypted = cipher.update(text, "utf8", "hex");
-  crypted += cipher.final("hex");
-  return crypted;
+function encrypt(text, ENCRYPTION_KEY, IV_LENGTH) {
+  let iv = crypto.randomBytes(IV_LENGTH);
+  let cipher = crypto.createCipheriv(
+    "aes-256-cbc",
+    Buffer.from(ENCRYPTION_KEY),
+    iv
+  );
+  let encrypted = cipher.update(text);
+  encrypted = Buffer.concat([encrypted, cipher.final()]);
+  return iv.toString("hex") + ":" + encrypted.toString("hex");
 }
 
-function decrypt(text, algorithm, password) {
-  var decipher = crypto.createDecipheriv(algorithm, password);
-  var dec = decipher.update(text, "hex", "utf8");
-  dec += decipher.final("utf8");
-  return dec;
+function decrypt(text, ENCRYPTION_KEY) {
+  let textParts = text.split(":");
+  let iv = Buffer.from(textParts.shift(), "hex");
+  let encryptedText = Buffer.from(textParts.join(":"), "hex");
+  let decipher = crypto.createDecipheriv(
+    "aes-256-cbc",
+    Buffer.from(ENCRYPTION_KEY),
+    iv
+  );
+  let decrypted = decipher.update(encryptedText);
+  decrypted = Buffer.concat([decrypted, decipher.final()]);
+  return decrypted.toString();
 }
 
 // error handler
