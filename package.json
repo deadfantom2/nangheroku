@@ -40,6 +40,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
+    "moment": "^2.24.0",
     "mongoose": "^5.8.9",
     "mongoose-validator": "^2.1.0",
     "morgan": "^1.9.1",
@@ -47,7 +48,7 @@
     "nodemailer": "^6.4.2",
     "nodemon": "^2.0.2",
     "openssl": "^1.1.0",
-    "rxjs": "~6.5.4",
+    "rxjs": "^6.5.4",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },

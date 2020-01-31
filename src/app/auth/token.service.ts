@@ -1,41 +1,51 @@
 import { Injectable } from "@angular/core";
-import { CookieService } from "ngx-cookie-service";
 import * as jwt_decode from "jwt-decode";
+import * as moment from "moment";
 
 @Injectable({
   providedIn: "root"
 })
 export class TokenService {
-  constructor(private cookieService: CookieService) { }
+  constructor() { }
 
-  GetToken() {
-    return this.cookieService.get("auth");
+  public setSession(authResult) {
+    const expiresAt = moment().add(authResult.expiresIn, 's'); // add secondes on authResult.expiresIn(number)
+    localStorage.setItem('id_token', authResult.token);
+    localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
+    this.setPayload(authResult);
   }
 
-  SetToken(token) {
-    this.cookieService.set(
-      "auth",
-      token,
-      new Date(Date.now() + 60000),
-      "/",
-      "/",
-      true,
-      "None"
-    );
-    // this.cookieService.set("auth", token, new Date(Date.now() + 300000));
+  logout() {
+    localStorage.removeItem("id_token");
+    localStorage.removeItem("expires_at");
   }
 
-  DeleteToken() {
-    this.cookieService.delete("auth");
+  public isLoggedIn() {
+    return moment().isBefore(this.getExpiration()); // true
   }
 
-  GetPayload() {
-    const token = this.GetToken();
+  public isLoggedOut() {
+    return !this.isLoggedIn();
+  }
+
+  getExpiration() {
+    const expiration = localStorage.getItem("expires_at");
+    const expiresAt = JSON.parse(expiration);
+    return moment(expiresAt);
+  }
+
+  setPayload(user) {
+    const tokenLocal = localStorage.getItem('id_token');
     let payload;
-    if (token) {
-      console.log("jwt_decode(token): ", jwt_decode(token))
-      payload = jwt_decode(token);
+    if (tokenLocal) {
+      payload = jwt_decode(user.token);
     }
+    console.log(payload)
+    localStorage.setItem("payload", JSON.stringify(payload));
     return payload;
+  }
+  getPayload(){
+    const userData = localStorage.getItem("payload");
+    return JSON.parse(userData)
   }
 }

@@ -5,7 +5,7 @@ var crypto = bluebird.promisifyAll(require("crypto"));
 var sendMail = require("../utils/mail").mailMessage;
 const User = require("../models/User");
 const Token = require("../models/Token");
-const { encrypt } = require("../utils/crypto");
+const lifeToken = require("../config/variables");
 
 const router = express.Router();
 
@@ -40,10 +40,11 @@ router.post("/register", async (req, res) => {
         "\n";
       var message =
         "A activation link email has been sent to " + user.email + ".";
-      await sendMail(user.email, subject, text, message, res);
+      // await sendMail(user.email, subject, text, message, res);
     }
   } catch (error) {
     if (error) {
+      console.log(error);
       if (error.errors) {
         return res.status(400).json({
           success: false,
@@ -51,15 +52,11 @@ router.post("/register", async (req, res) => {
             "Something is wrong, maybe you forget write your email or password"
         });
       }
-      console.log(error);
     }
   }
 });
 
 router.post("/login", async (req, res) => {
-  const ENCRYPTION_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpX"; // Must be 256 bits (32 characters)
-  const IV_LENGTH = 16; // For AES, this is always 16
-  // var iv = crypto.randomBytes(16).toString("hex");
   const findUser = await User.findOne({ email: req.body.email });
   if (!findUser) {
     return res.json({
@@ -75,39 +72,16 @@ router.post("/login", async (req, res) => {
     if (isMatch && findUser.isVerified === true) {
       const token = await jwt.sign(
         {
-          id: findUser._id,
-          prenom: findUser.prenom,
-          roles: findUser.roles,
-          email: findUser.email
-        },
-        process.env.SECRET_KEY,
-        { expiresIn: 60000 }
-      ); // 300/ 60 = 5 minutes
-      // res.cookie("auth", token, {
-      //   expires: new Date(Date.now() + 300000)
-      // });
-      console.log("await jwt.sign: ", token);
-      console.log(
-        "await encrypt(token): ",
-        await encrypt(token, ENCRYPTION_KEY, IV_LENGTH)
-      );
-      res.cookie("auth", await encrypt(token, ENCRYPTION_KEY, IV_LENGTH), {
-        expires: new Date(Date.now() + 60000),
-        secure: false,
-        httpOnly: false
-      });
-      // var decoded = await jwt.decode(token);
-      // var payload = await jwt.verify(token, process.env.SECRET_KEY);
-      return res.status(200).json({
-        success: true,
-        token: encrypt(token, ENCRYPTION_KEY, IV_LENGTH),
-        user: {
-          name: findUser.name,
           email: findUser.email,
-          age: findUser.age,
           roles: findUser.roles
         },
-        expiresIn: 60000,
+        process.env.SECRET_KEY,
+        { expiresIn: lifeToken.lifeOfJWTToken }
+      );
+      return res.status(200).json({
+        success: true,
+        token: token,
+        expiresIn: lifeToken.lifeOfJWTToken,
         message: "Authentication is succesfull !"
       });
     } else {

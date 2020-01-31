@@ -14,16 +14,13 @@ export class LoginComponent implements OnInit {
   user: User = new User();
   success: boolean;
 
-  constructor(private authService: AuthService, private tokenService: TokenService, private router: Router) { }
+  constructor(private _authService: AuthService, private router: Router) { }
 
   ngOnInit() { }
 
   loginUser(user: User) {
-    this.authService.login(user).subscribe(res => {
-      console.log(res)
-      this.tokenService.SetToken(res.token);
+    this._authService.login(user).subscribe(res => {
       this.router.navigate(['/protect']);
-    }
-    );
+    });
   }
 }
