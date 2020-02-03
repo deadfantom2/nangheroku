@@ -2,7 +2,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { CookieService } from 'ngx-cookie-service';
 import { TokenInterceptor } from './auth/token-interceptor';
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -14,6 +13,7 @@ import { RegisterComponent } from "./auth/register/register.component";
 import { TestrouteComponent } from './auth/testroute/testroute.component';
 
 import { AuthGuard } from './auth/auth.guard';
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 
 @NgModule({
   declarations: [
@@ -31,10 +31,15 @@ import { AuthGuard } from './auth/auth.guard';
     FormsModule,
     HttpClientModule
   ],
-  providers: [CookieService, AuthGuard,
+  providers: [AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
+      useClass: JwtInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true
     }
   ],

@@ -9,19 +9,14 @@ export class TokenService {
   constructor() { }
 
   public setSession(authResult) {
-    const expiresAt = moment().add(authResult.expiresIn, 's'); // add secondes on authResult.expiresIn(number)
+    const expiresAt = Date.now() + 120000; // expire in 2 minutes
     localStorage.setItem('id_token', authResult.token);
     localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
-    this.setPayload(authResult);
-  }
-
-  logout() {
-    localStorage.removeItem("id_token");
-    localStorage.removeItem("expires_at");
+    this.setPayload();
   }
 
   public isLoggedIn() {
-    return moment().isBefore(this.getExpiration()); // true
+    return (Date.now() < this.getExpiration()) ? true : false;
   }
 
   public isLoggedOut() {
@@ -31,21 +26,32 @@ export class TokenService {
   getExpiration() {
     const expiration = localStorage.getItem("expires_at");
     const expiresAt = JSON.parse(expiration);
-    return moment(expiresAt);
+    return expiresAt;
   }
 
-  setPayload(user) {
+
+  decodedJWT(){
     const tokenLocal = localStorage.getItem('id_token');
     let payload;
     if (tokenLocal) {
-      payload = jwt_decode(user.token);
+      payload = jwt_decode(tokenLocal);
     }
-    console.log(payload)
-    localStorage.setItem("payload", JSON.stringify(payload));
-    return payload;
+    const a = moment().add(payload.exp)
+    return payload; // return expire value of JWT
+  }
+
+  setPayload() {
+    const tokenDecoded = this.decodedJWT();
+    return localStorage.setItem("payload", JSON.stringify(tokenDecoded));
   }
   getPayload(){
     const userData = localStorage.getItem("payload");
     return JSON.parse(userData)
+  }
+
+  logout() {
+    localStorage.removeItem("id_token");
+    localStorage.removeItem("expires_at");
+    localStorage.removeItem("payload");
   }
 }

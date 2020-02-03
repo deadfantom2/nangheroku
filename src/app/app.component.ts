@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { TitleService } from "./title.service";
-import { Router } from "@angular/router";
+import { RoutesService } from './routes.service';
 
 @Component({
   selector: "app-root",
@@ -8,24 +8,12 @@ import { Router } from "@angular/router";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-  constructor(private titleService: TitleService, private router: Router) {}
+  constructor(private titleService: TitleService, private _routesService: RoutesService) { }
   ngOnInit() {
     // this.titleService.initTitle();
   }
 
-  navigateLogin() {
-    this.router.navigateByUrl("/login");
-  }
-  navigateRegister() {
-    this.router.navigateByUrl("/register");
-  }
-  navigateToUsers() {
-    this.router.navigateByUrl("/users");
-  }
-  navigateToOrders() {
-    this.router.navigateByUrl("/orders");
-  }
-  navigateToToto() {
-    this.router.navigateByUrl("/protect");
+  private navigateToRoute(pathRoute) {
+    this._routesService.navigateToRoute(pathRoute);
   }
 }

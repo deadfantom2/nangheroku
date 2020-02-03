@@ -5,7 +5,8 @@ import { AllOrdersComponent } from "./users/all-orders/all-orders.component";
 import { LoginComponent } from "./auth/login/login.component";
 import { RegisterComponent } from "./auth/register/register.component";
 import { TestrouteComponent } from './auth/testroute/testroute.component';
-import { AuthGuard } from './auth/auth.guard';
+// import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard } from './_helpers';
 
 
 const routes: Routes = [
