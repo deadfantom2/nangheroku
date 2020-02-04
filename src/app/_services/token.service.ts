@@ -6,17 +6,17 @@ import * as moment from "moment";
   providedIn: "root"
 })
 export class TokenService {
-  constructor() { }
+  constructor() {}
 
   public setSession(authResult) {
     const expiresAt = Date.now() + 120000; // expire in 2 minutes
-    localStorage.setItem('id_token', authResult.token);
+    localStorage.setItem("id_token", authResult.token);
     localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
     this.setPayload();
   }
 
   public isLoggedIn() {
-    return (Date.now() < this.getExpiration()) ? true : false;
+    return Date.now() < this.getExpiration() ? true : false;
   }
 
   public isLoggedOut() {
@@ -29,14 +29,13 @@ export class TokenService {
     return expiresAt;
   }
 
-
-  decodedJWT(){
-    const tokenLocal = localStorage.getItem('id_token');
+  decodedJWT() {
+    const tokenLocal = localStorage.getItem("id_token");
     let payload;
     if (tokenLocal) {
       payload = jwt_decode(tokenLocal);
     }
-    const a = moment().add(payload.exp)
+    const a = moment().add(payload.exp);
     return payload; // return expire value of JWT
   }
 
@@ -44,9 +43,9 @@ export class TokenService {
     const tokenDecoded = this.decodedJWT();
     return localStorage.setItem("payload", JSON.stringify(tokenDecoded));
   }
-  getPayload(){
+  getPayload() {
     const userData = localStorage.getItem("payload");
-    return JSON.parse(userData)
+    return JSON.parse(userData);
   }
 
   logout() {
