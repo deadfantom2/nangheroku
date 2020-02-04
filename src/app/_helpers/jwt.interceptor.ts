@@ -2,11 +2,10 @@ import {
   HttpInterceptor,
   HttpRequest,
   HttpHandler,
-  HttpEvent,
-  HttpErrorResponse
+  HttpEvent
 } from "@angular/common/http";
-import { Injectable, Injector } from "@angular/core";
-import { Observable, throwError } from "rxjs";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {

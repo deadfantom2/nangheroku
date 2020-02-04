@@ -1,37 +1,38 @@
+// Modules
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-
 import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { AllUsersComponent } from "./users/all-users/all-users.component";
-import { AllOrdersComponent } from "./users/all-orders/all-orders.component";
-import { LoginComponent } from "./auth/login/login.component";
-import { RegisterComponent } from "./auth/register/register.component";
-import { TestrouteComponent } from "./auth/testroute/testroute.component";
+import { PagesModule } from "./pages/pages.module";
+import { CommonModule } from '@angular/common';
 
-import { AuthGuard } from "./_guard";
-import { JwtInterceptor, ErrorInterceptor } from "./_helpers";
+// Components
+import { AppComponent } from "./app.component";
+
+// Interceptors
+import { JwtInterceptor } from "./_helpers/jwt.interceptor";
+import { ErrorInterceptor } from "./_helpers/error.interceptor";
+
+// Services
+import { ServiceModule } from './_services/service.module';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AllUsersComponent,
-    AllOrdersComponent,
-    LoginComponent,
-    RegisterComponent,
-    TestrouteComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    PagesModule,
+    ServiceModule,
+    CommonModule
   ],
   providers: [
-    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
@@ -45,4 +46,4 @@ import { JwtInterceptor, ErrorInterceptor } from "./_helpers";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { User } from "../../_models";
+import { User } from "../../../_models/user";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { AuthService } from "../../_services";
-import { RoutesService } from "src/app/routes.service";
+import { AuthService } from "../../../_services/auth/auth.service";
+import { RoutesService } from "src/app/_services/routes/routes.service";
 
 @Component({
   selector: "app-login",
@@ -18,9 +18,12 @@ export class LoginComponent implements OnInit {
     private _routesService: RoutesService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('login')
+  }
 
   loginUser(user: User) {
+    console.log(user)
     this._authService.login(user).subscribe(res => {
       this._routesService.navigateToRoute("/protect");
     });

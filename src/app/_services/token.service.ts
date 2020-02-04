@@ -2,11 +2,9 @@ import { Injectable } from "@angular/core";
 import * as jwt_decode from "jwt-decode";
 import * as moment from "moment";
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 export class TokenService {
-  constructor() {}
+  constructor() { }
 
   public setSession(authResult) {
     const expiresAt = Date.now() + 120000; // expire in 2 minutes
@@ -16,41 +14,38 @@ export class TokenService {
   }
 
   public isLoggedIn() {
-    return Date.now() < this.getExpiration() ? true : false;
+    return Date.now() < this.getExpiration() ? true : false;;
   }
 
-  public isLoggedOut() {
-    return !this.isLoggedIn();
+  public logout() {
+    localStorage.removeItem("id_token");
+    localStorage.removeItem("expires_at");
+    localStorage.removeItem("payload");
   }
 
-  getExpiration() {
+  private getExpiration() {
     const expiration = localStorage.getItem("expires_at");
     const expiresAt = JSON.parse(expiration);
     return expiresAt;
   }
 
-  decodedJWT() {
+  private decodedJWT() {
     const tokenLocal = localStorage.getItem("id_token");
     let payload;
     if (tokenLocal) {
       payload = jwt_decode(tokenLocal);
     }
-    const a = moment().add(payload.exp);
     return payload; // return expire value of JWT
   }
 
-  setPayload() {
-    const tokenDecoded = this.decodedJWT();
-    return localStorage.setItem("payload", JSON.stringify(tokenDecoded));
-  }
-  getPayload() {
+  public getPayload() {
     const userData = localStorage.getItem("payload");
     return JSON.parse(userData);
   }
-
-  logout() {
-    localStorage.removeItem("id_token");
-    localStorage.removeItem("expires_at");
-    localStorage.removeItem("payload");
+  private setPayload() {
+    const tokenDecoded = this.decodedJWT();
+    return localStorage.setItem("payload", JSON.stringify(tokenDecoded));
   }
+
+
 }

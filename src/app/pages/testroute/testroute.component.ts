@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { TokenService } from '../token.service';
+import { AuthService } from '../../_services/auth/auth.service';
+import { TokenService } from 'src/app/_services/token.service';
 
 @Component({
   selector: 'app-testroute',
@@ -17,6 +17,7 @@ export class TestrouteComponent implements OnInit {
   ngOnInit() {
     this._authService.toto().subscribe(data => {
       console.log(data)
+      this.user = this._tokenService.getPayload().email;
       return this.message = data.message;
     })
   }

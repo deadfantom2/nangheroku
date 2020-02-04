@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { TitleService } from "./title.service";
-import { RoutesService } from './routes.service';
+import { TitleService } from "./_services/titles/title.service";
+import { RoutesService } from './_services/routes/routes.service';
 
 @Component({
   selector: "app-root",
