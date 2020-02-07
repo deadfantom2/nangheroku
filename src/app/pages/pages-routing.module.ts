@@ -1,9 +1,9 @@
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AllUsersComponent } from './users/all-users/all-users.component';
 import { AllOrdersComponent } from './orders/all-orders/all-orders.component';
 import { TestrouteComponent } from './testroute/testroute.component';
 import { AuthGuard } from '../_guard/auth.guard';
-import { AuthComponent } from './auth/auth.component';
 
 const pagesRoutes: Routes = [
     {
@@ -21,12 +21,10 @@ const pagesRoutes: Routes = [
         component: TestrouteComponent,
         data: { title: "Protect" },
         canActivate: [AuthGuard]
-    },
-    {
-        path: '',
-        component: AuthComponent,
-        loadChildren: './auth/auth.module#AuthModule'
-    },
+    }
 ];
-
-export const PAGES_ROUTES = RouterModule.forChild(pagesRoutes);
+@NgModule({
+    imports: [RouterModule.forChild(pagesRoutes)],
+    exports: [RouterModule]
+})
+export class PagesRoutingModule { }

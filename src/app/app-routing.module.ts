@@ -1,15 +1,16 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { PagesComponent } from './pages/pages.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: PagesComponent,
-    loadChildren: './pages/pages.module#PagesModule'
+    loadChildren: './pages/auth/auth.module#AuthModule'
   },
+  {
+    path: '',
+    loadChildren: './pages/pages.module#PagesModule'
+  }
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

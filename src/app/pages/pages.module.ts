@@ -1,10 +1,7 @@
-// import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { RouterModule } from '@angular/router';
-
-import { PAGES_ROUTES } from './pages.routes';
+import { PagesRoutingModule } from './pages-routing.module';
 import { AllUsersComponent } from './users/all-users/all-users.component';
 import { TestrouteComponent } from './testroute/testroute.component';
 import { AuthModule } from './auth/auth.module';
@@ -18,12 +15,9 @@ import { AllOrdersComponent } from './orders/all-orders/all-orders.component';
         AllOrdersComponent,
         TestrouteComponent,
     ],
-    exports: [
-        PagesComponent
-    ],
+    exports: [],
     imports: [
-        // BrowserModule,
-        PAGES_ROUTES,
+        PagesRoutingModule,
         AuthModule,
         CommonModule,
         RouterModule

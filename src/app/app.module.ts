@@ -4,6 +4,7 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
+import { AuthModule } from './pages/auth/auth.module';
 import { PagesModule } from "./pages/pages.module";
 import { CommonModule } from '@angular/common';
 
@@ -17,20 +18,20 @@ import { ErrorInterceptor } from "./_helpers/error.interceptor";
 // Services
 import { ServiceModule } from './_services/service.module';
 
-
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
+    CommonModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    AuthModule,
     PagesModule,
-    ServiceModule,
-    CommonModule
+    ServiceModule
   ],
   providers: [
     {
