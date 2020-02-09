@@ -4,9 +4,7 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
-import { AuthModule } from './pages/auth/auth.module';
-import { PagesModule } from "./pages/pages.module";
-import { CommonModule } from '@angular/common';
+import { CommonModule } from "@angular/common";
 
 // Components
 import { AppComponent } from "./app.component";
@@ -16,12 +14,10 @@ import { JwtInterceptor } from "./_helpers/jwt.interceptor";
 import { ErrorInterceptor } from "./_helpers/error.interceptor";
 
 // Services
-import { ServiceModule } from './_services/service.module';
+import { ServiceModule } from "./_services/service.module";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     CommonModule,
@@ -29,8 +25,6 @@ import { ServiceModule } from './_services/service.module';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    AuthModule,
-    PagesModule,
     ServiceModule
   ],
   providers: [
@@ -47,4 +41,4 @@ import { ServiceModule } from './_services/service.module';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
