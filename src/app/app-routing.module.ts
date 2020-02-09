@@ -3,16 +3,17 @@ import { Routes, RouterModule } from "@angular/router";
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: './pages/auth/auth.module#AuthModule'
+    path: "",
+    loadChildren: () =>
+      import("./pages/auth/auth.module").then(m => m.AuthModule)
   },
   {
-    path: '',
-    loadChildren: './pages/pages.module#PagesModule'
+    path: "",
+    loadChildren: () => import("./pages/pages.module").then(m => m.PagesModule)
   }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
