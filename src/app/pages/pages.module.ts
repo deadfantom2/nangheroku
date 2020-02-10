@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
+import { FormsModule } from '@angular/forms';
 import { PagesRoutingModule } from "./pages-routing.module";
 import { AllUsersComponent } from "./users/all-users/all-users.component";
 import { TestrouteComponent } from "./testroute/testroute.component";
@@ -15,6 +16,6 @@ import { AllOrdersComponent } from "./orders/all-orders/all-orders.component";
     TestrouteComponent
   ],
   exports: [],
-  imports: [PagesRoutingModule, CommonModule, RouterModule]
+  imports: [PagesRoutingModule, CommonModule, RouterModule, FormsModule]
 })
-export class PagesModule {}
+export class PagesModule { }

@@ -1,7 +1,6 @@
 // Modules
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { CommonModule } from "@angular/common";
@@ -22,8 +21,6 @@ import { ServiceModule } from "./_services/service.module";
     BrowserModule,
     CommonModule,
     HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
     AppRoutingModule,
     ServiceModule
   ],
@@ -33,12 +30,12 @@ import { ServiceModule } from "./_services/service.module";
       useClass: JwtInterceptor,
       multi: true
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
-      multi: true
-    }
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: ErrorInterceptor,
+    //   multi: true
+    // }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

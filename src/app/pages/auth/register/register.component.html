@@ -1,1 +1,25 @@
-<p>register works!</p>
+<div class="card-body">
+  <div class="form-group">
+    <label>Username</label>
+    <input
+      type="text"
+      class="form-control rounded-0"
+      [(ngModel)]="user.email"
+      name="email"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input
+      type="password"
+      class="form-control rounded-0"
+      [(ngModel)]="user.password"
+      name="password"
+      required
+    />
+  </div>
+  <button type="button" (click)="createOneUser(user)">
+    Create User
+  </button>
+</div>
