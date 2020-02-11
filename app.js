@@ -59,7 +59,7 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/usersRoutes"));
 app.use("/api/orders", require("./routes/ordersRoutes"));
 app.get("/api/toto", checkAuth, (req, res) => {
-  console.log("user: ", req.user);
+  console.log("userName: ", req.userData);
   res.status(200).json({ message: "Le route toto" });
 });
 
