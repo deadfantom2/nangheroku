@@ -3,7 +3,9 @@ import { Title } from "@angular/platform-browser";
 import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
 import { filter, map } from "rxjs/operators";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TitleService {
   constructor(
     private router: Router,
@@ -13,10 +15,15 @@ export class TitleService {
 
   initTitle() {
     const appTitle = this.titleService.getTitle();
+    console.log(appTitle)
     this.router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd),
-        map(() => {
+        filter(event => {
+          console.log(event)
+          return event instanceof NavigationEnd
+        }),
+        map((a) => {
+          console.log(a)
           const child = this.activatedRoute.firstChild;
           console.log(child);
           if (child.snapshot.data["title"]) {

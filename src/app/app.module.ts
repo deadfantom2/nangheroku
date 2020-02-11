@@ -4,7 +4,8 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { CommonModule } from "@angular/common";
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 // Components
 import { AppComponent } from "./app.component";
 
@@ -22,7 +23,11 @@ import { ServiceModule } from "./_services/service.module";
     CommonModule,
     HttpClientModule,
     AppRoutingModule,
-    ServiceModule
+    ServiceModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+    })
   ],
   providers: [
     {
@@ -30,11 +35,11 @@ import { ServiceModule } from "./_services/service.module";
       useClass: JwtInterceptor,
       multi: true
     },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: ErrorInterceptor,
-    //   multi: true
-    // }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

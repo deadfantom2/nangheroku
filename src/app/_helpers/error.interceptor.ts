@@ -5,17 +5,19 @@ import {
   HttpEvent,
   HttpInterceptor
 } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
+import { Observable, throwError, EMPTY } from "rxjs";
 import { catchError } from "rxjs/operators";
 
 import { TokenService } from "../_services/token.service";
 import { RoutesService } from "../_services/routes/routes.service";
+import { ToastService } from './toast.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
     private _tokenService: TokenService,
-    private _routesService: RoutesService
+    private _routesService: RoutesService,
+    private _toastService: ToastService
   ) { }
 
   intercept(
@@ -28,10 +30,11 @@ export class ErrorInterceptor implements HttpInterceptor {
           // auto logout if 401 and 403 response returned from api
           this._tokenService.logout();
           this._routesService.navigateToRoute("login");
-          //   location.reload(true); // ?????
         }
         const error = err.error.message || err.statusText;
+        this._toastService.showError(error, '');
         return throwError(error);
+        // return EMPTY;
       })
     );
   }

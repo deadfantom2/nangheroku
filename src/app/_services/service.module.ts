@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  AuthService, RoutesService, TitleService, TokenService
+  AuthService, RoutesService, TokenService
 } from './services.index';
 
 
@@ -13,7 +13,7 @@ import {
     HttpClientModule
   ],
   providers: [
-    AuthService, RoutesService, TitleService, TokenService
+    AuthService, RoutesService, TokenService
   ],
   declarations: []
 })

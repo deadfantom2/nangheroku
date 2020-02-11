@@ -14,7 +14,7 @@ export class TokenService {
   }
 
   public isLoggedIn() {
-    return Date.now() < this.getExpiration() ? true : false;;
+    return Date.now() < this.getExpiration() ? true : false;
   }
 
   public logout() {

@@ -1,3 +1,3 @@
 module.exports = {
-  lifeOfJWTToken: 10
+  lifeOfJWTToken: 15
 };

@@ -3,17 +3,17 @@ import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-  UrlTree,
-  Router
+  UrlTree
 } from "@angular/router";
 import { Observable } from "rxjs";
 import { TokenService } from "../_services/token.service";
+import { RoutesService } from '../_services/services.index';
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router, private _tokenService: TokenService) { }
+  constructor(private _routesService: RoutesService, private _tokenService: TokenService) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -29,7 +29,8 @@ export class AuthGuard implements CanActivate {
       return true;
     } else {
       console.log("false token guard");
-      this.router.navigate(["/login"]);
+      this._tokenService.logout();
+      this._routesService.navigateToRoute("login");
       return false;
     }
   }

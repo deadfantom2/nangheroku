@@ -9,15 +9,15 @@ export class EntitiesService {
 
   protected type: string;
 
-  constructor(public apiService: ApiService) { }
+  constructor(public _apiService: ApiService) { }
 
   /** Get all the entities */
   public getAll(): Observable<any> {
-    return this.apiService.get(this.type);
+    return this._apiService.get(this.type);
   }
 
   /** Post someone data */
   public postSomeone(): Observable<any> {
-    return this.apiService.post(this.type);
+    return this._apiService.post(this.type);
   }
 }

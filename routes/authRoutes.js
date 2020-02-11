@@ -40,6 +40,7 @@ router.post("/register", async (req, res) => {
         "\n";
       var message =
         "A activation link email has been sent to " + user.email + ".";
+      res.send({ success: true, message: message });
       // await sendMail(user.email, subject, text, message, res);
     }
   } catch (error) {

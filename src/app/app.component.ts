@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { TitleService } from "./_services/titles/title.service";
+import { TitleService } from "./_helpers/title.service";
 import { RoutesService } from './_services/routes/routes.service';
 
 @Component({
@@ -8,12 +8,12 @@ import { RoutesService } from './_services/routes/routes.service';
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-  constructor(private titleService: TitleService, private _routesService: RoutesService) { }
+  constructor(private _titleService: TitleService, private _routesService: RoutesService) { }
   ngOnInit() {
-    // this.titleService.initTitle();
+    this._titleService.initTitle();
   }
 
-  private navigateToRoute(pathRoute) {
+  public navigateToRoute(pathRoute: string) {
     this._routesService.navigateToRoute(pathRoute);
   }
 }
