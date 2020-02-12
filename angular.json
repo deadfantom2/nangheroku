@@ -16,8 +16,8 @@
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
-                    "showCircularDependencies": false,
                     "options": {
+                        "showCircularDependencies": false,
                         "outputPath": "dist/heroku",
                         "index": "src/index.html",
                         "main": "src/main.ts",

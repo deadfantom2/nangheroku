@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, pipe } from "rxjs";
 import { User } from "../../../_models/user";
-import { ToastService, UsersService } from "../../../_services";
+import { UsersService } from "../../../_services";
+import { map, catchError } from 'rxjs/operators';
 
 @Component({
   selector: "app-all-users",
@@ -9,20 +10,41 @@ import { ToastService, UsersService } from "../../../_services";
   styleUrls: ["./all-users.component.scss"]
 })
 export class AllUsersComponent implements OnInit {
-  public allUsers$: Observable<User[]>;
+
+  public allUsersNormal: User[];
+  public allUsersAsync$: Observable<User[]>;
 
   constructor(
-    private usersService: UsersService,
-    private _toastService: ToastService
+    private _usersService: UsersService
   ) { }
 
   ngOnInit() {
-    this.allUsers$ = this.getAllUsers();
+    this.allUsersAsync$ = this.getAllUsersAsync();
+    this.getAllUsersNormal()
   }
 
-  private getAllUsers(): Observable<User[]> {
-    // return this.usersService.getAll(); // 1 method use by link protected entities services
-    return this.usersService.getUsers(); // 2 method
+  private getAllUsersAsync(): Observable<User[]> {
+    return this._usersService.getAll(); // 1 method use by link protected entities services
+    // return this._usersService.getUsers(); // 2 method
   }
+
+  private getAllUsersNormal() {
+    this._usersService.getAll().subscribe(data =>{
+      return  this.allUsersNormal = data
+    })
+  }
+
+
+
+  public emitToto() {
+     this.allUsersNormal.sort((u1, u2) => {
+      console.log(u1.name +  ' / ' + u2.name)
+      return u1.name.localeCompare(u2.name)
+     })
+     return this.allUsersNormal;
+
+    // console.log('allUsersAsync$: ', this.allUsersAsync$.pipe(map(data => console.log("data: ", data))))
+  }
+
 
 }

@@ -9,13 +9,15 @@ import { PagesComponent } from "./pages.component";
 import { AllUsersComponent } from "./users/all-users/all-users.component";
 import { AllOrdersComponent } from "./orders/all-orders/all-orders.component";
 import { TestrouteComponent } from "./testroute/testroute.component";
+import { UserPageComponent } from './user-page/user-page.component';
 
 @NgModule({
   declarations: [
     PagesComponent,
     AllUsersComponent,
     AllOrdersComponent,
-    TestrouteComponent
+    TestrouteComponent,
+    UserPageComponent
   ],
   exports: [],
   imports: [PagesRoutingModule, CommonModule, RouterModule]

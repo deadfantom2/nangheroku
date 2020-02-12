@@ -18,7 +18,7 @@ router.post("/register", async (req, res) => {
 
     const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
-      return res.json({
+      return res.status(409).json({
         success: false,
         message: "Account with that email address already exists."
       });
@@ -40,7 +40,7 @@ router.post("/register", async (req, res) => {
         "\n";
       var message =
         "A activation link email has been sent to " + user.email + ".";
-      res.send({ success: true, message: message });
+      res.status(201).json({ success: true, message: message });
       // await sendMail(user.email, subject, text, message, res);
     }
   } catch (error) {
@@ -60,7 +60,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   const findUser = await User.findOne({ email: req.body.email });
   if (!findUser) {
-    return res.json({
+    return res.status(404).json({
       success: false,
       message: `User not found!`
     });
@@ -73,7 +73,7 @@ router.post("/login", async (req, res) => {
     if (isMatch && findUser.isVerified === true) {
       const token = await jwt.sign(
         {
-          email: findUser.email,
+          name: findUser.name,
           roles: findUser.roles
         },
         process.env.SECRET_KEY,
