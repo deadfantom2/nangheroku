@@ -5,9 +5,7 @@ import { Observable, EMPTY } from 'rxjs';
 import { User } from 'src/app/_models/user';
 import { retry, shareReplay, catchError } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UsersService extends EntitiesService {
 
   protected type = 'api/users';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/_models/user';
-import { AuthService } from 'src/app/_services/services.index';
 import { retryWhen, delay, take } from 'rxjs/operators';
+import { User } from '../../../_models/user';
+import { AuthService } from '../../../_services';
 
 @Component({
   selector: 'app-register',

@@ -3,15 +3,13 @@ import { Title } from "@angular/platform-browser";
 import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
 import { filter, map } from "rxjs/operators";
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 export class TitleService {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title
-  ) {}
+  ) { }
 
   initTitle() {
     const appTitle = this.titleService.getTitle();

@@ -1,11 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
-import { environment } from "src/environments/environment";
-import { TokenService } from "../token.service";
-import { User } from 'src/app/_models/user';
-import { EntitiesService } from '../api/entities/entities.service';
-import { ApiService } from '../api.service';
+import { TokenService, EntitiesService, ApiService } from "../";
+import { User } from '../../_models/user';
 
 @Injectable()
 export class AuthService extends EntitiesService {

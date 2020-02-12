@@ -7,6 +7,12 @@ import { AppRoutingModule } from "./app-routing.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";
 
+// Services Module
+import { ServiceModule } from "./_services/service.module";
+
+// Guards Module 
+import { GuardsModule } from "./_guard/guards.module";
+
 // Components
 import { AppComponent } from "./app.component";
 
@@ -14,8 +20,7 @@ import { AppComponent } from "./app.component";
 import { JwtInterceptor } from "./_helpers/jwt.interceptor";
 import { ErrorInterceptor } from "./_helpers/error.interceptor";
 
-// Services
-import { ServiceModule } from "./_services/service.module";
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +30,7 @@ import { ServiceModule } from "./_services/service.module";
     HttpClientModule,
     AppRoutingModule,
     ServiceModule,
+    GuardsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       preventDuplicates: true
@@ -44,4 +50,4 @@ import { ServiceModule } from "./_services/service.module";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

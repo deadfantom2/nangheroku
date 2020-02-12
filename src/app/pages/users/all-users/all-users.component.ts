@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { UsersService } from "src/app/_services/api/entities/users.service";
 import { Observable } from "rxjs";
-import { User } from "src/app/_models/user";
-import { ToastService } from "src/app/_outils/toast.service";
+import { User } from "../../../_models/user";
+import { ToastService, UsersService } from "../../../_services";
 
 @Component({
   selector: "app-all-users",
@@ -15,7 +14,7 @@ export class AllUsersComponent implements OnInit {
   constructor(
     private usersService: UsersService,
     private _toastService: ToastService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.allUsers$ = this.getAllUsers();
@@ -26,10 +25,4 @@ export class AllUsersComponent implements OnInit {
     return this.usersService.getUsers(); // 2 method
   }
 
-  toast() {
-    this._toastService.showSuccess(
-      "Data shown successfully !!",
-      "Notification"
-    );
-  }
 }

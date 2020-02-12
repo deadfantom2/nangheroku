@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { TitleService } from "./_outils/title.service";
-import { RoutesService } from "./_outils/routes.service";
+import { RoutesService, TitleService } from "./_services";
 
 @Component({
   selector: "app-root",
@@ -11,7 +10,7 @@ export class AppComponent implements OnInit {
   constructor(
     private _titleService: TitleService,
     private _routesService: RoutesService
-  ) {}
+  ) { }
   ngOnInit() {
     this._titleService.initTitle();
   }

@@ -9,8 +9,7 @@ import { Observable, throwError, EMPTY } from "rxjs";
 import { catchError } from "rxjs/operators";
 
 import { TokenService } from "../_services/token.service";
-import { RoutesService } from "../_outils/routes.service";
-import { ToastService } from "../_outils/toast.service";
+import { RoutesService, ToastService } from "../_services";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -18,7 +17,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     private _tokenService: TokenService,
     private _routesService: RoutesService,
     private _toastService: ToastService
-  ) {}
+  ) { }
 
   intercept(
     request: HttpRequest<any>,

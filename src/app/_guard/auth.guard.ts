@@ -6,17 +6,14 @@ import {
   UrlTree
 } from "@angular/router";
 import { Observable } from "rxjs";
-import { TokenService } from "../_services/token.service";
-import { RoutesService } from "../_outils/routes.service";
+import { TokenService, RoutesService } from "../_services";
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
     private _routesService: RoutesService,
     private _tokenService: TokenService
-  ) {}
+  ) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -38,6 +35,3 @@ export class AuthGuard implements CanActivate {
     }
   }
 }
-
-// not logged in so redirect to login page with the return url
-// this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });

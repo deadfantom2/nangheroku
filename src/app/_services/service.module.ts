@@ -1,12 +1,27 @@
-import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-
-import { AuthService, TokenService } from "./services.index";
+import {
+  ApiService,
+  EntitiesService,
+  TokenService,
+  TitleService,
+  ToastService,
+  RoutesService,
+  AuthService,
+  UsersService
+} from "./";
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule],
-  providers: [AuthService, TokenService],
+  imports: [],
+  providers: [
+    ApiService,
+    EntitiesService,
+    TokenService,
+    TitleService,
+    ToastService,
+    RoutesService,
+    AuthService,
+    UsersService
+  ],
   declarations: []
 })
-export class ServiceModule {}
+export class ServiceModule { }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../_services/auth/auth.service';
-import { TokenService } from 'src/app/_services/token.service';
+import { AuthService, TokenService } from '../../_services';
 
 @Component({
   selector: 'app-testroute',
@@ -12,7 +11,8 @@ export class TestrouteComponent implements OnInit {
   message: String;
   user: any;
 
-  constructor(private _authService: AuthService, private _tokenService: TokenService) { }
+  constructor(private _authService: AuthService,
+    private _tokenService: TokenService) { }
 
   ngOnInit() {
     this._authService.toto().subscribe(data => {
