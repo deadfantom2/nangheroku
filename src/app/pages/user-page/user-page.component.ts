@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '../../_models/user';
-import { UsersService } from '../../_services';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -14,22 +13,27 @@ export class UserPageComponent implements OnInit {
   @Output() onShared = new EventEmitter<any>();
   @Output() onDeleteUser = new EventEmitter<any>();
   @Output() onSortAge = new EventEmitter<any>();
+  @Output() sorted = new EventEmitter<any>();
 
-  constructor(private _usersService: UsersService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  public deleteUser() {
-    this.onDeleteUser.emit();
-  }
-
-  public sortUsers() {
+  public sortUsers(): void {
     this.onShared.emit();
   }
 
-  public sortAge() {
+  public sortAge(): void {
     this.onSortAge.emit();
   }
 
+  public deleteUser(): void {
+    this.onDeleteUser.emit();
+  }
+
+
+  public sortedAsync(): void {
+    this.sorted.emit();
+  }
 }
