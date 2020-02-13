@@ -2,24 +2,23 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
-import { PagesRoutingModule } from "./pages-routing.module";
+import { ComponentsRoutingModule } from "./components-routing.module";
 
 // Components
-import { PagesComponent } from "./pages.component";
+import { ComponentsComponent } from "./components.component";
 import { AllUsersComponent } from "./users/all-users/all-users.component";
 import { AllOrdersComponent } from "./orders/all-orders/all-orders.component";
 import { TestrouteComponent } from "./testroute/testroute.component";
-import { UserPageComponent } from './user-page/user-page.component';
+import { UserPageComponent } from '../pages'
 
 @NgModule({
   declarations: [
-    PagesComponent,
+    ComponentsComponent,
     AllUsersComponent,
     AllOrdersComponent,
-    TestrouteComponent,
-    UserPageComponent
+    TestrouteComponent, UserPageComponent
   ],
   exports: [],
-  imports: [PagesRoutingModule, CommonModule, RouterModule]
+  imports: [ComponentsRoutingModule, CommonModule, RouterModule]
 })
-export class PagesModule {}
+export class PagesModule { }

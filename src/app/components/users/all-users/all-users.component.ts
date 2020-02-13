@@ -20,6 +20,7 @@ export class AllUsersComponent implements OnInit {
 
   ngOnInit() {
     this.allUsersAsync$ = this.getAllUsersAsync();
+    console.log(this.allUsersAsync$)
     this.getAllUsersNormal()
   }
 
@@ -29,19 +30,36 @@ export class AllUsersComponent implements OnInit {
   }
 
   private getAllUsersNormal() {
-    this._usersService.getAll().subscribe(data =>{
-      return  this.allUsersNormal = data
+    this._usersService.getAll().subscribe(data => {
+      return this.allUsersNormal = data
     })
   }
 
+  public deletesUser(user: User) {
+    // return this._usersService.deleteUser(user).subscribe(() => {
+    this.allUsersNormal.filter(allUsers => {
+      console.log(user._id)
+      console.log(this.allUsersNormal.length)
+      // console.log(allUsers._id, ' : ', user._id, ' = ', allUsers._id !== user._id)
+      allUsers._id !== +'5e413f6a80f8b20d06466a72'
+    })
+    console.log(this.allUsersNormal)
+    return this.allUsersNormal;
+    // })
+  }
 
+  public sortAge(event) {
+    console.log(event)
+    this.allUsersNormal.sort((u1, u2) => {
+      return u1.age - u2.age
+    })
+  }
 
   public emitToto() {
-     this.allUsersNormal.sort((u1, u2) => {
-      console.log(u1.name +  ' / ' + u2.name)
+    this.allUsersNormal.sort((u1, u2) => {
       return u1.name.localeCompare(u2.name)
-     })
-     return this.allUsersNormal;
+    })
+    // return this.allUsersNormal;
 
     // console.log('allUsersAsync$: ', this.allUsersAsync$.pipe(map(data => console.log("data: ", data))))
   }

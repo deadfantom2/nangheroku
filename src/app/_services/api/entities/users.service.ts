@@ -23,4 +23,16 @@ export class UsersService extends EntitiesService {
   public addUser(user: User): Observable<User[]> {
     return this._apiService.post(this.type + '/add', user) as Observable<User[]>;
   }
+
+
+  /** Add a User */
+  public deleteUser(user: User): Observable<User[]> {
+    return this._apiService.delete(this.type + '/' + user._id) as Observable<User[]>;
+  }
+
+
+
+
+
+
 }

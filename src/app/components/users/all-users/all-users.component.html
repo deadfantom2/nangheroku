@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div *ngFor="let user of allUsersNormal" class="col blueNormal">
+      <app-user-page
+        [user]="user"
+        (onShared)="emitToto()"
+        (onDeleteUser)="deletesUser(user)"
+        (onSortAge)="sortAge()"
+      ></app-user-page>
+    </div>
+    <div class="row">
+      <div *ngFor="let user of allUsersAsync$ | async" class="col redAsync">
+        <app-user-page [user]="user" (onShared)="emitToto()"></app-user-page>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '../../_models/user';
+import { UsersService } from '../../_services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-page',
@@ -10,15 +12,24 @@ export class UserPageComponent implements OnInit {
 
   @Input() user: User[];
   @Output() onShared = new EventEmitter<any>();
+  @Output() onDeleteUser = new EventEmitter<any>();
+  @Output() onSortAge = new EventEmitter<any>();
 
-
-  constructor() { }
+  constructor(private _usersService: UsersService) { }
 
   ngOnInit(): void {
   }
 
-  public toto(){
+  public deleteUser() {
+    this.onDeleteUser.emit();
+  }
+
+  public sortUsers() {
     this.onShared.emit();
+  }
+
+  public sortAge() {
+    this.onSortAge.emit();
   }
 
 }

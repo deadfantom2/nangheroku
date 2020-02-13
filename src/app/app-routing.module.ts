@@ -5,11 +5,11 @@ const routes: Routes = [
   {
     path: "",
     loadChildren: () =>
-      import("./pages/auth/auth.module").then(m => m.AuthModule)
+      import("./components/auth/auth.module").then(m => m.AuthModule)
   },
   {
     path: "",
-    loadChildren: () => import("./pages/pages.module").then(m => m.PagesModule)
+    loadChildren: () => import("./components/components.module").then(m => m.PagesModule)
   },
   {
     path: "",
@@ -22,4 +22,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

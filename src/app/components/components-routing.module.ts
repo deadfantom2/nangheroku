@@ -5,7 +5,7 @@ import { AllOrdersComponent } from './orders/all-orders/all-orders.component';
 import { TestrouteComponent } from './testroute/testroute.component';
 import { AuthGuard } from '../_guard';
 
-const pagesRoutes: Routes = [
+const componentsRoutes: Routes = [
     {
         path: "users",
         component: AllUsersComponent,
@@ -24,7 +24,7 @@ const pagesRoutes: Routes = [
     }
 ];
 @NgModule({
-    imports: [RouterModule.forChild(pagesRoutes)],
+    imports: [RouterModule.forChild(componentsRoutes)],
     exports: [RouterModule]
 })
-export class PagesRoutingModule { }
+export class ComponentsRoutingModule { }
