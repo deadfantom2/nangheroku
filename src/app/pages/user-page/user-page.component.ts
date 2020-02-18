@@ -10,30 +10,19 @@ import { Observable } from 'rxjs';
 export class UserPageComponent implements OnInit {
 
   @Input() user: User[];
-  @Output() onShared = new EventEmitter<any>();
-  @Output() onDeleteUser = new EventEmitter<any>();
-  @Output() onSortAge = new EventEmitter<any>();
-  @Output() sorted = new EventEmitter<any>();
+  @Output() sortByName = new EventEmitter<any>();
+  @Output() deleteById = new EventEmitter<User[]>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  public sortUsers(): void {
-    this.onShared.emit();
+  public sortName(): void {
+    this.sortByName.emit();
   }
-
-  public sortAge(): void {
-    this.onSortAge.emit();
-  }
-
   public deleteUser(): void {
-    this.onDeleteUser.emit();
+    this.deleteById.emit();
   }
 
-
-  public sortedAsync(): void {
-    this.sorted.emit();
-  }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable, pipe } from "rxjs";
+import { Observable, pipe, Subscription } from "rxjs";
 import { User } from "../../../_models/user";
 import { UsersService } from "../../../_services";
 import { map, catchError, tap } from "rxjs/operators";
@@ -10,65 +10,35 @@ import { map, catchError, tap } from "rxjs/operators";
   styleUrls: ["./all-users.component.scss"]
 })
 export class AllUsersComponent implements OnInit {
-  users = new Array<User>();
 
-  toto() {
-    this._usersService.getUs();
-  }
+  // Async Observable data stream
+  users$: Observable<User[]>;
 
   public allUsersNormal: User[];
   public allUsersAsync$: Observable<User[]>;
 
-  public filteredUserAsync$: Observable<User[]>;
-
-  constructor(private _usersService: UsersService) {}
+  constructor(private _usersService: UsersService) { }
 
   ngOnInit() {
-    this.toto();
-    this.getAllUsersNormal();
-    this.allUsersAsync$ = this.getAllUsersAsync();
+    this.getAllUsers();
   }
 
-  /** GET ALL DATA */
-  private getAllUsersNormal() {
-    this._usersService.getAll().subscribe(data => {
-      return (this.allUsersNormal = data);
-    });
+  /** GET ALL USERS */
+  private getAllUsers() {
+    this.users$ = this._usersService.allUsers;
+    this._usersService.getAllUsers();
+    // return this._usersService.getAll();  // 2 method by protected route
   }
 
-  private getAllUsersAsync(): Observable<User[]> {
-    return this._usersService.getAll(); // 1 method use by link protected entities services
-    // return this._usersService.getUsers(); // 2 method
+  /** DELETE USER BY ID */
+  public deleteUser(user: User) {
+    this._usersService.deleteUser(user);
   }
 
-  /** HTTP METHODS */
-  public deletesUser(user: User) {
-    // return this._usersService.deleteUser(user).subscribe(() => {
-    this.allUsersNormal.filter(allUsers => {
-      console.log(user._id);
-      console.log(this.allUsersNormal.length);
-      // console.log(allUsers._id, ' : ', user._id, ' = ', allUsers._id !== user._id)
-      allUsers._id !== +"5e413f6a80f8b20d06466a72";
-    });
-    console.log(this.allUsersNormal);
-    return this.allUsersNormal;
-    // })
-  }
 
   /** SORTING */
-  public sortAge() {
-    console.log(event);
-    this.allUsersNormal.sort((u1, u2) => {
-      return u1.age - u2.age;
-    });
-  }
-  public sortName() {
-    this.allUsersNormal.sort((u1, u2) => {
-      return u1.name.localeCompare(u2.name);
-    });
+  public doSortName() {
+    this._usersService.sortObject();
   }
 
-  private sorted(): Observable<User[]> {
-    return this.allUsersAsync$.pipe();
-  }
 }

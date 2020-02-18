@@ -1,6 +1,6 @@
 <div>
-  <button (click)="deleteUser()">delete</button>
-  <h5 (click)="sortUsers()">{{ user.name }}</h5>
-  <h5 (click)="sortAge()">{{ user.age }}</h5>
-  <h6 (click)="sortedAsync()">{{ user.email }}</h6>
+  <h5 (click)="sortName()">{{ user.name }}</h5>
+  <h5>{{ user.age }}</h5>
+  <h6>{{ user.email }}</h6>
+  <button (click)="deleteUser()" class="btn btn-info">Delete</button>
 </div>

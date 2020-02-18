@@ -17,7 +17,7 @@ export class TestrouteComponent implements OnInit {
   ngOnInit() {
     this._authService.toto().subscribe(data => {
       console.log(data)
-      this.user = this._tokenService.getPayload().email;
+      this.user = this._tokenService.getPayload().name;
       return this.message = data.message;
     })
   }

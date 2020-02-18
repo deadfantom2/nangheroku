@@ -4,14 +4,18 @@ const app = expres.Router();
 
 app.get("/", async (req, res) => {
   const getAllUsers = await User.find().populate("orders.order_id");
-  res.status(200).send(getAllUsers);
+  res
+    .status(200)
+    .json({ message: "Successfully fetch data!", users: getAllUsers });
 });
 
 app.get("/:id", async (req, res) => {
   const getUserById = await User.findById({ _id: req.params.id }).populate(
     "orders.order_id"
   );
-  res.status(200).send(getUserById);
+  res
+    .status(200)
+    .json({ message: "Successfully fetch one user by id!", user: getUserById });
 });
 
 app.post("/add", async (req, res) => {
@@ -35,12 +39,16 @@ app.put("/:id", async (req, res) => {
     { _id: req.params.id },
     req.body
   );
-  res.status(200).send(getUserByIdPut);
+  res
+    .status(200)
+    .json({ message: "Successfully updated user!", user: getUserByIdPut });
 });
 
 app.delete("/:id", async (req, res) => {
   const getUserByIdDelete = await User.findOneAndDelete({ _id: req.params.id });
-  res.status(200).send(getUserByIdDelete);
+  res
+    .status(200)
+    .json({ message: "User is deleted!", user: getUserByIdDelete });
 });
 
 function createDate(date) {

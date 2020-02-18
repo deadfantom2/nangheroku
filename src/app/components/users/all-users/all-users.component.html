@@ -1,20 +1,11 @@
-<p *ngFor="let user of users">dfdsf {{ user.name }}</p>
-
 <div class="container">
   <div class="row">
-    <div *ngFor="let user of allUsersNormal" class="col blueNormal">
+    <div *ngFor="let user of users$ | async" class="col redAsync">
       <app-user-page
         [user]="user"
-        (onShared)="sortName()"
-        (onDeleteUser)="deletesUser(user)"
-        (onSortAge)="sortAge()"
-        (sorted)="sorted()"
+        (sortByName)="doSortName()"
+        (deleteById)="deleteUser(user)"
       ></app-user-page>
-    </div>
-    <div class="row">
-      <div *ngFor="let user of allUsersAsync$ | async" class="col redAsync">
-        <app-user-page [user]="user" (onShared)="sortName()"></app-user-page>
-      </div>
     </div>
   </div>
 </div>

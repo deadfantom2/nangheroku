@@ -25,7 +25,7 @@ export class ApiService {
 
   /** Make a DELETE request */
   public delete(url: string): Observable<any> {
-    return this.http.delete(environment.apiUrl + `/${url}`);
+    return this.http.delete<User[]>(environment.apiUrl + `/${url}`);
   }
 
 
