@@ -10,8 +10,4 @@ export class RoutesService {
     return this.router.navigateByUrl(pathRoute);
   }
 
-  public navigateToRouteWithData(pathRoute: string, data: any) {
-    return this.router.navigateByUrl(pathRoute, data);
-  }
-
 }

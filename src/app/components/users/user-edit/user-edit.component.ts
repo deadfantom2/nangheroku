@@ -7,12 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserEditComponent implements OnInit {
 
-  data: String;
-
   constructor() { }
 
   ngOnInit(): void {
-    this.data = "DATA FROM USER-EDIT COMPONENT"
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '../../_models/user';
-import { RoutesService } from 'src/app/_services';
+import { RoutesService, UsersService } from 'src/app/_services';
 
 @Component({
   selector: 'app-user-page',
@@ -22,7 +22,7 @@ export class UserPageComponent implements OnInit {
     this.sortByName.emit();
   }
   public editUser(): void {
-    this.router.navigateToRouteWithData('/user', this.user);
+    this.router.navigateToRoute('/user');
   }
   public deleteUser(): void {
     this.deleteById.emit();
