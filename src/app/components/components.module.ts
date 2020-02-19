@@ -11,6 +11,7 @@ import { AllUsersComponent } from "./users/all-users/all-users.component";
 import { AllOrdersComponent } from "./orders/all-orders/all-orders.component";
 import { TestrouteComponent } from "./testroute/testroute.component";
 import { UserPageComponent } from "../pages";
+import { UserEditComponent } from './users/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UserPageComponent } from "../pages";
     AllUsersComponent,
     AllOrdersComponent,
     TestrouteComponent,
-    UserPageComponent
+    UserPageComponent,
+    UserEditComponent
   ],
   exports: [],
   imports: [
@@ -26,7 +28,6 @@ import { UserPageComponent } from "../pages";
     CommonModule,
     RouterModule,
     ReactiveFormsModule
-    // FormsModule
   ]
 })
-export class PagesModule {}
+export class PagesModule { }

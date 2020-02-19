@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable, pipe, Subscription } from "rxjs";
+import { Observable } from "rxjs";
 import { User } from "../../../_models/user";
 import { UsersService } from "../../../_services";
-import { map, catchError, tap } from "rxjs/operators";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
@@ -11,6 +10,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
   styleUrls: ["./all-users.component.scss"]
 })
 export class AllUsersComponent implements OnInit {
+
   // Async Observable data stream
   users$: Observable<User[]>;
 
@@ -18,24 +18,21 @@ export class AllUsersComponent implements OnInit {
   public allUsersAsync$: Observable<User[]>;
 
   public form: FormGroup;
-  public aSub: Subscription;
 
-  constructor(private _usersService: UsersService) {}
+  constructor(private _usersService: UsersService) { }
 
   ngOnInit() {
     this.getAllUsers();
     this.form = new FormGroup({
       email: new FormControl(null, [
         Validators.required,
-        Validators.minLength(8)
+        Validators.minLength(11),
+        Validators.maxLength(50)
       ]),
       password: new FormControl(null, [
         Validators.required,
-        Validators.minLength(8)
-      ]),
-      password_confirme: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(8)
+        Validators.minLength(4),
+        Validators.maxLength(100)
       ])
     });
   }
@@ -48,8 +45,10 @@ export class AllUsersComponent implements OnInit {
   }
 
   /** CREATE ONE USER  */
-  public createUser(user: User) {
-    console.log(this.form.value);
+  public createUser() {
+    this.form.disable();
+    this._usersService.addUser(this.form.value);
+    this.form.enable();
   }
 
   /** DELETE USER BY ID */

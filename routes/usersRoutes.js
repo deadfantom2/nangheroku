@@ -19,19 +19,32 @@ app.get("/:id", async (req, res) => {
 });
 
 app.post("/add", async (req, res) => {
-  let user = new User();
-  user.name = req.body.name;
-  user.age = req.body.age;
-  user.email = req.body.email;
-  user.password = req.body.password;
-  const createUser = await user.save();
-  res.status(201).json({
-    message:
-      "User:" +
-      req.body.email +
-      " created! in time: " +
-      createDate(createUser.createdAt)
-  });
+  try {
+    const existingUser = await User.findOne({ email: req.body.email });
+    if (existingUser) {
+      return res.status(409).json({
+        message: "Account with that email address already exists."
+      });
+    }
+
+    let user = new User();
+    user.name = req.body.name;
+    user.age = req.body.age;
+
+    user.email = req.body.email;
+    user.password = req.body.password;
+    const createUser = await user.save();
+    res.status(201).json({
+      message:
+        "User:" +
+        req.body.email +
+        " created! in time: " +
+        createDate(createUser.createdAt),
+      user: createUser
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.put("/:id", async (req, res) => {

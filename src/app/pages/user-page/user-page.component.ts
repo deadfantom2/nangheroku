@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '../../_models/user';
-import { Observable } from 'rxjs';
+import { RoutesService } from 'src/app/_services';
 
 @Component({
   selector: 'app-user-page',
@@ -10,16 +10,19 @@ import { Observable } from 'rxjs';
 export class UserPageComponent implements OnInit {
 
   @Input() user: User[];
-  @Output() sortByName = new EventEmitter<any>();
+  @Output() sortByName = new EventEmitter<User[]>();
   @Output() deleteById = new EventEmitter<User[]>();
 
-  constructor() { }
+  constructor(private router: RoutesService) { }
 
   ngOnInit(): void {
   }
 
   public sortName(): void {
     this.sortByName.emit();
+  }
+  public editUser(): void {
+    this.router.navigateToRouteWithData('/user', this.user);
   }
   public deleteUser(): void {
     this.deleteById.emit();

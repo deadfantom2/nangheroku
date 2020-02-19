@@ -39,9 +39,10 @@ export class UsersService extends EntitiesService {
 
   /** Add a User */
   public addUser(user: User) {
-    return this._apiService.post(this.type + "/add", user).subscribe(res => {
-
-      console.log(res)
+    this._apiService.post(this.type + "/add", user).subscribe(res => {
+      this.listUsers.unshift(res.user);
+      this.tempUsers = [...this.listUsers];
+      this.objectAllUsers.next(this.listUsers);
       this._toast.showSuccess('Successfully created an User!', 'Create an user')
     },
       error => {
@@ -69,5 +70,6 @@ export class UsersService extends EntitiesService {
     this.objectAllUsers.value.sort((n1, n2) => n1.name.localeCompare(n2.name));
     return this.objectAllUsers;
   }
+
 
 }

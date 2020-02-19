@@ -1,31 +1,62 @@
 <form [formGroup]="form" (ngSubmit)="createUser()" class="text-left">
   <div class="form-group">
-    <input
-      formControlName="email"
-      class="form-control checking-field"
-      placeholder="You Login"
-      type="text"
-    />
+    <input formControlName="email" placeholder="Your email" type="text" />
+    <span
+      class="text-danger"
+      *ngIf="
+        form.get('email').touched && form.get('email').hasError('required')
+      "
+      >Email is required</span
+    >
+    <span
+      class="text-danger"
+      *ngIf="
+        form.get('email').touched && form.get('email').hasError('minlength')
+      "
+      >Email isn't long enough, minimum of 11 characters</span
+    >
+    <span
+      class="text-danger"
+      *ngIf="
+        form.get('email').touched && form.get('email').hasError('maxlength')
+      "
+      >Email is long enough, maximum 50 characters</span
+    >
   </div>
   <div class="form-group">
     <input
       formControlName="password"
-      class="form-control checking-field"
       placeholder="You Password"
       type="password"
     />
-  </div>
-  <div class="form-group">
-    <input
-      formControlName="password_confirme"
-      class="form-control checking-field"
-      placeholder="Confirm Password"
-      type="password"
-    />
+    <span
+      class="text-danger"
+      *ngIf="
+        form.get('password').touched &&
+        form.get('password').hasError('required')
+      "
+      >Password is required</span
+    >
+    <span
+      class="text-danger"
+      *ngIf="
+        form.get('password').touched &&
+        form.get('password').hasError('minlength')
+      "
+      >Password isn't long enough, minimum 4 characters</span
+    >
+    <span
+      class="text-danger"
+      *ngIf="
+        form.get('password').touched &&
+        form.get('password').hasError('maxlength')
+      "
+      >Password is long enough, maximum 100 characters</span
+    >
   </div>
 
   <div class="form-group">
-    <button class="btn btn-main btn-block" type="submit">
+    <button [disabled]="form.invalid || form.disabled" type="submit">
       Sign up
     </button>
   </div>
