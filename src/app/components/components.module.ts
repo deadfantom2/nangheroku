@@ -30,4 +30,4 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
     ReactiveFormsModule
   ]
 })
-export class PagesModule { }
+export class ComponentsModule { }

@@ -3,12 +3,12 @@ import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { TokenService, EntitiesService, ApiService } from "../";
 import { User } from '../../_models/user';
+import { ResModel } from '../../_models/res-model';
 
 @Injectable()
 export class AuthService extends EntitiesService {
 
   protected type = 'api/auth';
-
   // private link = "https://hnodeangular.herokuapp.com";
 
   constructor(private _tokenService: TokenService,
@@ -20,7 +20,7 @@ export class AuthService extends EntitiesService {
     return this._apiService.get("api/toto");
   }
 
-  public login(user: User): Observable<User[]> {
+  public login(user: User): Observable<ResModel> {
     return this._apiService.post(this.type + "/login", user).pipe(
       tap(res => {
         return this._tokenService.setSession(res);
@@ -28,9 +28,9 @@ export class AuthService extends EntitiesService {
     );
   }
 
-  public register(user: User): Observable<User[]> {
+  public register(user: User): Observable<ResModel> {
     return this._apiService.post(this.type + "/register", user).pipe(
-      tap(res => console.log("Process " + res.message),
+      tap((res => console.log("Process " + res.message)),
         err => console.error(err),
         () => console.log("Complete")
       )

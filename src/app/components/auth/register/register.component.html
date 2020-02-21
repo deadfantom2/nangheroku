@@ -1,25 +1,48 @@
-<div class="card-body">
-  <div class="form-group">
-    <label>Username</label>
+<form [formGroup]="registerForm" (ngSubmit)="doRegisterUser()">
+  <div>
+    <label>Email</label>
     <input
+      [class.is-invalid]="getEmail.invalid && getEmail.touched"
       type="text"
-      class="form-control rounded-0"
-      [(ngModel)]="user.email"
-      name="email"
-      required
+      formControlName="email"
     />
+    <app-span-form-message
+      [validator-type]="getEmail"
+      [minSize]="11"
+      [maxSize]="50"
+      [message-type]="'Email'"
+    ></app-span-form-message>
   </div>
-  <div class="form-group">
+
+  <div>
     <label>Password</label>
     <input
+      [class.is-invalid]="getPassword.invalid && getPassword.touched"
+      formControlName="password"
       type="password"
-      class="form-control rounded-0"
-      [(ngModel)]="user.password"
-      name="password"
-      required
     />
+
+    <app-span-form-message
+      [validator-type]="getPassword"
+      [minSize]="4"
+      [maxSize]="100"
+      [message-type]="'Password'"
+    ></app-span-form-message>
   </div>
-  <button type="button" (click)="createOneUser(user)">
-    Create User
+
+  <div>
+    <label>Confirm Password</label>
+    <input
+      [class.is-invalid]="registerForm.errors?.misMatch"
+      formControlName="confirmPassword"
+      type="password"
+    />
+    <small *ngIf="registerForm.errors?.misMatch" class="text-danger"
+      >Password not match!</small
+    >
+  </div>
+
+  <button [disabled]="!registerForm.valid" type="submit">
+    Regiser
   </button>
-</div>
+</form>

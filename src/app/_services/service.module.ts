@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
   ApiService,
   EntitiesService,
@@ -7,11 +8,14 @@ import {
   ToastService,
   RoutesService,
   AuthService,
-  UsersService
+  UsersService,
+  UserValidationService
 } from "./";
 
 @NgModule({
-  imports: [],
+  imports: [FormsModule,
+    ReactiveFormsModule
+  ],
   providers: [
     ApiService,
     EntitiesService,
@@ -20,7 +24,8 @@ import {
     ToastService,
     RoutesService,
     AuthService,
-    UsersService
+    UsersService,
+    UserValidationService
   ],
   declarations: []
 })

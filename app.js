@@ -4,7 +4,7 @@ const logger = require("morgan");
 const chalk = require("chalk");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-const checkAuth = require("./middleware/check-auth");
+const middlewareAuth = require("./middleware/check-auth");
 require("dotenv").config();
 // const { encrypt, decrypt } = require("./utils/crypto");
 const crypto = require("crypto");
@@ -58,10 +58,13 @@ app.use(express.static(__dirname + "/"));
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/usersRoutes"));
 app.use("/api/orders", require("./routes/ordersRoutes"));
-app.get("/api/toto", checkAuth, (req, res) => {
-  console.log("userName: ", req.userData);
-  res.status(200).json({ message: "Le route toto" });
-});
+app.get(
+  "/api/toto",
+  [middlewareAuth.checkAuth, middlewareAuth.verificationROLE_ADMIN],
+  (req, res) => {
+    res.status(200).json({ message: "Le route toto" });
+  }
+);
 
 // error handler
 app.use((err, req, res, next) => {

@@ -1,12 +1,14 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from '@angular/common';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ValidationFormComponent } from "../../pages";
+
 
 @NgModule({
     declarations: [
@@ -14,13 +16,15 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
         LoginComponent,
         RegisterComponent,
         ForgotPasswordComponent,
-        ResetPasswordComponent
+        ResetPasswordComponent,
+        ValidationFormComponent
     ],
     exports: [],
     imports: [
         FormsModule,
+        ReactiveFormsModule,
         CommonModule,
-        AuthRoutingModule
+        AuthRoutingModule,
     ]
 })
 export class AuthModule { }

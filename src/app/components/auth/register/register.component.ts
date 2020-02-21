@@ -1,26 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { retryWhen, delay, take } from 'rxjs/operators';
-import { User } from '../../../_models/user';
-import { AuthService } from '../../../_services';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { AuthService, UserValidationService, ToastService, RoutesService } from '../../../_services';
+import { FormGroup, AbstractControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 
-  public user: User = new User();
+  public registerSub: Subscription;
+  public registerForm: FormGroup;
+  public getEmail: AbstractControl;
+  public getPassword: AbstractControl;
+  public message: String;
 
-  constructor(private _authService: AuthService) { }
+  constructor(private _authService: AuthService,
+    private _userValidationService: UserValidationService,
+    private _toastService: ToastService,
+    private _routes: RoutesService) { }
 
   ngOnInit() {
+    this.registerForm = this._userValidationService.registerForm;
+    this.getEmail = this._userValidationService.getEmail;
+    this.getPassword = this._userValidationService.getPassword;
   }
 
-  public createOneUser(user: User): void {
-    this._authService.register(user).pipe(
-      retryWhen(errors => errors.pipe(delay(5000), take(2)))
-    ).subscribe();
+  ngOnDestroy() {
+    if (this.registerSub) {
+      this.registerSub.unsubscribe();
+    }
   }
 
+  doRegisterUser() {
+    this.registerSub = this._authService.register(this.registerForm.value)
+      .subscribe(res => {
+        this._toastService.showSuccess(res.message, "User created!")
+        setTimeout(() => {
+          this._routes.navigateToRoute('/login');
+        }, 3000)
+      });
+  }
 }
