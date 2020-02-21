@@ -30,7 +30,6 @@ app.post("/add", async (req, res) => {
     let user = new User();
     user.name = req.body.name;
     user.age = req.body.age;
-
     user.email = req.body.email;
     user.password = req.body.password;
     const createUser = await user.save();
