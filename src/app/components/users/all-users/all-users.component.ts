@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { User } from "../../../_models/user";
-import { UsersService } from "../../../_services";
+import { UsersService, TableService } from "../../../_services";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
@@ -10,7 +10,6 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
   styleUrls: ["./all-users.component.scss"]
 })
 export class AllUsersComponent implements OnInit {
-
   // Async Observable data stream
   users$: Observable<User[]>;
 
@@ -18,10 +17,15 @@ export class AllUsersComponent implements OnInit {
   public allUsersAsync$: Observable<User[]>;
 
   public form: FormGroup;
+  public columns: string[];
 
-  constructor(private _usersService: UsersService) { }
+  constructor(
+    private _usersService: UsersService,
+    private _tableService: TableService
+  ) {}
 
   ngOnInit() {
+    this.columns = this._tableService.getColumns();
     this.getAllUsers();
     this.form = new FormGroup({
       email: new FormControl(null, [

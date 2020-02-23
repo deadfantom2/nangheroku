@@ -7,15 +7,14 @@ import {
   TitleService,
   ToastService,
   RoutesService,
+  TableService,
   AuthService,
   UsersService,
   UserValidationService
 } from "./";
 
 @NgModule({
-  imports: [FormsModule,
-    ReactiveFormsModule
-  ],
+  imports: [FormsModule, ReactiveFormsModule],
   providers: [
     ApiService,
     EntitiesService,
@@ -23,10 +22,11 @@ import {
     TitleService,
     ToastService,
     RoutesService,
+    TableService,
     AuthService,
     UsersService,
     UserValidationService
   ],
   declarations: []
 })
-export class ServiceModule { }
+export class ServiceModule {}

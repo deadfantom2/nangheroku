@@ -62,14 +62,21 @@
   </div>
 </form>
 
-<div class="container">
-  <div class="row">
-    <div *ngFor="let user of users$ | async" class="col redAsync">
-      <app-user-page
-        [user]="user"
-        (sortByName)="doSortName()"
-        (deleteById)="deleteUser(user)"
-      ></app-user-page>
-    </div>
-  </div>
-</div>
+<table border="1 solid">
+  <thead>
+    <tr>
+      <th *ngFor="let header of columns">{{ header }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let user of users$ | async"
+      class="col redAsync"
+      app-user-page
+      [user]="user"
+      [columns]="columns"
+      (sortByName)="doSortName()"
+      (deleteById)="deleteUser(user)"
+    ></tr>
+  </tbody>
+</table>

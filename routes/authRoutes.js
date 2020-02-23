@@ -73,6 +73,7 @@ router.post("/login", async (req, res) => {
     if (isMatch && findUser.isVerified === true) {
       const token = await jwt.sign(
         {
+          _id: findUser.id,
           name: findUser.name,
           roles: findUser.roles
         },
