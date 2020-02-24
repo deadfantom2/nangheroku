@@ -10,19 +10,24 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
   styleUrls: ["./all-users.component.scss"]
 })
 export class AllUsersComponent implements OnInit {
+
   // Async Observable data stream
-  users$: Observable<User[]>;
+  public users$: Observable<User[]>;
 
   public allUsersNormal: User[];
   public allUsersAsync$: Observable<User[]>;
 
+  // Form and Table
   public form: FormGroup;
-  public columns: string[];
+  public columns: Object;  // table headers name
+  public isDesc: boolean = false;
+  public tabHeaderName: String;
+  public direction: number;
 
   constructor(
     private _usersService: UsersService,
     private _tableService: TableService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.columns = this._tableService.getColumns();
@@ -61,7 +66,9 @@ export class AllUsersComponent implements OnInit {
   }
 
   /** SORTING */
-  public doSortName() {
-    this._usersService.sortObject();
+  public doSortByHeader(property: String): void {
+    this.isDesc = !this.isDesc; //change the direction
+    this.tabHeaderName = property;
+    this.direction = this.isDesc ? 1 : -1;
   }
 }

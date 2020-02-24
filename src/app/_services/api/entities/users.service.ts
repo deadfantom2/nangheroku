@@ -10,13 +10,15 @@ import { ToastService } from '../../_outils';
 export class UsersService extends EntitiesService {
   protected type = "api/users";
 
-  allUsers: Observable<User[]>;
+  public allUsers: Observable<User[]>;
   private objectAllUsers: BehaviorSubject<User[]>;
 
   private listUsers: User[] = [];
-  private tempUsers: User[] = [];
+  public tempUsers: User[] = [];
 
-  constructor(_apiService: ApiService, private _toast: ToastService) {
+  constructor(_apiService: ApiService,
+    private _toast: ToastService
+  ) {
     super(_apiService);
 
     this.objectAllUsers = new BehaviorSubject(null) as BehaviorSubject<User[]>;
@@ -62,13 +64,6 @@ export class UsersService extends EntitiesService {
       error => {
         console.log(error);
       });
-  }
-
-
-  /** Get All Users Sorted by ASC */
-  public sortObject() {
-    this.objectAllUsers.value.sort((n1, n2) => n1.name.localeCompare(n2.name));
-    return this.objectAllUsers;
   }
 
 

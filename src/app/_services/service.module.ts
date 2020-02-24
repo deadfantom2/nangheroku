@@ -8,6 +8,7 @@ import {
   ToastService,
   RoutesService,
   TableService,
+  DateService,
   AuthService,
   UsersService,
   UserValidationService
@@ -23,10 +24,11 @@ import {
     ToastService,
     RoutesService,
     TableService,
+    DateService,
     AuthService,
     UsersService,
     UserValidationService
   ],
   declarations: []
 })
-export class ServiceModule {}
+export class ServiceModule { }

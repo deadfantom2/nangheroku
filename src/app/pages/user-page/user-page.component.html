@@ -1,12 +1,26 @@
 <td
   *ngFor="let col of columns; let i = index; let first = first; let last = last"
 >
-  <div *ngIf="first" (click)="sortName()">
-    {{ user[col] }}
+  <div *ngIf="first">
+    <span>{{ user[col.property] }}</span>
   </div>
-  <div *ngIf="i != '0' && i != '4' && i != '6'">{{ user[col] }}</div>
-  <div *ngIf="i == '4'">
-    {{ changeRoleName(user[col]) }}
+  <div *ngIf="col.property === 'surname'">
+    <span>{{ user[col.property] }}</span>
+  </div>
+  <div *ngIf="col.property === 'age'">
+    <span>{{ user[col.property] }}</span>
+  </div>
+  <div *ngIf="col.property === 'email'">
+    <span>{{ user[col.property] }}</span>
+  </div>
+  <div *ngIf="col.property === 'roles'">
+    <span>{{ changeName(user[col.property]) }}</span>
+  </div>
+  <div *ngIf="col.property === 'isVerified'">
+    <span>{{ changeName(user[col.property]) }}</span>
+  </div>
+  <div *ngIf="col.property === 'createdAt'">
+    {{ changeDateToDDMMYYYY(user[col.property]) }}
   </div>
   <div *ngIf="last">
     <button (click)="editUser()">Edit</button>

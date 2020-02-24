@@ -65,17 +65,33 @@
 <table border="1 solid">
   <thead>
     <tr>
-      <th *ngFor="let header of columns">{{ header }}</th>
+      <th
+        *ngFor="let header of columns"
+        (click)="doSortByHeader(header.property)"
+      >
+        {{ header.text }}
+        <i
+          class="fa"
+          [ngClass]="{
+            'fa-sort': tabHeaderName != header.property,
+            'fa-sort-asc': tabHeaderName == header.property && isDesc,
+            'fa-sort-desc': tabHeaderName == header.property && !isDesc
+          }"
+        ></i>
+      </th>
     </tr>
   </thead>
   <tbody>
     <tr
-      *ngFor="let user of users$ | async"
+      *ngFor="
+        let user of users$
+          | async
+          | sortBy: { property: tabHeaderName, direction: direction }
+      "
       class="col redAsync"
       app-user-page
       [user]="user"
       [columns]="columns"
-      (sortByName)="doSortName()"
       (deleteById)="deleteUser(user)"
     ></tr>
   </tbody>

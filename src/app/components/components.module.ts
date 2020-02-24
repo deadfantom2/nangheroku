@@ -12,6 +12,7 @@ import { AllOrdersComponent } from "./orders/all-orders/all-orders.component";
 import { TestrouteComponent } from "./testroute/testroute.component";
 import { UserPageComponent } from "../pages";
 import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { SortByPipe } from '../_pipes/sort-by.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
     AllOrdersComponent,
     TestrouteComponent,
     UserPageComponent,
-    UserEditComponent
+    UserEditComponent,
+    SortByPipe
   ],
   exports: [],
   imports: [
