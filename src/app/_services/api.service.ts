@@ -23,6 +23,11 @@ export class ApiService {
     return this.http.post(environment.apiUrl + `/${url}`, payload);
   }
 
+  /** Make a Patch request */
+  public patch(url: string, user: User[]): Observable<any> {
+    return this.http.patch(environment.apiUrl + `/${url}`, user);
+  }
+
   /** Make a DELETE request */
   public delete(url: string): Observable<any> {
     return this.http.delete<User[]>(environment.apiUrl + `/${url}`);

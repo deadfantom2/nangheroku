@@ -8,7 +8,7 @@ import { ToastService } from '../../_outils';
 
 @Injectable()
 export class UsersService extends EntitiesService {
-  protected type = "api/users";
+  protected type = "api/";
 
   public allUsers: Observable<User[]>;
   private objectAllUsers: BehaviorSubject<User[]>;
@@ -27,7 +27,7 @@ export class UsersService extends EntitiesService {
 
   /** Get All Users of Users */
   public getAllUsers() {
-    this._apiService.get(this.type)
+    this._apiService.get(this.type + 'users')
       .subscribe(
         res => {
           this.listUsers = res.users;
@@ -41,7 +41,7 @@ export class UsersService extends EntitiesService {
 
   /** Add a User */
   public addUser(user: User) {
-    this._apiService.post(this.type + "/add", user).subscribe(res => {
+    this._apiService.post(this.type + "users/add", user).subscribe(res => {
       this.listUsers.unshift(res.user);
       this.tempUsers = [...this.listUsers];
       this.objectAllUsers.next(this.listUsers);
@@ -54,7 +54,7 @@ export class UsersService extends EntitiesService {
 
   /** Delete a User */
   public deleteUser(user: User) {
-    this._apiService.delete(this.type + "/" + user._id).subscribe(item => {
+    this._apiService.delete(this.type + "users/" + user._id).subscribe(item => {
       const dix = this.listUsers.findIndex(items => items._id === item.user['_id']);
       this.listUsers.splice(dix, 1);
       this.tempUsers = [...this.listUsers];
@@ -64,6 +64,11 @@ export class UsersService extends EntitiesService {
       error => {
         console.log(error);
       });
+  }
+
+  /** Patch: change access activation of user */
+  public changeActivationUser(user: User) {
+
   }
 
 
