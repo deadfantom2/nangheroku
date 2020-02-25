@@ -26,17 +26,20 @@ app.patch(
 );
 
 async function adminFunction(type, user, req, res) {
+  let typeName;
   if (type === "roles") {
-    user.roles = req.body.roles;
+    req.body.roles ? (user.roles = req.body.roles) : (user.roles = user.roles);
+    typeName = "Role";
   }
   if (type === "activations") {
     user.isVerified === true
       ? (user.isVerified = false)
       : (user.isVerified = true);
+    typeName = "Access";
   }
   await user.save();
   res.status(200).json({
-    message: "Role changed for user: " + user.name,
+    message: typeName + " changed for user: " + user.name,
     user: user
   });
 }
