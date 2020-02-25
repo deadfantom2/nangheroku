@@ -20,12 +20,12 @@ export class ApiService {
 
   /** Make a POST request */
   public post(url: string, payload: any = null): Observable<any> {
-    return this.http.post(environment.apiUrl + `/${url}`, payload);
+    return this.http.post<User[]>(environment.apiUrl + `/${url}`, payload);
   }
 
   /** Make a Patch request */
   public patch(url: string, payload: any = null): Observable<any> {
-    return this.http.patch(environment.apiUrl + `/${url}`, payload);
+    return this.http.patch<User[]>(environment.apiUrl + `/${url}`, payload);
   }
 
   /** Make a DELETE request */

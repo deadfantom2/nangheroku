@@ -1,29 +1,21 @@
-<div class="card-body">
-  <div class="form-group">
-    <label>Username</label>
+<form [formGroup]="loginForm" (ngSubmit)="doLoginUser()">
+  <div>
+    <label>Email</label>
     <input
+      [class.is-invalid]="getEmail.invalid && getEmail.touched"
       type="text"
-      class="form-control rounded-0"
-      [(ngModel)]="user.email"
-      name="email"
-      required
+      formControlName="email"
     />
   </div>
-  <div class="form-group">
+  <div>
     <label>Password</label>
     <input
+      [class.is-invalid]="getPassword.invalid && getPassword.touched"
+      formControlName="password"
       type="password"
-      class="form-control rounded-0"
-      [(ngModel)]="user.password"
-      name="password"
-      required
     />
   </div>
-  <button
-    type="button"
-    (click)="loginUser(user)"
-    class="btn btn-success float-right"
-  >
+  <button [disabled]="!loginForm.valid" type="submit">
     Login
   </button>
-</div>
+</form>

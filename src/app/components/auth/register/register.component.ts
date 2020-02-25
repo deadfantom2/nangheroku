@@ -14,17 +14,22 @@ export class RegisterComponent implements OnInit, OnDestroy {
   public registerForm: FormGroup;
   public getEmail: AbstractControl;
   public getPassword: AbstractControl;
-  public message: String;
 
   constructor(private _authService: AuthService,
     private _userValidationService: UserValidationService,
     private _toastService: ToastService,
-    private _routes: RoutesService) { }
+    private _routesService: RoutesService) { }
 
   ngOnInit() {
-    this.registerForm = this._userValidationService.registerForm;
+    this.registerForm = this._userValidationService.authForm;
     this.getEmail = this._userValidationService.getEmail;
     this.getPassword = this._userValidationService.getPassword;
+    /** RESET AUTH FORM */
+    this.registerForm.setValue({
+      email: null,
+      password: null,
+      confirmPassword: null
+    });
   }
 
   ngOnDestroy() {
@@ -33,12 +38,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
   }
 
-  doRegisterUser() {
+  public doRegisterUser(): void {
     this.registerSub = this._authService.register(this.registerForm.value)
       .subscribe(res => {
         this._toastService.showSuccess(res.message, "User created!")
         setTimeout(() => {
-          this._routes.navigateToRoute('/login');
+          this._routesService.navigateToRoute('/login');
         }, 3000)
       });
   }

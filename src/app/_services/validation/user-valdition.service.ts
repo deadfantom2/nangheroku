@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import {
     forbiddenNameValidatorEmail, forbiddenNameValidatorPassword,
     PasswordValdiator
@@ -8,14 +8,14 @@ import {
 @Injectable()
 export class UserValidationService {
 
-    public registerForm: FormGroup;
+    public authForm: FormGroup;
 
     constructor(private _fb: FormBuilder) {
-        this.formRegister()
+        this.formAuth()
     }
 
-    private formRegister() {
-        this.registerForm = this._fb.group({
+    private formAuth(): FormGroup {
+        return this.authForm = this._fb.group({
             email: [null, [Validators.required, Validators.minLength(11), Validators.maxLength(50), forbiddenNameValidatorEmail]],
             password: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(100), forbiddenNameValidatorPassword(/password/)]],
             confirmPassword: [null],
@@ -23,11 +23,11 @@ export class UserValidationService {
     }
 
     /** GET KEY FROM REGISTERFORM VALUE */
-    get getEmail() {
-        return this.registerForm.get('email');
+    get getEmail(): AbstractControl {
+        return this.authForm.get('email');
     }
-    get getPassword() {
-        return this.registerForm.get('password');
+    get getPassword(): AbstractControl {
+        return this.authForm.get('password');
     }
 
 

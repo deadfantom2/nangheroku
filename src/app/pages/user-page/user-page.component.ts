@@ -8,10 +8,12 @@ import { RoutesService, DateService } from "../../_services";
   styleUrls: ["./user-page.component.scss"]
 })
 export class UserPageComponent implements OnInit {
+
   @Input() user: User[];
-  @Input() columns: Object;
+  @Input() columns: object;
 
   @Output() changeActivation = new EventEmitter<User[]>();
+  @Output() changeRole = new EventEmitter<User[]>();
   @Output() deleteById = new EventEmitter<User[]>();
 
   constructor(private router: RoutesService, private _dateService: DateService) { }
@@ -20,9 +22,6 @@ export class UserPageComponent implements OnInit {
 
   /** Change name of roles or activation */
   public changeName(name: String) {
-    if (typeof name === "string") {
-      return name.split("_")[0].toLocaleLowerCase(); // only return admin or user
-    }
     if (typeof name === "boolean") {
       return name ? 'Activated' : 'Not activated'
     }
@@ -39,6 +38,9 @@ export class UserPageComponent implements OnInit {
 
   public patchVerification(): void {
     this.changeActivation.emit();
+  }
+  public patchRole(): void {
+    this.changeRole.emit();
   }
 
   public deleteUser(): void {

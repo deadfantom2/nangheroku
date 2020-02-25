@@ -19,9 +19,9 @@ export class AllUsersComponent implements OnInit {
 
   // Form and Table
   public form: FormGroup;
-  public columns: Object;  // table headers name
+  public columns: object;  // table headers name
   public isDesc: boolean = false;
-  public tabHeaderName: String;
+  public tabHeaderName: string;
   public direction: number;
 
   constructor(
@@ -47,32 +47,35 @@ export class AllUsersComponent implements OnInit {
   }
 
   /** GET ALL USERS */
-  private getAllUsers() {
+  private getAllUsers(): void {
     this.users$ = this._usersService.allUsers;
     this._usersService.getAllUsers();
     // return this._usersService.getAll();  // 2 method by protected route
   }
 
   /** CREATE ONE USER  */
-  public createUser() {
-    this.form.disable();
+  public createUser(): void {
     this._usersService.addUser(this.form.value);
-    this.form.enable();
   }
 
   /** PATCH ACCOUNT ACTIVATION USER  */
-  public changeAccessUser(user: User) {
-    console.log(user)
+  public changeAccessUser(user: User): void {
     this._usersService.changeActivationUser(user);
   }
 
+  /** PATCH ROLE USER  */
+  public changeRoleUser(user: User): void {
+    console.log(user)
+    this._usersService.changeRoleUser(user);
+  }
+
   /** DELETE USER BY ID */
-  public deleteUser(user: User) {
+  public deleteUser(user: User): void {
     this._usersService.deleteUser(user);
   }
 
   /** SORTING */
-  public doSortByHeader(property: String): void {
+  public doSortByHeader(property: string): void {
     this.isDesc = !this.isDesc; //change the direction
     this.tabHeaderName = property;
     this.direction = this.isDesc ? 1 : -1;
