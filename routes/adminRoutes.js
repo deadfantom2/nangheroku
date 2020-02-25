@@ -15,7 +15,7 @@ app.patch(
       const type = req.params.type;
       const id = req.params.id;
       const findUser = await User.findById({ _id: id });
-      await adminFunction(type, findUser, res);
+      await adminFunction(type, findUser, req, res);
     } catch (error) {
       if (error) {
         console.log(error);
@@ -25,11 +25,9 @@ app.patch(
   }
 );
 
-async function adminFunction(type, user, res) {
+async function adminFunction(type, user, req, res) {
   if (type === "roles") {
-    user.roles === "ADMIN_ROLE"
-      ? (user.roles = "USER_ROLE")
-      : (user.roles = "ADMIN_ROLE");
+    user.roles = req.body.roles;
   }
   if (type === "activations") {
     user.isVerified === true
