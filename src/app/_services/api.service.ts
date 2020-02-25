@@ -24,8 +24,8 @@ export class ApiService {
   }
 
   /** Make a Patch request */
-  public patch(url: string, user: User[]): Observable<any> {
-    return this.http.patch(environment.apiUrl + `/${url}`, user);
+  public patch(url: string, payload: any = null): Observable<any> {
+    return this.http.patch(environment.apiUrl + `/${url}`, payload);
   }
 
   /** Make a DELETE request */

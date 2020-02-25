@@ -11,6 +11,7 @@ export class UserPageComponent implements OnInit {
   @Input() user: User[];
   @Input() columns: Object;
 
+  @Output() changeActivation = new EventEmitter<User[]>();
   @Output() deleteById = new EventEmitter<User[]>();
 
   constructor(private router: RoutesService, private _dateService: DateService) { }
@@ -34,6 +35,10 @@ export class UserPageComponent implements OnInit {
 
   public editUser(): void {
     this.router.navigateToRoute("/user");
+  }
+
+  public patchVerification(): void {
+    this.changeActivation.emit();
   }
 
   public deleteUser(): void {

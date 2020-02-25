@@ -60,6 +60,12 @@ export class AllUsersComponent implements OnInit {
     this.form.enable();
   }
 
+  /** PATCH ACCOUNT ACTIVATION USER  */
+  public changeAccessUser(user: User) {
+    console.log(user)
+    this._usersService.changeActivationUser(user);
+  }
+
   /** DELETE USER BY ID */
   public deleteUser(user: User) {
     this._usersService.deleteUser(user);

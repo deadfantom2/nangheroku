@@ -92,6 +92,7 @@
       app-user-page
       [user]="user"
       [columns]="columns"
+      (changeActivation)="changeAccessUser(user)"
       (deleteById)="deleteUser(user)"
     ></tr>
   </tbody>

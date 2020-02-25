@@ -16,7 +16,7 @@
   <div *ngIf="col.property === 'roles'">
     <span>{{ changeName(user[col.property]) }}</span>
   </div>
-  <div *ngIf="col.property === 'isVerified'">
+  <div *ngIf="col.property === 'isVerified'" (click)="patchVerification()">
     <span>{{ changeName(user[col.property]) }}</span>
   </div>
   <div *ngIf="col.property === 'createdAt'">

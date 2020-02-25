@@ -5,6 +5,7 @@ import { Observable, EMPTY, BehaviorSubject } from "rxjs";
 import { User } from "src/app/_models/user";
 import { retry, shareReplay, catchError } from "rxjs/operators";
 import { ToastService } from '../../_outils';
+import { ResModel } from '../../../_models/res-model';
 
 @Injectable()
 export class UsersService extends EntitiesService {
@@ -52,6 +53,17 @@ export class UsersService extends EntitiesService {
       })
   }
 
+  /** Patch: change access activation of user */
+  public changeActivationUser(user: User) {
+    this._apiService.patch(this.type + "private/activations/" + user._id, user).subscribe(res => {
+      const userSelected = this.listUsers.find(userOfList => userOfList._id === res.user._id);
+      userSelected.isVerified = res.user.isVerified
+    },
+      error => {
+        console.log(error);
+      })
+  }
+
   /** Delete a User */
   public deleteUser(user: User) {
     this._apiService.delete(this.type + "users/" + user._id).subscribe(item => {
@@ -64,11 +76,6 @@ export class UsersService extends EntitiesService {
       error => {
         console.log(error);
       });
-  }
-
-  /** Patch: change access activation of user */
-  public changeActivationUser(user: User) {
-
   }
 
 
