@@ -5,7 +5,8 @@ export class User {
   public age?: number;
   public email: string;
   public password: string;
-  public token?: string;
   public isVerified?: boolean;
+  public roles?: string;
+  public token?: string;
   public createdAt?: Date;
 }

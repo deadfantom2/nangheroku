@@ -3,7 +3,7 @@ import { EntitiesService } from "./entities.service";
 import { ApiService } from "../../api.service";
 import { Observable, EMPTY, BehaviorSubject } from "rxjs";
 import { User } from "src/app/_models/user";
-import { ToastService } from '../../_outils';
+import { ToastService } from "../../_outils";
 
 @Injectable()
 export class UsersService extends EntitiesService {
@@ -15,9 +15,7 @@ export class UsersService extends EntitiesService {
   private listUsers: User[] = [];
   public tempUsers: User[] = [];
 
-  constructor(_apiService: ApiService,
-    private _toast: ToastService
-  ) {
+  constructor(_apiService: ApiService, private _toast: ToastService) {
     super(_apiService);
 
     this.objectAllUsers = new BehaviorSubject(null) as BehaviorSubject<User[]>;
@@ -26,66 +24,94 @@ export class UsersService extends EntitiesService {
 
   /** Get: All Users of Users */
   public getAllUsers(): void {
-    this._apiService.get(this.type + 'users')
-      .subscribe(
-        res => {
-          this.listUsers = res.users;
-          this.tempUsers = [...res.users];
-          this.objectAllUsers.next(this.listUsers);
-        },
-        error => {
-          console.log(error);
-        });
+    this._apiService.get(this.type + "users").subscribe(
+      res => {
+        this.listUsers = res.users;
+        this.tempUsers = [...res.users];
+        this.objectAllUsers.next(this.listUsers);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   /** Post: Add a User */
   public addUser(user: User): void {
-    this._apiService.post(this.type + "users/add", user).subscribe(res => {
-      this.listUsers.unshift(res.user);
-      this.tempUsers = [...this.listUsers];
-      this.objectAllUsers.next(this.listUsers);
-      this._toast.showSuccess('Successfully created an User!', 'Create an user')
-    },
+    this._apiService.post(this.type + "users/add", user).subscribe(
+      res => {
+        this.listUsers.unshift(res.user);
+        this.tempUsers = [...this.listUsers];
+        this.objectAllUsers.next(this.listUsers);
+        this._toast.showSuccess(
+          "Successfully created an User!",
+          "Create an user"
+        );
+      },
       error => {
         console.log(error);
-      })
+      }
+    );
   }
 
   /** Patch: change access activation of user */
   public changeRoleUser(user: User): void {
-    console.log(user)
-    this._apiService.patch(this.type + "private/roles/" + user._id, user).subscribe(res => {
-      this._toast.showSuccess('Successfully changed role for user ' + user.email, 'Role User')
-    },
-      error => {
-        console.log(error);
-      })
+    console.log(user.roles);
+    this._apiService
+      .patch(this.type + "private/roles/" + user._id, user.roles)
+      .subscribe(
+        res => {
+          console.log(res);
+          this._toast.showSuccess(
+            "Successfully changed role for user " + user.email,
+            "Role User"
+          );
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   /** Patch: change access activation of user */
   public changeActivationUser(user: User): void {
-    this._apiService.patch(this.type + "private/activations/" + user._id, user).subscribe(res => {
-      const userSelected = this.listUsers.find(userOfList => userOfList._id === res.user._id);
-      userSelected.isVerified = res.user.isVerified;
-      this._toast.showSuccess('Successfully changed access for user ' + userSelected.email, 'Access User')
-    },
-      error => {
-        console.log(error);
-      })
+    this._apiService
+      .patch(this.type + "private/activations/" + user._id, user)
+      .subscribe(
+        res => {
+          const userSelected = this.listUsers.find(
+            userOfList => userOfList._id === res.user._id
+          );
+          userSelected.isVerified = res.user.isVerified;
+          this._toast.showSuccess(
+            "Successfully changed access for user " + userSelected.email,
+            "Access User"
+          );
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   /** Delete: a User */
   public deleteUser(user: User): void {
-    this._apiService.delete(this.type + "users/" + user._id).subscribe(item => {
-      const user = this.listUsers.findIndex(items => items._id === item.user['_id']);
-      this.listUsers.splice(user, 1);
-      this.tempUsers = [...this.listUsers];
-      this.objectAllUsers.next(this.listUsers);
-      this._toast.showSuccess('Successfully deleted an User!', 'Delete an user');
-    },
+    this._apiService.delete(this.type + "users/" + user._id).subscribe(
+      item => {
+        const user = this.listUsers.findIndex(
+          items => items._id === item.user["_id"]
+        );
+        this.listUsers.splice(user, 1);
+        this.tempUsers = [...this.listUsers];
+        this.objectAllUsers.next(this.listUsers);
+        this._toast.showSuccess(
+          "Successfully deleted an User!",
+          "Delete an user"
+        );
+      },
       error => {
         console.log(error);
-      });
+      }
+    );
   }
-
 }
