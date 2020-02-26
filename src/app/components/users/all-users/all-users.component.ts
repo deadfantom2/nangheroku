@@ -64,9 +64,8 @@ export class AllUsersComponent implements OnInit {
   }
 
   /** PATCH ROLE USER  */
-  public changeRoleUser(user: User): void {
-    console.log(user)
-    this._usersService.changeRoleUser(user);
+  public changeRoleUser(user: User, roleUser: string): void {
+    this._usersService.changeRoleUser(user, roleUser);
   }
 
   /** DELETE USER BY ID */

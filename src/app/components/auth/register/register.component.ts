@@ -26,9 +26,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.getPassword = this._userValidationService.getPassword;
     /** RESET AUTH FORM */
     this.registerForm.setValue({
-      email: null,
-      password: null,
-      confirmPassword: null
+      email: new Date().getTime() + "@fr.fr",
+      password: "frfr",
+      confirmPassword: "frfr"
     });
   }
 
@@ -43,8 +43,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this._toastService.showSuccess(res.message, "User created!")
         setTimeout(() => {
+          this.registerForm.reset();
           this._routesService.navigateToRoute('/login');
         }, 3000)
       });
+
   }
 }

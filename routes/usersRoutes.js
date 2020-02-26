@@ -1,5 +1,6 @@
 const expres = require("express");
 const User = require("../models/User");
+const middlewareAuth = require("../middleware/check-auth");
 const app = expres.Router();
 
 app.get("/", async (req, res) => {
@@ -38,7 +39,7 @@ app.post("/add", async (req, res) => {
         "User:" +
         req.body.email +
         " created! in time: " +
-        createDate(createUser.createdAt),
+        (await createUserDate(createUser.createdAt)),
       user: createUser
     });
   } catch (error) {
@@ -56,6 +57,24 @@ app.put("/:id", async (req, res) => {
     .json({ message: "Successfully updated user!", user: getUserByIdPut });
 });
 
+app.patch(
+  "/:type/:id",
+  middlewareAuth.cantChangeYourAdminAccess,
+  async (req, res) => {
+    try {
+      const type = req.params.type;
+      const id = req.params.id;
+      const findUser = await User.findById({ _id: id });
+      await adminFunction(type, findUser, req, res);
+    } catch (error) {
+      if (error) {
+        console.log(error);
+        res.status(400).send({ message: "Error" });
+      }
+    }
+  }
+);
+
 app.delete("/:id", async (req, res) => {
   const getUserByIdDelete = await User.findOneAndDelete({ _id: req.params.id });
   res
@@ -63,9 +82,28 @@ app.delete("/:id", async (req, res) => {
     .json({ message: "User is deleted!", user: getUserByIdDelete });
 });
 
-function createDate(date) {
+async function createUserDate(date) {
   const dateInMs = new Date(date).getTime();
   return new Date(dateInMs);
+}
+
+async function adminFunction(type, user, req, res) {
+  let typeName;
+  if (type === "roles") {
+    req.body.roles ? (user.roles = req.body.roles) : (user.roles = user.roles);
+    typeName = "Role";
+  }
+  if (type === "activations") {
+    user.isVerified === true
+      ? (user.isVerified = false)
+      : (user.isVerified = true);
+    typeName = "Access";
+  }
+  await user.save();
+  res.status(200).json({
+    message: typeName + " changed for user: " + user.name,
+    user: user
+  });
 }
 
 module.exports = app;

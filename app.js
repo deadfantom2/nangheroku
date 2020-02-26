@@ -56,13 +56,12 @@ app.use(express.static(__dirname + "/"));
 
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
-app.use("/api/users", require("./routes/usersRoutes"));
-app.use("/api/orders", require("./routes/ordersRoutes"));
 app.use(
-  "/api/private",
+  "/api/users",
   [middlewareAuth.checkAuth, middlewareAuth.verificationROLE_ADMIN],
-  require("./routes/adminRoutes")
+  require("./routes/usersRoutes")
 );
+app.use("/api/orders", require("./routes/ordersRoutes"));
 app.get(
   "/api/toto",
   [middlewareAuth.checkAuth, middlewareAuth.verificationROLE_ADMIN],

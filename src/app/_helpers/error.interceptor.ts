@@ -25,11 +25,12 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError(err => {
-        if (err.status === 401 || err.status === 403) {
+        if (err.status === 401) {
           // auto logout if 401 and 403 response returned from api
           this._tokenService.logout();
           this._routesService.navigateToRoute("login");
         }
+
         const error = err.error.message || err.statusText;
         this._toastService.showError(error, "");
         return throwError(error);

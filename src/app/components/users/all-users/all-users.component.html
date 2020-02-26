@@ -62,14 +62,14 @@
   </div>
 </form>
 
-<table border="1 solid">
+<table >
   <thead>
     <tr>
       <th
         *ngFor="let header of columns"
         (click)="doSortByHeader(header.property)"
       >
-        {{ header.text }}
+        <span>{{ header.text }}</span>
         <i
           class="fa"
           [ngClass]="{
@@ -92,8 +92,8 @@
       app-user-page
       [user]="user"
       [columns]="columns"
-      (changeRole)="changeRoleUser(user)"
-      (changeActivation)="changeAccessUser(user)"
+      (changeRole)="changeRoleUser(user, $event)"
+      (changeAccess)="changeAccessUser(user)"
       (deleteById)="deleteUser(user)"
     ></tr>
   </tbody>

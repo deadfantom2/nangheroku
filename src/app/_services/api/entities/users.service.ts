@@ -7,7 +7,8 @@ import { ToastService } from "../../_outils";
 
 @Injectable()
 export class UsersService extends EntitiesService {
-  protected type = "api/";
+
+  protected type = "api/users";
 
   public allUsers: Observable<User[]>;
   private objectAllUsers: BehaviorSubject<User[]>;
@@ -24,7 +25,7 @@ export class UsersService extends EntitiesService {
 
   /** Get: All Users of Users */
   public getAllUsers(): void {
-    this._apiService.get(this.type + "users").subscribe(
+    this._apiService.get(this.type).subscribe(
       res => {
         this.listUsers = res.users;
         this.tempUsers = [...res.users];
@@ -38,7 +39,7 @@ export class UsersService extends EntitiesService {
 
   /** Post: Add a User */
   public addUser(user: User): void {
-    this._apiService.post(this.type + "users/add", user).subscribe(
+    this._apiService.post(this.type + "/add", user).subscribe(
       res => {
         this.listUsers.unshift(res.user);
         this.tempUsers = [...this.listUsers];
@@ -55,10 +56,9 @@ export class UsersService extends EntitiesService {
   }
 
   /** Patch: change access activation of user */
-  public changeRoleUser(user: User): void {
-    console.log(user.roles);
+  public changeRoleUser(user: User, roleUser: string): void {
     this._apiService
-      .patch(this.type + "private/roles/" + user._id, user.roles)
+      .patch(this.type + "/roles/" + user._id, { roles: roleUser })
       .subscribe(
         res => {
           console.log(res);
@@ -76,7 +76,7 @@ export class UsersService extends EntitiesService {
   /** Patch: change access activation of user */
   public changeActivationUser(user: User): void {
     this._apiService
-      .patch(this.type + "private/activations/" + user._id, user)
+      .patch(this.type + "/activations/" + user._id, user)
       .subscribe(
         res => {
           const userSelected = this.listUsers.find(
@@ -96,7 +96,7 @@ export class UsersService extends EntitiesService {
 
   /** Delete: a User */
   public deleteUser(user: User): void {
-    this._apiService.delete(this.type + "users/" + user._id).subscribe(
+    this._apiService.delete(this.type + "/" + user._id).subscribe(
       item => {
         const user = this.listUsers.findIndex(
           items => items._id === item.user["_id"]

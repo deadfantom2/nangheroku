@@ -12,13 +12,14 @@ export class UserPageComponent implements OnInit {
   @Input() user: User[];
   @Input() columns: object;
 
-  @Output() changeActivation = new EventEmitter<User[]>();
+  @Output() changeAccess = new EventEmitter<User[]>();
   @Output() changeRole = new EventEmitter<User[]>();
   @Output() deleteById = new EventEmitter<User[]>();
 
   constructor(private router: RoutesService, private _dateService: DateService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   /** Change name of roles or activation */
   public changeName(name: String) {
@@ -36,11 +37,11 @@ export class UserPageComponent implements OnInit {
     this.router.navigateToRoute("/user");
   }
 
-  public patchVerification(): void {
-    this.changeActivation.emit();
+  public editAccessUser(): void {
+    this.changeAccess.emit();
   }
-  public patchRole(): void {
-    this.changeRole.emit();
+  public editRoleUser(roleUser: any): void {
+    this.changeRole.emit(roleUser);
   }
 
   public deleteUser(): void {
