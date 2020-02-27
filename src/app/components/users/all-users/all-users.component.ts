@@ -79,4 +79,10 @@ export class AllUsersComponent implements OnInit {
     this.tabHeaderName = property;
     this.direction = this.isDesc ? 1 : -1;
   }
+
+  /** SORTING */
+  public doFilterByHeader(): void {
+    console.log("filter click")
+  }
+
 }

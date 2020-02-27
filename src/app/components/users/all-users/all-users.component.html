@@ -68,6 +68,7 @@
       <th
         *ngFor="let header of columns"
         (click)="doSortByHeader(header.property)"
+        (dblclick)="doFilterByHeader()"
       >
         <span
           >{{ header.text }}
