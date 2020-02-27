@@ -62,22 +62,24 @@
   </div>
 </form>
 
-<table >
+<table>
   <thead>
     <tr>
       <th
         *ngFor="let header of columns"
         (click)="doSortByHeader(header.property)"
       >
-        <span>{{ header.text }}</span>
-        <i
-          class="fa"
-          [ngClass]="{
-            'fa-sort': tabHeaderName != header.property,
-            'fa-sort-asc': tabHeaderName == header.property && isDesc,
-            'fa-sort-desc': tabHeaderName == header.property && !isDesc
-          }"
-        ></i>
+        <span
+          >{{ header.text }}
+          <i
+            class="fa"
+            [ngClass]="{
+              'fa-sort': tabHeaderName != header.property,
+              'fa-sort-asc': tabHeaderName == header.property && isDesc,
+              'fa-sort-desc': tabHeaderName == header.property && !isDesc
+            }"
+          ></i>
+        </span>
       </th>
     </tr>
   </thead>

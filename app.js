@@ -6,9 +6,8 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const middlewareAuth = require("./middleware/check-auth");
 require("dotenv").config();
-// const { encrypt, decrypt } = require("./utils/crypto");
-const crypto = require("crypto");
-
+const fakeSeed = require("./seedNode/MOCK_DATA2.json");
+const User = require("./models/User");
 // Init express
 const app = express();
 
@@ -69,6 +68,22 @@ app.get(
     res.status(200).json({ message: "Le route toto" });
   }
 );
+// app.post("/fakeusers", async (req, res) => {
+//   fakeSeed.map(item => {
+//   const user = new User();
+//   user.name = item.name
+//   user.surname = item.surname
+//   user.age = item.age
+//   user.email = item.email
+//   user.password = item.password
+//   user.img = item.img
+//   user.isVerified = item.isVerified
+//   user.roles = item.roles
+//   user.google = item.google
+//   user.save() 
+//   });
+//   res.json({ users: "ok" });
+// });
 
 // error handler
 app.use((err, req, res, next) => {

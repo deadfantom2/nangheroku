@@ -1,4 +1,32 @@
+.user {
+  &_access {
+    border-radius: 0.25rem;
+    color: white;
+    &__ok {
+      background-color: #12bee4;
+    }
+    &__no {
+      background-color: red;
+    }
+  }
+  &_access:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.5);
+    color: black;
+  }
+}
+
 span {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+  font-size: 0.75rem;
+}
+.actions_icons {
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+}
+
+.fas {
+  color: #12bee4;
 }

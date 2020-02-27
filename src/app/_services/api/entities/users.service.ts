@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { EntitiesService } from "./entities.service";
 import { ApiService } from "../../api.service";
-import { Observable, EMPTY, BehaviorSubject } from "rxjs";
+import { Observable, EMPTY, BehaviorSubject, ReplaySubject,interval } from "rxjs";
 import { User } from "src/app/_models/user";
 import { ToastService } from "../../_outils";
 
@@ -27,9 +27,11 @@ export class UsersService extends EntitiesService {
   public getAllUsers(): void {
     this._apiService.get(this.type).subscribe(
       res => {
+        console.log(res.users)
         this.listUsers = res.users;
         this.tempUsers = [...res.users];
         this.objectAllUsers.next(this.listUsers);
+        
       },
       error => {
         console.log(error);
