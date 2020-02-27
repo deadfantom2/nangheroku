@@ -89,6 +89,7 @@
         let user of users$
           | async
           | sortBy: { property: tabHeaderName, direction: direction }
+          | filterBy: { property: tabHeaderName }
       "
       class="col redAsync"
       app-user-page

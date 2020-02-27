@@ -20,8 +20,6 @@ import { AppComponent } from "./app.component";
 import { JwtInterceptor } from "./_helpers/jwt.interceptor";
 import { ErrorInterceptor } from "./_helpers/error.interceptor";
 
-
-
 @NgModule({
   declarations: [AppComponent],
   imports: [

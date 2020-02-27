@@ -14,6 +14,7 @@ import { TestrouteComponent } from "./testroute/testroute.component";
 import { UserPageComponent } from "../pages";
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { SortByPipe } from '../_pipes/sort-by.pipe';
+import { FilterByPipe } from '../_pipes/filter-by.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SortByPipe } from '../_pipes/sort-by.pipe';
     TestrouteComponent,
     UserPageComponent,
     UserEditComponent,
-    SortByPipe
+    SortByPipe,
+    FilterByPipe
   ],
   exports: [],
   imports: [
