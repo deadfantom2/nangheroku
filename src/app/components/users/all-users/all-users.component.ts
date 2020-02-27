@@ -10,7 +10,6 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
   styleUrls: ["./all-users.component.scss"]
 })
 export class AllUsersComponent implements OnInit {
-
   // Async Observable data stream
   public users$: Observable<User[]>;
 
@@ -19,15 +18,17 @@ export class AllUsersComponent implements OnInit {
 
   // Form and Table
   public form: FormGroup;
-  public columns: object;  // table headers name
+  public columns: object; // table headers name
   public isDesc: boolean = false;
   public tabHeaderName: string;
   public direction: number;
+  private timer: any;
+  private preventSimpleClick: boolean = false;
 
   constructor(
     private _usersService: UsersService,
     private _tableService: TableService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.columns = this._tableService.getColumns();
@@ -75,14 +76,22 @@ export class AllUsersComponent implements OnInit {
 
   /** SORTING */
   public doSortByHeader(property: string): void {
-    this.isDesc = !this.isDesc; //change the direction
-    this.tabHeaderName = property;
-    this.direction = this.isDesc ? 1 : -1;
-  }
+    this.timer = 0;
+    this.preventSimpleClick = false;
 
-  /** SORTING */
-  public doFilterByHeader(): void {
-    console.log("filter click")
+    this.timer = setTimeout(() => {
+      if (!this.preventSimpleClick) {
+        console.log("sort");
+        this.isDesc = !this.isDesc; //change the direction
+        this.tabHeaderName = property;
+        this.direction = this.isDesc ? 1 : -1;
+      }
+    }, 200);
   }
-
+  /** FILTERING */
+  doFilterByHeader(): void {
+    this.preventSimpleClick = true;
+    clearTimeout(this.timer);
+    console.log("filter");
+  }
 }
