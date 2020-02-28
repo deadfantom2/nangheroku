@@ -3,6 +3,8 @@ import { Observable } from "rxjs";
 import { User } from "../../../_models/user";
 import { UsersService, TableService } from "../../../_services";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { FilterModalComponent } from 'src/app/modals/filter-modal/filter-modal.component';
 
 @Component({
   selector: "app-all-users",
@@ -27,8 +29,9 @@ export class AllUsersComponent implements OnInit {
 
   constructor(
     private _usersService: UsersService,
-    private _tableService: TableService
-  ) {}
+    private _tableService: TableService,
+    private _dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.columns = this._tableService.getColumns();
@@ -86,12 +89,18 @@ export class AllUsersComponent implements OnInit {
         this.tabHeaderName = property;
         this.direction = this.isDesc ? 1 : -1;
       }
-    }, 200);
+    }, 300);
   }
   /** FILTERING */
-  doFilterByHeader(): void {
+  public doFilterByHeader(property: string, users: User[]): void {
     this.preventSimpleClick = true;
     clearTimeout(this.timer);
     console.log("filter");
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { header: property, users: users };
+    let dialogRef = this._dialog.open(FilterModalComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(value => {
+      console.log(`Dialog sent: ${value}`);
+    });
   }
 }

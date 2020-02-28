@@ -62,13 +62,15 @@
   </div>
 </form>
 
+<!-- <app-filter-modal (isActivated)="(true)"></app-filter-modal> -->
+
 <table>
   <thead>
     <tr>
       <th
         *ngFor="let header of columns"
         (click)="doSortByHeader(header.property)"
-        (dblclick)="doFilterByHeader()"
+        (dblclick)="doFilterByHeader(header.property, users$)"
       >
         <span
           >{{ header.text }}
@@ -85,12 +87,12 @@
     </tr>
   </thead>
   <tbody>
+    <!-- | filterBy: { property: tabHeaderName } -->
     <tr
       *ngFor="
         let user of users$
           | async
           | sortBy: { property: tabHeaderName, direction: direction }
-          | filterBy: { property: tabHeaderName }
       "
       class="col redAsync"
       app-user-page

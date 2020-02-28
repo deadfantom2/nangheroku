@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Filter by {{ property }}</h2>
+
+<mat-dialog-content>
+  <p
+    *ngFor="
+      let user of users$
+        | async
+        | sortBy: { property: property, direction: 1 }
+        | filterBy: { property: property, user: userValue }
+    "
+  >
+    <span (click)="filterByProperty(property, user[property])">
+      {{ user[property] }}
+    </span>
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+</mat-dialog-actions>
+
+<button mat-button>Ok</button>

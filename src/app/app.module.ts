@@ -24,12 +24,12 @@ import { ErrorInterceptor } from "./_helpers/error.interceptor";
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
     HttpClientModule,
     AppRoutingModule,
     ServiceModule,
     GuardsModule,
-    BrowserAnimationsModule,
     ToastrModule.forRoot({
       preventDuplicates: true
     })
