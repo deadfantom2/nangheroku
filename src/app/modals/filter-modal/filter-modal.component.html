@@ -1,65 +1,30 @@
-<!-- <form (ngSubmit)="submit($event)">
-  <h2 mat-dialog-title>Filter by {{ propertyHeader }}</h2> -->
-<!--      | filterBy: { property: propertyHeader, userItem: userValue } -->
-<!-- <mat-dialog-content>
-    <p
-      *ngFor="
-        let user of users$
-          | async
-          | sortBy: { property: propertyHeader, direction: 1 }
-          | filterBy: { property: propertyHeader, userItem: userValue }
-      "
-    >
-      <input type="checkbox" [value]="user.name" />
-      <span (click)="filterByProperty(propertyHeader, user[propertyHeader])">
-        {{ user[propertyHeader] }}
-      </span>
-    </p>
-  </mat-dialog-content>
-
-  <mat-dialog-actions>
-    <button class="mat-raised-button" type="submit">Ok</button>
-    <button class="mat-raised-button" (click)="close()">Close</button>
-  </mat-dialog-actions>
-</form> -->
-
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modalzef title</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p
-          *ngFor="
-            let user of users$
-              | async
-              | sortBy: { property: propertyHeader, direction: 1 }
-          "
-        >
-          {{ user.name }}
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Close
-        </button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+<div class="upload-Modal animated fadeIn" [ngClass]="_modal.cache">
+  <div class="modal" style="display: block;" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Upload Image</h5>
+          <button
+            (click)="fermerModal()"
+            type="button"
+            class="close"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p *ngFor="let user of users$ | async">{{ user.name }}</p>
+        </div>
+        <div class="modal-footer">
+          <button
+            (click)="fermerModal()"
+            type="button"
+            class="btn btn-secondary"
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   </div>

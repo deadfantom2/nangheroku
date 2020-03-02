@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { User } from "../../../_models/user";
-import { UsersService, TableService } from "../../../_services";
+import { UsersService, TableService, ModalService } from "../../../_services";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { FilterModalComponent } from 'src/app/modals/filter-modal/filter-modal.component';
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { FilterModalComponent } from "src/app/modals/filter-modal/filter-modal.component";
 
 @Component({
   selector: "app-all-users",
@@ -30,10 +30,12 @@ export class AllUsersComponent implements OnInit {
   constructor(
     private _usersService: UsersService,
     private _tableService: TableService,
-    private _dialog: MatDialog
-  ) { }
+    private _dialog: MatDialog,
+    private _modal: ModalService
+  ) {}
 
   ngOnInit() {
+    this._modal.notification.subscribe(() => console.log("moad lfilters"));
     this.columns = this._tableService.getColumns();
     this.getAllUsers();
     this.form = new FormGroup({
@@ -104,5 +106,11 @@ export class AllUsersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(value => {
       console.log(`Dialog sent: ${value}`);
     });
+  }
+
+  openModal(id: string) {
+    this.preventSimpleClick = true;
+    clearTimeout(this.timer);
+    this._modal.afficheModal("filters", id);
   }
 }

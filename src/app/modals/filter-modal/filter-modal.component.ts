@@ -1,28 +1,24 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { Observable } from 'rxjs';
-import { User } from 'src/app/_models/user';
+import { Component, OnInit, Input } from "@angular/core";
+import { Observable } from "rxjs";
+import { User } from "src/app/_models/user";
+import { ModalService } from "src/app/_services";
 
 @Component({
-  selector: 'app-filter-modal',
-  templateUrl: './filter-modal.component.html',
-  styleUrls: ['./filter-modal.component.scss']
+  selector: "app-filter-modal",
+  templateUrl: "./filter-modal.component.html",
+  styleUrls: ["./filter-modal.component.scss"]
 })
 export class FilterModalComponent implements OnInit {
-
-  @Input('users') users$: Observable<User[]>;
+  @Input("users") users$: Observable<User[]>;
 
   public propertyHeader: string;
   public userValue: string;
   // public users$: Observable<User[]>;
 
-  constructor(
-    // public dialogRef: MatDialogRef<FilterModalComponent>,
-    // @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  constructor(private _modal: ModalService) {}
 
   ngOnInit() {
-    console.log(this.users$)
+    console.log(this.users$);
     //   this.propertyHeader = this.data.header;
     //   this.users$ = this.data.users;
   }
@@ -33,7 +29,6 @@ export class FilterModalComponent implements OnInit {
   //   this.userValue = user;
   // }
 
-
   // close() {
   //   this.dialogRef.close("Thanks for using me!");
   // }
@@ -42,4 +37,8 @@ export class FilterModalComponent implements OnInit {
   //   console.log(e)
   // }
 
+  fermerModal() {
+    console.log("dfd");
+    this._modal.cacheModal();
+  }
 }
