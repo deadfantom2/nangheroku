@@ -63,7 +63,15 @@
 </form>
 
 <!-- <app-filter-modal (isActivated)="(true)"></app-filter-modal> -->
-
+<button
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#exampleModal"
+>
+  Launch demo modal
+</button>
+<app-filter-modal [users]="users$"></app-filter-modal>
 <table>
   <thead>
     <tr>
@@ -87,12 +95,12 @@
     </tr>
   </thead>
   <tbody>
-    <!-- | filterBy: { property: tabHeaderName } -->
     <tr
       *ngFor="
         let user of users$
           | async
           | sortBy: { property: tabHeaderName, direction: direction }
+          | filterBy: { property: tabHeaderName, userItem: userValue }
       "
       class="col redAsync"
       app-user-page

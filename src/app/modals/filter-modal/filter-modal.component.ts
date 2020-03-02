@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Observable } from 'rxjs';
 import { User } from 'src/app/_models/user';
@@ -10,28 +10,36 @@ import { User } from 'src/app/_models/user';
 })
 export class FilterModalComponent implements OnInit {
 
-  public property: string;
-  public userValue: string;
-  public users$: Observable<User[]>;
+  @Input('users') users$: Observable<User[]>;
 
-  constructor(public dialogRef: MatDialogRef<FilterModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-  }
+  public propertyHeader: string;
+  public userValue: string;
+  // public users$: Observable<User[]>;
+
+  constructor(
+    // public dialogRef: MatDialogRef<FilterModalComponent>,
+    // @Inject(MAT_DIALOG_DATA) public data: any
+  ) { }
 
   ngOnInit() {
-    this.property = this.data.header;
-    this.users$ = this.data.users;
+    console.log(this.users$)
+    //   this.propertyHeader = this.data.header;
+    //   this.users$ = this.data.users;
   }
 
-  public filterByProperty(property: string, name: string) {
-    this.property = property
-    this.userValue = name;
-  }
+  // public filterByProperty(property: string, user: string) {
+  //   console.log(property, user)
+  //   this.propertyHeader = property
+  //   this.userValue = user;
+  // }
 
 
-  close() {
-    this.dialogRef.close("Thanks for using me!");
-  }
+  // close() {
+  //   this.dialogRef.close("Thanks for using me!");
+  // }
+
+  // submit(e) {
+  //   console.log(e)
+  // }
 
 }

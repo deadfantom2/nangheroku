@@ -6,7 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SortByPipe implements PipeTransform {
 
   transform(array: [], args?: any) {
-    console.log('SORT PIPE')
     if (array != null) {
       return array.sort((a, b) => {
         if (a[args.property] === '' || a[args.property] === null || typeof a[args.property] === 'undefined') {

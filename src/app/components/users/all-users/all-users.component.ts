@@ -78,7 +78,7 @@ export class AllUsersComponent implements OnInit {
   }
 
   /** SORTING */
-  public doSortByHeader(property: string): void {
+  public doSortByHeader(header: string): void {
     this.timer = 0;
     this.preventSimpleClick = false;
 
@@ -86,18 +86,20 @@ export class AllUsersComponent implements OnInit {
       if (!this.preventSimpleClick) {
         console.log("sort");
         this.isDesc = !this.isDesc; //change the direction
-        this.tabHeaderName = property;
+        this.tabHeaderName = header;
         this.direction = this.isDesc ? 1 : -1;
       }
     }, 300);
   }
   /** FILTERING */
-  public doFilterByHeader(property: string, users: User[]): void {
+  public doFilterByHeader(property: string, users: []): void {
     this.preventSimpleClick = true;
     clearTimeout(this.timer);
-    console.log("filter");
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = { header: property, users: users };
+    dialogConfig.width = "15rem";
+    dialogConfig.height = "30rem";
+
     let dialogRef = this._dialog.open(FilterModalComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(value => {
       console.log(`Dialog sent: ${value}`);
