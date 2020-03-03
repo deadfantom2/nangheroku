@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-var validate = require("mongoose-validator");
+const validate = require("mongoose-validator");
 
 // Name Validator
-var nameValidator = [
+const nameValidator = [
   validate({
     validator: "matches",
     arguments: /^(([a-zA-Z]{3,20})+[ ]+([a-zA-Z]{3,20})+)+$/,
@@ -17,7 +17,7 @@ var nameValidator = [
   })
 ];
 // E-mail Validator
-var emailValidator = [
+const emailValidator = [
   validate({
     validator: "isEmail",
     message: "E-mail is not a valid."
@@ -29,7 +29,7 @@ var emailValidator = [
   })
 ];
 // Password Validator
-var passwordValidator = [
+const passwordValidator = [
   validate({
     validator: "isLength",
     arguments: [4, 100],
@@ -37,7 +37,7 @@ var passwordValidator = [
   })
 ];
 // Role Validator
-var rolesValidos = {
+const rolesValidos = {
   values: ["ADMIN_ROLE", "USER_ROLE"],
   message: "{VALUE} ce nest pas une role valide!"
 };
@@ -85,5 +85,5 @@ UserSchema.methods.comparePassword = async (reqBodyPwd, dbUserPwd) => {
   return comparePwd;
 };
 
-var User = mongoose.model("UserModel", UserSchema);
+const User = mongoose.model("UserModel", UserSchema);
 module.exports = User;

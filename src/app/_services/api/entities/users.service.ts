@@ -1,13 +1,12 @@
 import { Injectable } from "@angular/core";
 import { EntitiesService } from "./entities.service";
 import { ApiService } from "../../api.service";
-import { Observable, EMPTY, BehaviorSubject, ReplaySubject, interval } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 import { User } from "../../../_models/user";
 import { ToastService } from "../../_outils";
 
 @Injectable()
 export class UsersService extends EntitiesService {
-
   protected type = "api/users";
 
   public allUsers: Observable<User[]>;
@@ -61,7 +60,6 @@ export class UsersService extends EntitiesService {
       .patch(this.type + "/roles/" + user._id, { roles: roleUser })
       .subscribe(
         res => {
-          console.log(res);
           this._toast.showSuccess(
             "Successfully changed role for user " + user.email,
             "Role User"
@@ -98,15 +96,11 @@ export class UsersService extends EntitiesService {
   public deleteUser(user: User): void {
     this._apiService.delete(this.type + "/" + user._id).subscribe(
       item => {
-        console.log('DELETE ONE TOTOTOTOTOTOTOTOTO: ', item)
-        console.log(this.listUsers)
         const user = this.listUsers.findIndex(
           items => items._id === item.user["_id"]
         );
         this.listUsers.splice(user, 1);
         this.tempUsers = [...this.listUsers];
-        console.log(this.listUsers)
-        console.log(this.tempUsers)
         this.objectAllUsers.next(this.listUsers);
         this._toast.showSuccess(
           "Successfully deleted an User!",
@@ -118,5 +112,4 @@ export class UsersService extends EntitiesService {
       }
     );
   }
-
 }

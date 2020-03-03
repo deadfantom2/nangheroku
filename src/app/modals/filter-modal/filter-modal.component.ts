@@ -9,19 +9,17 @@ import { ModalService } from "src/app/_services";
   styleUrls: ["./filter-modal.component.scss"]
 })
 export class FilterModalComponent implements OnInit {
-
   @Input("users") public users$: Observable<User[]>;
   @Input() public property: string;
 
   @Output() public filterByHeader = new EventEmitter<object>();
   @Output() public submitFilter = new EventEmitter<any>();
 
-  constructor(public _modal: ModalService) { }
+  constructor(public _modal: ModalService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  public filterByProperty(property: string, user: User[]): void {
+  public filterByProperty(property: string, user: User): void {
     this.filterByHeader.emit({ property: property, user: user });
     this.closeModal();
   }

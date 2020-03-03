@@ -55,6 +55,7 @@ app.use(express.static(__dirname + "/"));
 
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/upload", require("./routes/uploadFiles"));
 app.use(
   "/api/users",
   [middlewareAuth.checkAuth, middlewareAuth.verificationROLE_ADMIN],
@@ -80,7 +81,7 @@ app.get(
 //   user.isVerified = item.isVerified
 //   user.roles = item.roles
 //   user.google = item.google
-//   user.save() 
+//   user.save()
 //   });
 //   res.json({ users: "ok" });
 // });

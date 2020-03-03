@@ -10,7 +10,6 @@ import { User } from "../../../_models/user";
   styleUrls: ["./all-users.component.scss"]
 })
 export class AllUsersComponent implements OnInit {
-
   // Async Observable data stream
   public users$: Observable<User[]>;
 
@@ -29,7 +28,7 @@ export class AllUsersComponent implements OnInit {
     private _usersService: UsersService,
     private _tableService: TableService,
     private _modal: ModalService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.columns = this._tableService.getColumns();
