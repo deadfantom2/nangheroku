@@ -9,12 +9,12 @@ import { RoutesService, DateService } from "../../_services";
 })
 export class UserPageComponent implements OnInit {
 
-  @Input() user: User[];
-  @Input() columns: object;
+  @Input() public user: User[];
+  @Input() public columns: object;
 
-  @Output() changeAccess = new EventEmitter<User[]>();
-  @Output() changeRole = new EventEmitter<User[]>();
-  @Output() deleteById = new EventEmitter<User[]>();
+  @Output() public changeAccess = new EventEmitter<User[]>();
+  @Output() public changeRole = new EventEmitter<User[]>();
+  @Output() public deleteById = new EventEmitter<User[]>();
 
   constructor(private router: RoutesService, private _dateService: DateService) { }
 

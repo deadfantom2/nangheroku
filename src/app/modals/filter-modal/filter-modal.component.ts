@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Observable } from "rxjs";
 import { User } from "src/app/_models/user";
 import { ModalService } from "src/app/_services";
@@ -9,36 +9,28 @@ import { ModalService } from "src/app/_services";
   styleUrls: ["./filter-modal.component.scss"]
 })
 export class FilterModalComponent implements OnInit {
-  @Input("users") users$: Observable<User[]>;
 
-  public propertyHeader: string;
-  public userValue: string;
-  // public users$: Observable<User[]>;
+  @Input("users") public users$: Observable<User[]>;
+  @Input() public property: string;
 
-  constructor(private _modal: ModalService) {}
+  @Output() public filterByHeader = new EventEmitter<object>();
+  @Output() public submitFilter = new EventEmitter<any>();
+
+  constructor(public _modal: ModalService) { }
 
   ngOnInit() {
-    console.log(this.users$);
-    //   this.propertyHeader = this.data.header;
-    //   this.users$ = this.data.users;
   }
 
-  // public filterByProperty(property: string, user: string) {
-  //   console.log(property, user)
-  //   this.propertyHeader = property
-  //   this.userValue = user;
-  // }
+  public filterByProperty(property: string, user: User[]): void {
+    this.filterByHeader.emit({ property: property, user: user });
+    this.closeModal();
+  }
 
-  // close() {
-  //   this.dialogRef.close("Thanks for using me!");
-  // }
+  public filter(event: any): void {
+    // this.submitFilter.emit(event);
+  }
 
-  // submit(e) {
-  //   console.log(e)
-  // }
-
-  fermerModal() {
-    console.log("dfd");
-    this._modal.cacheModal();
+  public closeModal(): void {
+    this._modal.close();
   }
 }

@@ -1,10 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
-import { User } from "../../../_models/user";
-import { UsersService, TableService, ModalService } from "../../../_services";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { FilterModalComponent } from "src/app/modals/filter-modal/filter-modal.component";
+import { Observable } from "rxjs";
+import { UsersService, TableService, ModalService } from "../../../_services";
+import { User } from "../../../_models/user";
 
 @Component({
   selector: "app-all-users",
@@ -12,17 +10,17 @@ import { FilterModalComponent } from "src/app/modals/filter-modal/filter-modal.c
   styleUrls: ["./all-users.component.scss"]
 })
 export class AllUsersComponent implements OnInit {
+
   // Async Observable data stream
   public users$: Observable<User[]>;
-
-  public allUsersNormal: User[];
-  public allUsersAsync$: Observable<User[]>;
 
   // Form and Table
   public form: FormGroup;
   public columns: object; // table headers name
   public isDesc: boolean = false;
-  public tabHeaderName: string;
+  public tabSortHeaderName: string;
+  public tabFilterHeaderName: string;
+  public userObject: User[];
   public direction: number;
   private timer: any;
   private preventSimpleClick: boolean = false;
@@ -30,12 +28,10 @@ export class AllUsersComponent implements OnInit {
   constructor(
     private _usersService: UsersService,
     private _tableService: TableService,
-    private _dialog: MatDialog,
     private _modal: ModalService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this._modal.notification.subscribe(() => console.log("moad lfilters"));
     this.columns = this._tableService.getColumns();
     this.getAllUsers();
     this.form = new FormGroup({
@@ -83,34 +79,24 @@ export class AllUsersComponent implements OnInit {
   public doSortByHeader(header: string): void {
     this.timer = 0;
     this.preventSimpleClick = false;
-
     this.timer = setTimeout(() => {
       if (!this.preventSimpleClick) {
-        console.log("sort");
         this.isDesc = !this.isDesc; //change the direction
-        this.tabHeaderName = header;
+        this.tabSortHeaderName = header;
         this.direction = this.isDesc ? 1 : -1;
       }
     }, 300);
   }
+
   /** FILTERING */
-  public doFilterByHeader(property: string, users: []): void {
+  public doFilterByHeader(header: string): void {
     this.preventSimpleClick = true;
     clearTimeout(this.timer);
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = { header: property, users: users };
-    dialogConfig.width = "15rem";
-    dialogConfig.height = "30rem";
-
-    let dialogRef = this._dialog.open(FilterModalComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(value => {
-      console.log(`Dialog sent: ${value}`);
-    });
+    this.tabFilterHeaderName = header;
+    this._modal.open(header, "filters");
   }
 
-  openModal(id: string) {
-    this.preventSimpleClick = true;
-    clearTimeout(this.timer);
-    this._modal.afficheModal("filters", id);
+  public filterItem(option: any): void {
+    this.userObject = option.user;
   }
 }

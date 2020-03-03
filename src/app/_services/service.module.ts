@@ -25,6 +25,7 @@ import {
     ToastService,
     RoutesService,
     TableService,
+    ModalService,
     DateService,
     AuthService,
     UsersService,
@@ -32,4 +33,4 @@ import {
   ],
   declarations: []
 })
-export class ServiceModule {}
+export class ServiceModule { }

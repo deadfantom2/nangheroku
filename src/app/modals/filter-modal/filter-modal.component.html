@@ -3,9 +3,9 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Upload Image</h5>
+          <h5 class="modal-title">Filter by {{ property }}</h5>
           <button
-            (click)="fermerModal()"
+            (click)="closeModal()"
             type="button"
             class="close"
             aria-label="Close"
@@ -13,16 +13,31 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
-          <p *ngFor="let user of users$ | async">{{ user.name }}</p>
+          <form (ngSubmit)="filter($event)">
+            <button type="submit">OK</button>
+            <p
+              *ngFor="
+                let user of users$
+                  | async
+                  | sortBy: { property: property, direction: -1 }
+              "
+              (click)="filterByProperty(property, user)"
+            >
+              <input type="checkbox" [value]="user[property]" />
+              {{ user[property] }}
+            </p>
+          </form>
         </div>
+
         <div class="modal-footer">
           <button
-            (click)="fermerModal()"
+            (click)="closeModal()"
             type="button"
             class="btn btn-secondary"
           >
-            Close
+            Close:
           </button>
         </div>
       </div>

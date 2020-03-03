@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { EntitiesService } from "./entities.service";
 import { ApiService } from "../../api.service";
 import { Observable, EMPTY, BehaviorSubject, ReplaySubject, interval } from "rxjs";
-import { User } from "src/app/_models/user";
+import { User } from "../../../_models/user";
 import { ToastService } from "../../_outils";
 
 @Injectable()
@@ -27,7 +27,6 @@ export class UsersService extends EntitiesService {
   public getAllUsers(): void {
     this._apiService.get(this.type).subscribe(
       res => {
-        console.log(res.users)
         this.listUsers = res.users;
         this.tempUsers = [...res.users];
         this.objectAllUsers.next(this.listUsers);
@@ -99,11 +98,15 @@ export class UsersService extends EntitiesService {
   public deleteUser(user: User): void {
     this._apiService.delete(this.type + "/" + user._id).subscribe(
       item => {
+        console.log('DELETE ONE TOTOTOTOTOTOTOTOTO: ', item)
+        console.log(this.listUsers)
         const user = this.listUsers.findIndex(
           items => items._id === item.user["_id"]
         );
         this.listUsers.splice(user, 1);
         this.tempUsers = [...this.listUsers];
+        console.log(this.listUsers)
+        console.log(this.tempUsers)
         this.objectAllUsers.next(this.listUsers);
         this._toast.showSuccess(
           "Successfully deleted an User!",
@@ -116,12 +119,4 @@ export class UsersService extends EntitiesService {
     );
   }
 
-  /**FILTER */
-  public filterUsers(user: User) {
-    console.log(user.name)
-    return this.listUsers.filter(item => item.name.includes(user.name));
-
-
-
-  }
 }

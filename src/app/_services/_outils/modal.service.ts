@@ -1,34 +1,25 @@
-import { Injectable, EventEmitter } from "@angular/core";
+import { Injectable } from "@angular/core";
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 export class ModalService {
+
   public type: string;
-  public id: string;
+  public header: string;
   public cache: string = "cache";
-  public notification = new EventEmitter();
 
   constructor() {
-    console.log(this.cache);
-    console.log("modal uplaods");
   }
 
-  cacheModal() {
-    this.cache = "cache";
-    this.id = null;
-    this.type = null;
-  }
-
-  afficheModal(type: string, id: string) {
-    console.log("toto from on of modal service");
-    this.cache = "";
-    this.id = id;
+  public open(header: string, type: string): void {
     this.type = type;
-
-    console.log(id);
-    console.log(this.type);
-    console.log(this.cache);
-    console.log(this.notification);
+    this.header = header;
+    this.cache = "";
   }
+
+  public close(): void {
+    this.type = null;
+    this.header = null;
+    this.cache = "cache";
+  }
+
 }

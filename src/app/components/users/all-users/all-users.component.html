@@ -62,24 +62,22 @@
   </div>
 </form>
 
-<!-- (dblclick)="doFilterByHeader(header.property, users$)" -->
-
 <table>
   <thead>
     <tr>
       <th
         *ngFor="let header of columns; let i = index"
         (click)="doSortByHeader(header.property)"
-        (dblclick)="openModal(header)"
+        (dblclick)="doFilterByHeader(header.property)"
       >
         <span
           >{{ header.text }}
           <i
             class="fa"
             [ngClass]="{
-              'fa-sort': tabHeaderName != header.property,
-              'fa-sort-asc': tabHeaderName == header.property && isDesc,
-              'fa-sort-desc': tabHeaderName == header.property && !isDesc
+              'fa-sort': tabSortHeaderName != header.property,
+              'fa-sort-asc': tabSortHeaderName == header.property && isDesc,
+              'fa-sort-desc': tabSortHeaderName == header.property && !isDesc
             }"
           ></i>
         </span>
@@ -91,8 +89,8 @@
       *ngFor="
         let user of users$
           | async
-          | sortBy: { property: tabHeaderName, direction: direction }
-          | filterBy: { property: tabHeaderName, userItem: userValue }
+          | filterBy: { property: tabFilterHeaderName, userItem: userObject }
+          | sortBy: { property: tabSortHeaderName, direction: direction }
       "
       class="col redAsync"
       app-user-page
@@ -104,4 +102,8 @@
     ></tr>
   </tbody>
 </table>
-<app-filter-modal [users]="users$"></app-filter-modal>
+<app-filter-modal
+  [users]="users$"
+  [property]="tabFilterHeaderName"
+  (filterByHeader)="filterItem($event)"
+></app-filter-modal>
