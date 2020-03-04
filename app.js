@@ -55,7 +55,8 @@ app.use(express.static(__dirname + "/"));
 
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
-app.use("/upload", require("./routes/uploadFiles"));
+app.use("/upload", middlewareAuth.checkAuth, require("./routes/uploadFiles"));
+app.use("/image", middlewareAuth.checkAuth, require("./routes/imageRoutes"));
 app.use(
   "/api/users",
   [middlewareAuth.checkAuth, middlewareAuth.verificationROLE_ADMIN],

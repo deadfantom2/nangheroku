@@ -28,7 +28,7 @@ export class AllUsersComponent implements OnInit {
     private _usersService: UsersService,
     private _tableService: TableService,
     private _modal: ModalService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.columns = this._tableService.getColumns();
@@ -97,5 +97,14 @@ export class AllUsersComponent implements OnInit {
 
   public filterItem(option: any): void {
     this.userObject = option.user;
+  }
+
+  /** FILE */
+  fileToUpload: File = null;
+  public handleFileInput(files: FileList) {
+    console.log("files: ", files)
+    console.log("files: ", files.item(0))
+    this.fileToUpload = files.item(0);
+    this._usersService.addProfilePicture(files.item(0))
   }
 }
