@@ -117,14 +117,13 @@ async function downloadByType(type, imageArchive, req, res) {
       });
     }
   }
-  if (type === "photos" || type === "files") {
+  if (type === "files") {
     const body = {
       name: imageArchive,
       route: type,
       _userId: req.userData.id
     };
     const createFile = await File.create(body);
-    console.log(createFile);
     const updateFilesUser = await User.updateOne(
       { _id: req.userData.id },
       {
@@ -138,22 +137,29 @@ async function downloadByType(type, imageArchive, req, res) {
     res
       .status(201)
       .json({ success: true, message: "File created!", post: updateFilesUser });
-
-    //   const createNew = await User.updateOne(
-    //     { _id: req.userData.id },
-    //     {
-    //       $push: {
-    //         files: {
-    //           file_id: imageArchive
-    //         }
-    //       }
-    //     }
-    //   );
-    //   return res.status(201).json({
-    //     success: true,
-    //     message: "The new file created!",
-    //     file: createNew
-    //   });
+  }
+  if (type === "photos") {
+    const body = {
+      name: imageArchive,
+      route: type,
+      _userId: req.userData.id
+    };
+    const createPhoto = await Photo.create(body);
+    const updatePhotosUser = await User.updateOne(
+      { _id: req.userData.id },
+      {
+        $push: {
+          files: {
+            file_id: createPhoto._id
+          }
+        }
+      }
+    );
+    res.status(201).json({
+      success: true,
+      message: "Photo created!",
+      post: updatePhotosUser
+    });
   }
 }
 

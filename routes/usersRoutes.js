@@ -5,7 +5,9 @@ const app = expres.Router();
 
 app.get("/", async (req, res) => {
   //  .populate("orders.order_id")
-  const getAllUsers = await User.find().populate("files.file_id");
+  const getAllUsers = await User.find()
+    .populate("files.file_id")
+    .populate("photos.file_id");
   res
     .status(200)
     .json({ message: "Successfully fetch data!", users: getAllUsers });
