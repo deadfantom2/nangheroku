@@ -2,7 +2,7 @@ const express = require("express");
 const fileUpload = require("express-fileupload");
 const fs = require("fs");
 const User = require("../models/User");
-const Photo = require("../models/Photo");
+// const Photo = require("../models/Photo");
 const File = require("../models/File");
 
 const app = express();
@@ -72,93 +72,62 @@ app.put("/:type", async (req, res) => {
 
 async function downloadByType(type, imageArchive, req, res) {
   if (type === "profile") {
+    let typeMessage = "created";
     const userOne = await User.findById({ _id: req.userData.id });
-    if (userOne.img.length === 0) {
-      // $push add object everytime, exemple: [{},{},{}]
-      const createUserImage = await User.updateOne(
-        { _id: req.userData.id },
-        {
-          $push: {
-            img: {
-              name: imageArchive,
-              route: type
-            }
-          }
-        }
-      );
-      return res.status(201).json({
-        success: true,
-        message: "The picture created!",
-        file: createUserImage
-      });
-    } else {
+    if (userOne.img.length !== 0) {
+      typeMessage = "updated";
       const oldpath =
         "./uploads/" + type + "/" + req.userData.id + "/" + userOne.img[0].name;
-
       if (fs.existsSync(oldpath)) {
         fs.unlinkSync(oldpath); // Delete the last picture by ID in folder
       }
-      // $set = reset object, delete object and after create, exemple: [{}]
-      const updateUserImage = await User.updateOne(
+    }
+
+    // $set = reset object, delete object and after create, exemple: [{}]
+    const updateUserImage = await User.updateOne(
+      { _id: req.userData.id },
+      {
+        $set: {
+          img: {
+            name: imageArchive,
+            route: type
+          }
+        }
+      }
+    );
+    return res.status(201).json({
+      success: true,
+      message: "The picture " + typeMessage,
+      file: updateUserImage
+    });
+  }
+  if (type === "files" || type === "photos") {
+    new Promise(async (resolve, reject) => {
+      const body = {
+        name: imageArchive,
+        route: type,
+        _userId: req.userData.id
+      };
+      const newFile = await File.create(body);
+      if (newFile) resolve(newFile);
+      else reject("Error");
+    }).then(async file => {
+      // $push add object everytime, exemple: [{},{},{}]
+      const updateFilesUser = await User.updateOne(
         { _id: req.userData.id },
         {
-          $set: {
-            img: {
-              name: imageArchive,
-              route: type
+          $push: {
+            [type]: {
+              file_id: file._id
             }
           }
         }
       );
-      return res.status(201).json({
+      res.status(201).json({
         success: true,
-        message: "The picture updated!",
-        file: updateUserImage
+        message: "File added!",
+        post: updateFilesUser
       });
-    }
-  }
-  if (type === "files") {
-    const body = {
-      name: imageArchive,
-      route: type,
-      _userId: req.userData.id
-    };
-    const createFile = await File.create(body);
-    const updateFilesUser = await User.updateOne(
-      { _id: req.userData.id },
-      {
-        $push: {
-          files: {
-            file_id: createFile._id
-          }
-        }
-      }
-    );
-    res
-      .status(201)
-      .json({ success: true, message: "File created!", post: updateFilesUser });
-  }
-  if (type === "photos") {
-    const body = {
-      name: imageArchive,
-      route: type,
-      _userId: req.userData.id
-    };
-    const createPhoto = await Photo.create(body);
-    const updatePhotosUser = await User.updateOne(
-      { _id: req.userData.id },
-      {
-        $push: {
-          files: {
-            file_id: createPhoto._id
-          }
-        }
-      }
-    );
-    res.status(201).json({
-      success: true,
-      message: "Photo created!",
-      post: updatePhotosUser
     });
   }
 }
