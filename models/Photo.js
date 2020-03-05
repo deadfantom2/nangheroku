@@ -1,16 +1,17 @@
 const mongoose = require("mongoose");
 
-const FileSchema = mongoose.Schema(
+const PhotoSchema = mongoose.Schema(
   {
     name: String,
     route: String,
     _userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "UserModel"
+      ref: "usermodel",
+      required: true
     }
   },
   { timestamps: true }
 );
 
-const File = mongoose.model("FileModel", FileSchema);
-module.exports = File;
+const Photo = mongoose.model("PhotoModel", PhotoSchema);
+module.exports = Photo;

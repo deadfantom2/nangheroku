@@ -4,10 +4,11 @@ const tokenSchema = new mongoose.Schema({
   _userId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "usermodel"
+    ref: "UserModel"
   },
   token: { type: String, required: true },
   createdAt: { type: Date, required: true, default: Date.now, expires: 43200 }
 });
 
-const Token = (module.exports = mongoose.model("Token", tokenSchema));
+const Token = mongoose.model("TokenModel", tokenSchema);
+module.exports = Token;

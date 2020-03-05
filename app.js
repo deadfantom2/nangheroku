@@ -12,6 +12,7 @@ const User = require("./models/User");
 const app = express();
 
 // Connect to MongoDB.
+// mongoose.connect(process.env.MONGODB_URI, {
 mongoose.connect(process.env.MONGOLAB_URI || process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -70,22 +71,22 @@ app.get(
     res.status(200).json({ message: "Le route toto" });
   }
 );
-// app.post("/fakeusers", async (req, res) => {
-//   fakeSeed.map(item => {
-//   const user = new User();
-//   user.name = item.name
-//   user.surname = item.surname
-//   user.age = item.age
-//   user.email = item.email
-//   user.password = item.password
-//   user.img = item.img
-//   user.isVerified = item.isVerified
-//   user.roles = item.roles
-//   user.google = item.google
-//   user.save()
-//   });
-//   res.json({ users: "ok" });
-// });
+app.post("/fakeusers", async (req, res) => {
+  fakeSeed.map(item => {
+    const user = new User();
+    user.name = item.name;
+    user.surname = item.surname;
+    user.age = item.age;
+    user.email = item.email;
+    user.password = item.password;
+    user.img = item.img;
+    user.isVerified = item.isVerified;
+    user.roles = item.roles;
+    user.google = item.google;
+    user.save();
+  });
+  res.json({ users: "ok" });
+});
 
 // error handler
 app.use((err, req, res, next) => {

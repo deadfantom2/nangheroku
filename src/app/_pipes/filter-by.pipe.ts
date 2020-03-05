@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class FilterByPipe implements PipeTransform {
   transform(array: [], args?: any) {
-    console.log("Filter pipe: ", array, " - ", args);
+    // console.log("Filter pipe: ", array, " - ", args);
     if (array) {
       if (!args.property && !args.userItem) {
         console.log("1");

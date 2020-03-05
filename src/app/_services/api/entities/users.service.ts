@@ -28,6 +28,7 @@ export class UsersService extends EntitiesService {
   public getAllUsers(): void {
     this._apiService.get(this.type).subscribe(
       res => {
+        console.log(res)
         this.listUsers = res.users;
         this.tempUsers = [...res.users];
         this.objectAllUsers.next(this.listUsers);
@@ -116,7 +117,7 @@ export class UsersService extends EntitiesService {
   }
 
   /** Create or Update: a User image */
-  public addProfilePicture(file: File): void {
+  public addProfilePicture(file: any): void {
     this.formData.append('fileInput', file);
     this._apiService.put('upload/profile',
       this.formData,
@@ -132,7 +133,4 @@ export class UsersService extends EntitiesService {
         })
   }
 
-  public toto(user: User) {
-    this._apiService.put('gfkldgdkfgkldfg', { name: user.name })
-  }
 }

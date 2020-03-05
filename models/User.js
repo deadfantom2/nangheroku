@@ -37,9 +37,14 @@ const passwordValidator = [
   })
 ];
 // Role Validator
-const rolesValidos = {
+const rolesValidator = {
   values: ["ADMIN_ROLE", "USER_ROLE"],
   message: "{VALUE} ce nest pas une role valide!"
+};
+// Image, Photo, File route Validator
+const imageRoutesValidator = {
+  values: ["profile", "files", "photos"],
+  message: "{VALUE} it's fail route!"
 };
 
 const UserSchema = mongoose.Schema(
@@ -49,17 +54,32 @@ const UserSchema = mongoose.Schema(
     age: { type: Number, default: 1 },
     email: { type: String, required: true, validate: emailValidator },
     password: { type: String, required: true, validate: passwordValidator },
-    img: { type: String, required: false },
-    roles: { type: String, default: "USER_ROLE", enum: rolesValidos },
+    roles: { type: String, default: "USER_ROLE", enum: rolesValidator },
     google: { type: Boolean, default: false },
     isVerified: { type: Boolean, default: true },
-    passwordResetToken: String,
-    passwordResetExpires: Date,
+    img: [
+      {
+        name: String,
+        route: { type: String, enum: imageRoutesValidator }
+      }
+    ],
+    photos: [
+      {
+        file_id: { type: mongoose.Schema.Types.ObjectId, ref: "FileModel" }
+      }
+    ],
+    files: [
+      {
+        file_id: { type: mongoose.Schema.Types.ObjectId, ref: "FileModel" }
+      }
+    ],
     orders: [
       {
         order_id: { type: mongoose.Schema.Types.ObjectId, ref: "OrderModel" }
       }
-    ]
+    ],
+    passwordResetToken: String,
+    passwordResetExpires: Date
   },
   { timestamps: true }
 );

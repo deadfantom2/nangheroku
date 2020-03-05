@@ -4,7 +4,8 @@ const middlewareAuth = require("../middleware/check-auth");
 const app = expres.Router();
 
 app.get("/", async (req, res) => {
-  const getAllUsers = await User.find().populate("orders.order_id");
+  //  .populate("orders.order_id")
+  const getAllUsers = await User.find().populate("files.file_id");
   res
     .status(200)
     .json({ message: "Successfully fetch data!", users: getAllUsers });
