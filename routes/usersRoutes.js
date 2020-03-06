@@ -14,9 +14,9 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/:id", async (req, res) => {
-  const getUserById = await User.findById({ _id: req.params.id }).populate(
-    "orders.order_id"
-  );
+  const getUserById = await User.findById({ _id: req.params.id })
+    .populate("files.file_id")
+    .populate("photos.file_id");
   res
     .status(200)
     .json({ message: "Successfully fetch one user by id!", user: getUserById });

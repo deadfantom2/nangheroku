@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { User } from "../../_models/user";
 import { RoutesService, DateService } from "../../_services";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "tr[app-user-page]",
@@ -17,10 +18,11 @@ export class UserPageComponent implements OnInit {
 
   constructor(
     private router: RoutesService,
-    private _dateService: DateService
-  ) {}
+    private _dateService: DateService,
+    private routers: Router
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   /** Change name of roles or activation */
   public changeName(name: String) {
@@ -34,8 +36,8 @@ export class UserPageComponent implements OnInit {
     return this._dateService.customDateDDMMYYYY(date);
   }
 
-  public editUser(): void {
-    this.router.navigateToRoute("/user");
+  public editUser(user: User): void {
+    this.routers.navigate(['user', user._id])
   }
 
   public editAccessUser(): void {

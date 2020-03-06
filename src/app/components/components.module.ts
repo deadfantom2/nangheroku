@@ -25,6 +25,7 @@ import {
 // Pipes
 import { SortByPipe } from '../_pipes/sort-by.pipe';
 import { FilterByPipe } from '../_pipes/filter-by.pipe';
+import { ImageDisplayPipe } from '../_pipes/image-display.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { FilterByPipe } from '../_pipes/filter-by.pipe';
     FilterModalComponent,
     ImageModalComponent,
     SortByPipe,
-    FilterByPipe
+    FilterByPipe,
+    ImageDisplayPipe
   ],
   exports: [],
   imports: [

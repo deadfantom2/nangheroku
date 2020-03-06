@@ -10,10 +10,11 @@ const componentsRoutes: Routes = [
     {
         path: "users",
         component: AllUsersComponent,
-        data: { title: "Users" }
+        data: { title: "Users" },
+        canActivate: [AuthGuard]
     },
     {
-        path: "user",
+        path: "user/:id",
         component: UserEditComponent,
         data: { title: "User edit" }
     },

@@ -2,15 +2,17 @@ import { Injectable } from "@angular/core";
 import { EntitiesService } from "./entities.service";
 import { ApiService } from "../../api.service";
 import { Observable, BehaviorSubject } from "rxjs";
-import { User, File } from "../../../_models";
+import { User, File, ResModel } from "../../../_models";
 import { ToastService } from "../../_outils";
 
 @Injectable()
 export class UsersService extends EntitiesService {
   protected type = "api/users";
 
-  public allUsers: Observable<User[]>;
   private objectAllUsers: BehaviorSubject<User[]>;
+  private objectOneUser: BehaviorSubject<User[]>;
+  public allUsers: Observable<User[]>;
+  public oneUser: Observable<User[]>;
 
   private listUsers: User[] = [];
   public tempUsers: User[] = [];
@@ -20,8 +22,11 @@ export class UsersService extends EntitiesService {
   constructor(_apiService: ApiService, private _toast: ToastService) {
     super(_apiService);
 
+
     this.objectAllUsers = new BehaviorSubject(null) as BehaviorSubject<User[]>;
+    this.objectOneUser = new BehaviorSubject(null) as BehaviorSubject<User[]>;
     this.allUsers = this.objectAllUsers.asObservable();
+    this.oneUser = this.objectOneUser.asObservable();
   }
 
   /** Get: All Users of Users */
@@ -32,6 +37,20 @@ export class UsersService extends EntitiesService {
         this.listUsers = res.users;
         this.tempUsers = [...res.users];
         this.objectAllUsers.next(this.listUsers);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  /** Get: All Users of Users */
+  public getUserById(id: string): void {
+    console.log(id)
+    this._apiService.get(this.type + '/' + id).subscribe(
+      res => {
+        this.listUsers = res.user;
+        this.objectOneUser.next(this.listUsers);
       },
       error => {
         console.log(error);
