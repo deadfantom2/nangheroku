@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 import { EntitiesService } from "./entities.service";
 import { ApiService } from "../../api.service";
 import { Observable, BehaviorSubject } from "rxjs";
-import { User, File, ResModel } from "../../../_models";
+import { User } from "../../../_models";
 import { ToastService } from "../../_outils";
+import { HttpHeaders, HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class UsersService extends EntitiesService {
@@ -19,9 +20,12 @@ export class UsersService extends EntitiesService {
 
   private formData: FormData = new FormData();
 
-  constructor(_apiService: ApiService, private _toast: ToastService) {
+  constructor(
+    _apiService: ApiService,
+    private _toast: ToastService,
+    private _http: HttpClient
+  ) {
     super(_apiService);
-
 
     this.objectAllUsers = new BehaviorSubject(null) as BehaviorSubject<User[]>;
     this.objectOneUser = new BehaviorSubject(null) as BehaviorSubject<User[]>;
@@ -33,7 +37,7 @@ export class UsersService extends EntitiesService {
   public getAllUsers(): void {
     this._apiService.get(this.type).subscribe(
       res => {
-        console.log(res)
+        console.log(res);
         this.listUsers = res.users;
         this.tempUsers = [...res.users];
         this.objectAllUsers.next(this.listUsers);
@@ -46,10 +50,11 @@ export class UsersService extends EntitiesService {
 
   /** Get: All Users of Users */
   public getUserById(id: string): void {
-    console.log(id)
-    this._apiService.get(this.type + '/' + id).subscribe(
+    console.log(id);
+    this._apiService.get(this.type + "/" + id).subscribe(
       res => {
         this.listUsers = res.user;
+        console.log(res.user.name);
         this.objectOneUser.next(this.listUsers);
       },
       error => {
@@ -137,19 +142,19 @@ export class UsersService extends EntitiesService {
 
   /** Create or Update: a User image */
   public addProfilePicture(file: any): void {
-    this.formData.append('fileInput', file);
-    this._apiService.put('upload/profile',
-      this.formData,
-      { name: file.name, route: 'profile' })
-      .subscribe(res => {
-        this._toast.showSuccess(
-          res.message,
-          "Image profile"
-        );
-      },
+    this.formData.append("fileInput", file);
+    this._apiService
+      .put("upload/profile", this.formData, {
+        name: file.name,
+        route: "profile"
+      })
+      .subscribe(
+        res => {
+          this._toast.showSuccess(res.message, "Image profile");
+        },
         error => {
           console.log(error);
-        })
+        }
+      );
   }
-
 }

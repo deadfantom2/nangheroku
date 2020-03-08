@@ -1,1 +1,12 @@
-{{ user$ | async | json }}
+<div *ngIf="user$ | async as user">
+  <p>name: {{ user.name }}</p>
+  <p>surname: {{ user.surname }}</p>
+  <p>email: {{ user.email }}</p>
+  <p>age: {{ user.age }}</p>
+  <p *ngFor="let img of user.img">
+    img: {{ img.name }} img: {{ img.route }}
+
+    <img [src]="img | imageDisplay: 'profile' | async" />
+  </p>
+  <p></p>
+</div>

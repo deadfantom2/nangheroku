@@ -10,7 +10,7 @@ import { ToastrModule } from "ngx-toastr";
 // Services Module
 import { ServiceModule } from "./_services/service.module";
 
-// Guards Module 
+// Guards Module
 import { GuardsModule } from "./_guard/guards.module";
 
 // Components
@@ -48,4 +48,4 @@ import { ErrorInterceptor } from "./_helpers/error.interceptor";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

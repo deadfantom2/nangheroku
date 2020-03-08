@@ -16,7 +16,7 @@
   </div>
   <div *ngIf="col.property === 'img'">
     <span *ngFor="let img of user[col.property]">
-      <img [src]="img | imageDisplay: 'profile'" />
+      <img [src]="img | imageDisplay: 'profile' | async" />
     </span>
   </div>
   <div *ngIf="col.property === 'roles'">

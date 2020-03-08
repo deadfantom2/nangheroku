@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
-import { User, File } from '../_models';
+import { User, File } from "../_models";
 
 @Injectable()
 export class ApiService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   ////////////////////////////////
   // PUBLIC METHODS
@@ -24,8 +23,16 @@ export class ApiService {
   }
 
   /** Make a PUT request */
-  public put(url: string, formData?: any, payload: any = null): Observable<any> {
-    return this.http.put<File[]>(environment.apiUrl + `/${url}`, formData, payload);
+  public put(
+    url: string,
+    formData?: any,
+    payload: any = null
+  ): Observable<any> {
+    return this.http.put<File[]>(
+      environment.apiUrl + `/${url}`,
+      formData,
+      payload
+    );
   }
 
   /** Make a PATCH request */
@@ -37,6 +44,4 @@ export class ApiService {
   public delete(url: string): Observable<any> {
     return this.http.delete<User[]>(environment.apiUrl + `/${url}`);
   }
-
-
 }

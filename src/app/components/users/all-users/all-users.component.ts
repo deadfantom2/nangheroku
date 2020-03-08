@@ -28,7 +28,7 @@ export class AllUsersComponent implements OnInit {
     private _usersService: UsersService,
     private _tableService: TableService,
     private _modal: ModalService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.columns = this._tableService.getColumns();
@@ -50,6 +50,7 @@ export class AllUsersComponent implements OnInit {
   /** GET ALL USERS */
   private getAllUsers(): void {
     this.users$ = this._usersService.allUsers;
+    console.log(this.users$);
     this._usersService.getAllUsers();
     // return this._usersService.getAll();  // 2 method by protected route
   }
@@ -102,9 +103,9 @@ export class AllUsersComponent implements OnInit {
   /** FILE */
   fileToUpload: File = null;
   public handleFileInput(files: FileList) {
-    console.log("files: ", files)
-    console.log("files: ", files.item(0))
+    console.log("files: ", files);
+    console.log("files: ", files.item(0));
     this.fileToUpload = files.item(0);
-    this._usersService.addProfilePicture(files.item(0))
+    this._usersService.addProfilePicture(files.item(0));
   }
 }
