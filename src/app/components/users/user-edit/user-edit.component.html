@@ -1,6 +1,15 @@
-<form (ngSubmit)="handleFileInput($event.target)">
-  <input type="file" (change)="handleFileInput($event.target.files)" />
-  <input type="checkbox" value="profile" />
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input
+    type="file"
+    name="file"
+    (change)="handleFileInput($event.target.files)"
+  />
+  <select name="types" (change)="handleType($event)">
+    <option value="profile">profile</option>
+    <option value="files">files</option>
+    <option value="photos">photos</option>
+  </select>
+
   <button type="submit">
     Add
   </button>

@@ -20,10 +20,7 @@ export class UsersService extends EntitiesService {
 
   private formData: FormData = new FormData();
 
-  constructor(
-    _apiService: ApiService,
-    private _toast: ToastService
-  ) {
+  constructor(_apiService: ApiService, private _toast: ToastService) {
     super(_apiService);
 
     this.objectAllUsers = new BehaviorSubject(null) as BehaviorSubject<User[]>;
@@ -142,6 +139,8 @@ export class UsersService extends EntitiesService {
   /** Create or Update: a User image */
   public addProfilePicture(file: any, route: string): void {
     this.formData.append("fileInput", file);
+    console.log(file);
+    console.log(route);
     this._apiService
       .put("upload/profile", this.formData, {
         name: file.name,
@@ -149,6 +148,7 @@ export class UsersService extends EntitiesService {
       })
       .subscribe(
         res => {
+          console.log(res);
           this._toast.showSuccess(res.message, "Image profile");
         },
         error => {
