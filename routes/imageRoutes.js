@@ -3,14 +3,16 @@ const path = require("path");
 const fs = require("fs");
 const app = express();
 
-app.get("/:type/:image", async (req, res) => {
+app.get("/:type/:folder/:image", async (req, res) => {
   const type = req.params.type;
+  const folder = req.params.folder;
   const image = req.params.image;
   const pathImage = path.resolve(
     __dirname,
-    "../uploads/" + type + "/" + req.userData.id + "/" + image
+    "../uploads/" + type + "/" + folder + "/" + image
+    // "../uploads/" + type + "/" + req.userData.id + "/" + image
   );
-  console.log("../uploads/" + type + "/" + req.userData.id + "/" + image);
+  console.log("../uploads/" + type + "/" + folder + "/" + image);
   if (fs.existsSync(pathImage)) {
     res.sendFile(pathImage);
   } else {

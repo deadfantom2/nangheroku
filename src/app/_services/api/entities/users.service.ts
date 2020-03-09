@@ -4,7 +4,6 @@ import { ApiService } from "../../api.service";
 import { Observable, BehaviorSubject } from "rxjs";
 import { User } from "../../../_models";
 import { ToastService } from "../../_outils";
-import { HttpHeaders, HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class UsersService extends EntitiesService {
@@ -16,14 +15,14 @@ export class UsersService extends EntitiesService {
   public oneUser: Observable<User[]>;
 
   private listUsers: User[] = [];
+  private listUser: User[] = [];
   public tempUsers: User[] = [];
 
   private formData: FormData = new FormData();
 
   constructor(
     _apiService: ApiService,
-    private _toast: ToastService,
-    private _http: HttpClient
+    private _toast: ToastService
   ) {
     super(_apiService);
 
@@ -53,9 +52,9 @@ export class UsersService extends EntitiesService {
     console.log(id);
     this._apiService.get(this.type + "/" + id).subscribe(
       res => {
-        this.listUsers = res.user;
+        this.listUser = res.user;
         console.log(res.user.name);
-        this.objectOneUser.next(this.listUsers);
+        this.objectOneUser.next(this.listUser);
       },
       error => {
         console.log(error);
@@ -141,12 +140,12 @@ export class UsersService extends EntitiesService {
   }
 
   /** Create or Update: a User image */
-  public addProfilePicture(file: any): void {
+  public addProfilePicture(file: any, route: string): void {
     this.formData.append("fileInput", file);
     this._apiService
       .put("upload/profile", this.formData, {
         name: file.name,
-        route: "profile"
+        route: route
       })
       .subscribe(
         res => {

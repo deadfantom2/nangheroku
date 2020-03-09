@@ -7,6 +7,8 @@ import { RoutesService, TitleService } from "./_services";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
+
+  isLogged: any;
   constructor(
     private _titleService: TitleService,
     private _routesService: RoutesService

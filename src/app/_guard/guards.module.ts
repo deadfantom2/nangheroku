@@ -3,12 +3,13 @@ import { NgModule } from "@angular/core";
 
 // Guards
 import {
-  AuthGuard
+  AuthGuard,
+  AdminGuard
 } from "./";
 
 @NgModule({
   declarations: [],
-  providers: [AuthGuard],
+  providers: [AuthGuard, AdminGuard],
   exports: [],
   imports: []
 })

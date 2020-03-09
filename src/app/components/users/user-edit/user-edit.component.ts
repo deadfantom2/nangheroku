@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { User, ResModel } from "../../../_models";
+import { User } from "../../../_models";
 import { UsersService } from "src/app/_services";
 import { Observable } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
@@ -17,7 +17,7 @@ export class UserEditComponent implements OnInit {
   constructor(
     private _usersService: UsersService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getUser();
@@ -28,7 +28,15 @@ export class UserEditComponent implements OnInit {
     this._usersService.getUserById(this.route.snapshot.params.id);
   }
 
-  public getImage(type, image) {
-    this._usersService.geImages(type, image);
+  /** FILE */
+  fileToUpload: File = null;
+  public handleFileInput(files: FileList) {
+    console.log("files: ", files);
+    // console.log("files: ", files.item(0));
+    // this.fileToUpload = files.item(0);
+    // this._usersService.addProfilePicture(files.item(0), 'profile');
+
   }
+
+
 }

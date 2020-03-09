@@ -2,7 +2,6 @@ const express = require("express");
 const fileUpload = require("express-fileupload");
 const fs = require("fs");
 const User = require("../models/User");
-// const Photo = require("../models/Photo");
 const File = require("../models/File");
 
 const app = express();
@@ -26,7 +25,8 @@ app.put("/:type", async (req, res) => {
   const type = req.params.type;
   const archive = req.files.fileInput; // Initialize name for input = fileInput
   const typeRoutes = ["profile", "photos", "files"]; // Type of routes
-  const extensionsImages = ["png", "jpg", "jpeg", "gif"]; // Type's file extensions
+  const extensionsImages = ["png", "jpg", "jpeg", "gif"]; // Type's file extensions images
+  const extensionsFiles = ["pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx"]; // Type's file extensions files
 
   // Formating name for the file
   const coupeNomImage = archive.name.split(".");
@@ -43,12 +43,22 @@ app.put("/:type", async (req, res) => {
         message: "Fail route!"
       });
     }
+
     // Rules of the type's file, only the type: xlsx and etc...
-    if (extensionsImages.indexOf(extention) < 0) {
-      return res.status(400).json({
-        success: false,
-        message: "Valid extensions are " + extensionsImages.join(", ")
-      });
+    if (type === "profile") {
+      if (extensionsImages.indexOf(extention) < 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Valid extensions are " + extensionsImages.join(", ")
+        });
+      }
+    } else {
+      if (extensionsFiles.indexOf(extention) < 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Valid extensions are " + extensionsFiles.join(", ")
+        });
+      }
     }
 
     const pathFolders = "./uploads/" + type + "/" + req.userData.id;
@@ -133,3 +143,22 @@ async function downloadByType(type, imageArchive, req, res) {
 }
 
 module.exports = app;
+
+// dla seba pypsik privlikatelnoi dla seba
+// ei nravotsa kogda ona vugladit storinee v etoi odejde chem v drygoi
+// kogda nakrashenu gybu
+
+// tebe nravitsa kogda y teba strijka krasivee  kogda tu odenish svoe lubimoe kogda namazit djinsi
+
+// s ogolennumi nogami na kablykax eshe i v takom cvete arkom tu ne kak ne bydesh vugladet stroinee, A SEKSYALNEE DA!!
+// stroinee mojno vugladet esli odet' bruki, platie, tyfli
+// tvoi podrygi tak ne odelis
+
+// dla seba odevaeshsa, devyska kotoraa ogolaet chasti tela:
+//   > intyitivno zazuvaet smotret na nix pokazuvaa svou dostypnost
+//   > vesna, templo: xochetsa pokazat svou seksyalnost, privlech vnimanie
+
+// a ne odevaus vuzuvaushe, s parnami esli on ne gai takoe ne prokatuvaet
+
+// mojno odetsa po drygomy i vugladit stroino i krasivo,
+//   a tu vsachiski odevaesh to shto vuzovet vnimanie i skaju eshe shto eto ne tak

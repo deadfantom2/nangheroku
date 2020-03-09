@@ -58,20 +58,16 @@ app.use(express.static(__dirname + "/"));
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/upload", middlewareAuth.checkAuth, require("./routes/uploadFiles"));
-app.use("/image", middlewareAuth.checkAuth, require("./routes/imageRoutes"));
+app.use("/image", require("./routes/imageRoutes"));
 app.use(
   "/api/users",
   [middlewareAuth.checkAuth, middlewareAuth.verificationROLE_ADMIN],
   require("./routes/usersRoutes")
 );
 app.use("/api/orders", require("./routes/ordersRoutes"));
-app.get(
-  "/api/toto",
-  [middlewareAuth.checkAuth, middlewareAuth.verificationROLE_ADMIN],
-  (req, res) => {
-    res.status(200).json({ message: "Le route toto" });
-  }
-);
+app.get("/api/toto", middlewareAuth.checkAuth, (req, res) => {
+  res.status(200).json({ message: "Le route toto" });
+});
 app.post("/fakeusers", async (req, res) => {
   fakeSeed.map(item => {
     const user = new User();
@@ -80,7 +76,6 @@ app.post("/fakeusers", async (req, res) => {
     user.age = item.age;
     user.email = item.email;
     user.password = item.password;
-    user.img = item.img;
     user.isVerified = item.isVerified;
     user.roles = item.roles;
     user.google = item.google;

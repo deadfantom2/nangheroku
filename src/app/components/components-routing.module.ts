@@ -4,14 +4,14 @@ import { AllUsersComponent } from "./users/all-users/all-users.component";
 import { UserEditComponent } from "./users/user-edit/user-edit.component";
 import { AllOrdersComponent } from "./orders/all-orders/all-orders.component";
 import { TestrouteComponent } from "./testroute/testroute.component";
-import { AuthGuard } from "../_guard";
+import { AuthGuard, AdminGuard } from "../_guard";
 
 const componentsRoutes: Routes = [
   {
     path: "users",
     component: AllUsersComponent,
     data: { title: "Users" },
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, AdminGuard]
   },
   {
     path: "user/:id",
@@ -35,4 +35,4 @@ const componentsRoutes: Routes = [
   imports: [RouterModule.forChild(componentsRoutes)],
   exports: [RouterModule]
 })
-export class ComponentsRoutingModule {}
+export class ComponentsRoutingModule { }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { User } from "../../_models/user";
-import { RoutesService, DateService } from "../../_services";
 import { Router } from '@angular/router';
+import { DateService, UsersService } from "../../_services";
+import { User } from "../../_models/user";
 
 @Component({
   selector: "tr[app-user-page]",
@@ -17,7 +17,7 @@ export class UserPageComponent implements OnInit {
   @Output() public deleteById = new EventEmitter<User[]>();
 
   constructor(
-    private router: RoutesService,
+    private _usersService: UsersService,
     private _dateService: DateService,
     private routers: Router
   ) { }
@@ -50,4 +50,6 @@ export class UserPageComponent implements OnInit {
   public deleteUser(): void {
     this.deleteById.emit();
   }
+
+
 }
