@@ -4,7 +4,8 @@
     name="file"
     (change)="handleFileInput($event.target.files)"
   />
-  <select name="types" (change)="handleType($event)">
+  <select name="types" value="profile" (change)="handleType($event)">
+    <option>Select type of file</option>
     <option value="profile">profile</option>
     <option value="files">files</option>
     <option value="photos">photos</option>

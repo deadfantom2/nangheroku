@@ -44,6 +44,7 @@ export class UserEditComponent implements OnInit {
     }
   }
   public handleType(event: any): void {
+    console.log(event.target.value);
     this.form.get("types").setValue(event.target.value);
   }
   public onSubmit(): void {

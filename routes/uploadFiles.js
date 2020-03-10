@@ -45,23 +45,31 @@ app.put("/:type", async (req, res) => {
     }
 
     // Rules of the type's file, only the type: xlsx and etc...
-    if (type === "profile") {
+    if (type === "profile" || type === "photos") {
       if (extensionsImages.indexOf(extention) < 0) {
         return res.status(400).json({
           success: false,
           message: "Valid extensions are " + extensionsImages.join(", ")
         });
       }
-    } else {
-      if (extensionsFiles.indexOf(extention) < 0) {
+    }
+    if (type === "files") {
+      if (
+        extensionsFiles.indexOf(extention) < 0 ||
+        extensionsImages.indexOf(extention) < 0
+      ) {
         return res.status(400).json({
           success: false,
-          message: "Valid extensions are " + extensionsFiles.join(", ")
+          message:
+            "Valid extensions are " +
+            extensionsFiles.join(", ") +
+            extensionsImages.join(", ")
         });
       }
     }
 
     const pathFolders = "./uploads/" + type + "/" + req.userData.id;
+    console.log("pathFolders: ", pathFolders);
     const path = pathFolders + "/" + imageArchive;
     const existPath = await fs.existsSync(pathFolders);
     if (!existPath) {

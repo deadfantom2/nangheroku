@@ -142,14 +142,19 @@ export class UsersService extends EntitiesService {
     console.log(file);
     console.log(route);
     this._apiService
-      .put("upload/profile", this.formData, {
+      .put("upload/" + route, this.formData, {
         name: file.name,
         route: route
       })
       .subscribe(
         res => {
           console.log(res);
-          this._toast.showSuccess(res.message, "Image profile");
+          if (route === "profile") {
+            console.log("profile");
+          } else {
+            console.log("else");
+          }
+          this._toast.showSuccess(res.message, "File added");
         },
         error => {
           console.log(error);
