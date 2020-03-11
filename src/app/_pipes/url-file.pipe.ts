@@ -1,13 +1,14 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: "imageDisplay"
+  name: "urlFile"
 })
-export class ImageDisplayPipe implements PipeTransform {
+export class UrlFilePipe implements PipeTransform {
   transform(file: any, args: any) {
 
     let url = "http://localhost:3000/image";
 
+    console.log("file: ", file, " --- args: ", args)
     if (!file) {
       console.log("nety")
       return url + "/profile/nonimage";
@@ -23,6 +24,7 @@ export class ImageDisplayPipe implements PipeTransform {
         break;
       case "files":
         url += "/files/" + args.userId + '/' + file.file_id.name;
+        console.log(file.file_id.name.split('.')[1])
         break;
       case "photos":
         url += "/photos/" + args.userId + '/' + file.file_id.name;

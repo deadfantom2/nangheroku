@@ -16,7 +16,7 @@
   </div>
   <div *ngIf="col.property === 'img'">
     <span *ngFor="let img of user[col.property]">
-      <img [src]="img | imageDisplay: { type: 'profile', userId: user._id }" />
+      <img [src]="img | urlFile: { type: 'profile', userId: user._id }" />
     </span>
   </div>
   <div *ngIf="col.property === 'roles'">

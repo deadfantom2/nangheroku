@@ -8,16 +8,20 @@ import { RoutesService, TitleService } from "./_services";
 })
 export class AppComponent implements OnInit {
 
-  isLogged: any;
+
   constructor(
     private _titleService: TitleService,
     private _routesService: RoutesService
   ) { }
+
   ngOnInit() {
-    this._titleService.initTitle();
+    this._titleService.initTitle(); 
   }
 
-  public navigateToRoute(pathRoute: string) {
+  // Navigate to route
+  public navigateToRoute(pathRoute: string): void {
     this._routesService.navigateToRoute(pathRoute);
   }
+
+  
 }

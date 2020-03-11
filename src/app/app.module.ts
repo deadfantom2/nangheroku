@@ -19,9 +19,10 @@ import { AppComponent } from "./app.component";
 // Interceptors
 import { JwtInterceptor } from "./_helpers/jwt.interceptor";
 import { ErrorInterceptor } from "./_helpers/error.interceptor";
+import { NavComponent } from './components/layout/nav/nav.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,    NavComponent,],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

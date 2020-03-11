@@ -4,7 +4,7 @@
     name="file"
     (change)="handleFileInput($event.target.files)"
   />
-  <select name="types" value="profile" (change)="handleType($event)">
+  <select name="types" (change)="handleType($event)">
     <option>Select type of file</option>
     <option value="profile">profile</option>
     <option value="files">files</option>
@@ -22,12 +22,14 @@
   <p>Emmail: {{ user.email }}</p>
   <p>Age: {{ user.age }}</p>
   <p *ngFor="let img of user.img">
-    <img [src]="img | imageDisplay: { type: 'profile', userId: user._id }" />
+    <img [src]="img | urlFile: { type: 'profile', userId: user._id }" />
   </p>
   <p *ngFor="let photo of user.photos">
-    <img [src]="photo | imageDisplay: { type: 'photos', userId: user._id }" />
+    <img [src]="photo | urlFile: { type: 'photos', userId: user._id }" />
   </p>
-  <!-- <p *ngFor="let file of user.files">
-    <img [src]="file | imageDisplay: { type: 'files', userId: user._id }" />
-  </p> -->
+  <p *ngFor="let file of user.files">
+    <img [src]="file | fileType: { type: 'files' }" />
+    <span>dd{{file.file_id.name}}</span>
+  </p>
+
 </div>

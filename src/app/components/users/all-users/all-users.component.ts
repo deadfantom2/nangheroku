@@ -103,8 +103,6 @@ export class AllUsersComponent implements OnInit {
   /** FILE */
   fileToUpload: File = null;
   public handleFileInput(files: FileList) {
-    // console.log("files: ", files);
-    // console.log("files: ", files.item(0));
     this.fileToUpload = files.item(0);
     this._usersService.addProfilePicture(files.item(0), 'profile');
   }

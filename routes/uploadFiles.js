@@ -54,16 +54,11 @@ app.put("/:type", async (req, res) => {
       }
     }
     if (type === "files") {
-      if (
-        extensionsFiles.indexOf(extention) < 0 ||
-        extensionsImages.indexOf(extention) < 0
-      ) {
+      console.log("filesfkfkkfkffk");
+      if (extensionsFiles.indexOf(extention) < 0) {
         return res.status(400).json({
           success: false,
-          message:
-            "Valid extensions are " +
-            extensionsFiles.join(", ") +
-            extensionsImages.join(", ")
+          message: "Valid extensions are " + extensionsFiles.join(", ")
         });
       }
     }
