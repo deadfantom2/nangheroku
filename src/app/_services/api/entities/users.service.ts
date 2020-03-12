@@ -137,10 +137,11 @@ export class UsersService extends EntitiesService {
   }
 
   /** Create or Update: a User image */
-  public addProfilePicture(file: any, route: string): void {
+  public addProfilePicture(file: any, route: string, user: User): void {
+    console.log(user)
     this.formData.append("fileInput", file);
     console.log(file);
-    console.log(route);
+    console.log(user);
     this._apiService
       .put("upload/" + route, this.formData, {
         name: file.name,
@@ -148,9 +149,21 @@ export class UsersService extends EntitiesService {
       })
       .subscribe(
         res => {
-          console.log(res);
+          console.log("res: ", res);
+          console.log("user: ", user);
           if (route === "profile") {
-            console.log("profile");
+            
+
+            this.listUser.img[0].name = res.fileName
+            console.log("profile: ", this.listUser);
+            // console.log("userSelected: ", userSelected)
+            // console.log("userSelected: ", userSelected.isVerified)
+            // console.log("userSelected: ", userSelected.img)
+            // console.log("userSelected: ", userSelected.img[0])
+            // userSelected.img[0].name = res.fileName;
+
+
+
           } else {
             console.log("else");
           }

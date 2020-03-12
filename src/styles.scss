@@ -5,6 +5,8 @@
     --text-secondary: #ececec;
     --bg-primary: #23232e;
     --bg-secondary: #141418;
+    --border-primary: #23232e;
+    --border-secondary: #141418;
     --transition-speed: 600ms;
   }
 
@@ -22,43 +24,47 @@ img {
     height: 5rem;
 }
 
+/* VARIABLES THEMES */
 .dark {
   --text-primary: #b6b6b6;
   --text-secondary: #ececec;
   --bg-primary: #23232e;
   --bg-secondary: #141418;
+  --border-primary: #23232e;
+  --border-secondary: #141418;
 }
-
 .light {
   --text-primary: #1f1f1f;
   --text-secondary: #000000;
   --bg-primary: #ffffff;
-  --bg-secondary: #e4e4e4;
+  --bg-secondary: #ffffff;
+  --border-primary: #e4e4e4;
+  --border-secondary: #e4e4e4;
 }
-
 .solar {
   --text-primary: #576e75;
   --text-secondary: #35535c;
   --bg-primary: #fdf6e3;
   --bg-secondary: #f5e5b8;
+  --border-primary: #fdf6e3;
+  --border-secondary: #f5e5b8;
 }
 
+/* BUTTONS THEME */
 .theme-icon {
   display: none;
 }
-
 .dark #darkIcon {
   display: block;
 }
-
 .light #lightIcon {
   display: block;
 }
-
 .solar #solarIcon {
   display: block;
 }
-  /* SCROLL */
+
+/* SCROLL */
 body::-webkit-scrollbar {
   width: 1rem; /* largeur scroll */
 }
@@ -72,8 +78,6 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
   border: 1px solid #aeaeb5
 }
-
-
 body::-webkit-scrollbar-thumb:hover {
   background: red
 }

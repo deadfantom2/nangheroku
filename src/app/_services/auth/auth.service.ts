@@ -53,20 +53,19 @@ export class AuthService extends EntitiesService {
       const token = res.token;
       this._tokenService.token = token;
       if (token) {
-        const expiresInDuration = res.expiresIn;
-        this._tokenService.setAuthTimer(expiresInDuration);
-        this._tokenService.isAuthenticated = true;
-        this._tokenService.authStatusListener.next(true);
-        const now = new Date();
-        const expirationDate = new Date(
-          now.getTime() + expiresInDuration * 1000
-        );
-        this._tokenService.saveAuthData(token, expirationDate);
-        this._toastService.showSuccess(res.message, "Auth");
-
         setTimeout(() => {
+          const expiresInDuration = res.expiresIn;
+          this._tokenService.setAuthTimer(expiresInDuration);
+          this._tokenService.isAuthenticated = true;
+          this._tokenService.authStatusListener.next(true);
+          const now = new Date();
+          const expirationDate = new Date(
+            now.getTime() + expiresInDuration * 1000
+          );
+          this._tokenService.saveAuthData(token, expirationDate);
           this._routesService.navigateToRoute("/protect");
         }, 3000);
+        this._toastService.showSuccess(res.message, "Auth");
       }
     });
   }

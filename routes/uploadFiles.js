@@ -111,7 +111,7 @@ async function downloadByType(type, imageArchive, req, res) {
     return res.status(201).json({
       success: true,
       message: "The picture " + typeMessage,
-      file: updateUserImage
+      fileName: imageArchive
     });
   }
   if (type === "files" || type === "photos") {
@@ -139,7 +139,7 @@ async function downloadByType(type, imageArchive, req, res) {
       res.status(201).json({
         success: true,
         message: "File added!",
-        post: updateFilesUser
+        file: updateFilesUser
       });
     });
   }

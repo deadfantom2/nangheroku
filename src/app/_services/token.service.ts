@@ -5,12 +5,15 @@ import { RoutesService } from "./_outils";
 
 @Injectable()
 export class TokenService {
+
   public isAuthenticated = false;
   public token: string;
   public tokenTimer: any;
   public authStatusListener = new Subject<boolean>();
 
-  constructor(private _routesService: RoutesService) {}
+  constructor(private _routesService: RoutesService) {
+    console.log(this.authStatusListener)
+  }
 
   public getToken() {
     return this.token;
@@ -22,6 +25,25 @@ export class TokenService {
 
   public getAuthStatusListener() {
     return this.authStatusListener.asObservable();
+  }
+
+  public getPayload() {
+    const userData = localStorage.getItem("payload");
+    return JSON.parse(userData);
+  }
+  
+  private getAuthData() {
+    const token = localStorage.getItem("id_token");
+    const expirationDate = localStorage.getItem("expiration");
+    const payload = localStorage.getItem("payload");
+    if (!token || !expirationDate || !payload) {
+      return;
+    }
+    return {
+      token: token,
+      expirationDate: new Date(expirationDate),
+      payload: payload
+    };
   }
 
   public autoAuthUser() {
@@ -39,15 +61,6 @@ export class TokenService {
     }
   }
 
-  public logout() {
-    this.token = null;
-    this.isAuthenticated = false;
-    this.authStatusListener.next(false);
-    clearTimeout(this.tokenTimer);
-    this.clearAuthData();
-    this._routesService.navigateToRoute("/");
-  }
-
   public setAuthTimer(duration: number) {
     console.log("Setting timer: " + duration);
     this.tokenTimer = setTimeout(() => {
@@ -63,10 +76,7 @@ export class TokenService {
     }
     return payload; // return expire value of JWT
   }
-  public getPayload() {
-    const userData = localStorage.getItem("payload");
-    return JSON.parse(userData);
-  }
+
   public saveAuthData(token: string, expirationDate: Date) {
     localStorage.setItem("id_token", token);
     localStorage.setItem("expiration", expirationDate.toISOString());
@@ -74,23 +84,18 @@ export class TokenService {
     localStorage.setItem("payload", JSON.stringify(tokenDecoded));
   }
 
+  public logout() {
+    this.token = null;
+    this.isAuthenticated = false;
+    this.authStatusListener.next(false);
+    clearTimeout(this.tokenTimer);
+    this.clearAuthData();
+    this._routesService.navigateToRoute("/");
+  }
+
   private clearAuthData() {
     localStorage.removeItem("id_token");
     localStorage.removeItem("expiration");
     localStorage.removeItem("payload");
-  }
-
-  private getAuthData() {
-    const token = localStorage.getItem("id_token");
-    const expirationDate = localStorage.getItem("expiration");
-    const payload = localStorage.getItem("payload");
-    if (!token || !expirationDate || !payload) {
-      return;
-    }
-    return {
-      token: token,
-      expirationDate: new Date(expirationDate),
-      payload: payload
-    };
   }
 }

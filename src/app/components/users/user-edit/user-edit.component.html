@@ -1,28 +1,31 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <input
-    type="file"
-    name="file"
-    (change)="handleFileInput($event.target.files)"
-  />
-  <select name="types" (change)="handleType($event)">
-    <option>Select type of file</option>
-    <option value="profile">profile</option>
-    <option value="files">files</option>
-    <option value="photos">photos</option>
-  </select>
-
-  <button type="submit">
-    Add
-  </button>
-</form>
-
 <div *ngIf="user$ | async as user">
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit(user)">
+    <input
+      type="file"
+      name="file"
+      (change)="handleFileInput($event.target.files)"
+    />
+    <select name="types" (change)="handleType($event)">
+      <option>Select type of file</option>
+      <option value="profile">profile</option>
+      <option value="files">files</option>
+      <option value="photos">photos</option>
+    </select>
+
+    <button type="submit">
+      Add
+    </button>
+  </form>
+
+
   <p>Name: {{ user.name }}</p>
   <p>surname: {{ user.surname }}</p>
   <p>Emmail: {{ user.email }}</p>
   <p>Age: {{ user.age }}</p>
   <p *ngFor="let img of user.img">
-    <img [src]="img | urlFile: { type: 'profile', userId: user._id }" />
+    <img [src]="img.name | urlFile: { type: 'profile', userId: user._id }" />
+    {{img.name}}
   </p>
   <p *ngFor="let photo of user.photos">
     <img [src]="photo | urlFile: { type: 'photos', userId: user._id }" />

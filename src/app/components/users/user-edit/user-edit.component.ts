@@ -47,12 +47,14 @@ export class UserEditComponent implements OnInit {
     console.log(event.target.value);
     this.form.get("types").setValue(event.target.value);
   }
-  public onSubmit(): void {
+  public onSubmit(user: User): void {
+    console.log(user);
     console.log(this.form.get("file").value);
     console.log(this.form.get("types").value);
     this._usersService.addProfilePicture(
       this.form.get("file").value,
-      this.form.get("types").value
+      this.form.get("types").value,
+      user
     );
   }
 }

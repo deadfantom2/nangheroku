@@ -20,7 +20,7 @@ export class UrlFilePipe implements PipeTransform {
 
     switch (args.type) {
       case "profile":
-        url += "/profile/" + args.userId + '/' + file.name;
+        url += "/profile/" + args.userId + '/' + file;
         break;
       case "files":
         url += "/files/" + args.userId + '/' + file.file_id.name;

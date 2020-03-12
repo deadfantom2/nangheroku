@@ -8,7 +8,7 @@ export class FileTypePipe implements PipeTransform {
 
     let url = "assets/";
 
-    console.log("file: ", file, " --- args: ", args)
+    // console.log("file: ", file, " --- args: ", args)
     if (!file) {
       console.log("nety")
     }

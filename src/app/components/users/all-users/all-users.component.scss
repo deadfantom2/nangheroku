@@ -1,40 +1,62 @@
+table {
+    // width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 2rem;
+    width: 50rem;
+}
+
+th { 
+    background: var(--bg-primary);   // background thead header
+    color: var(--text-primary);   // color text thead header 
+    border: 1px solid var(--border-primary);   // background border header 
+    font-weight: bold; 
+    padding: 6px; 
+    text-align: left; 
+    &:last-of-type > span .fa {
+        display: none;
+    }
+}
+
+tbody > tr {
+    background-color: var(--bg-secondary);   // background tbody row
+    color: var(--text-primary);   // text color tbody row
+    border: 1px solid var(--border-secondary);   // border color tbody row
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        border-left: 0.25rem solid #12bee4;
+    }
+}
+
 span {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0.25rem;
     font-size: 0.75rem;
-    color: #ffffff;
     font-family: "Open Sans";
     font-weight: bold;
     line-height: 1rem;
     cursor: pointer;
-}
-i {
-    position: relative;
-    left: 0.25rem;
-}
-
-table {
-    margin-top: 2rem;
-    width: 50rem;
-    border-collapse: collapse;
-    & > thead {
-        background-color: #8f9bb3;
-    };
-
-}
-th:last-of-type > span .fa {
-    display: none;
-}
-tbody > tr {
-    background-size: 10px;
-    background-color: white;
-
-    &:hover {
-        cursor: pointer;
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-        color: black;
-        border-left: 0.25rem solid #12bee4;
+    & > i {
+        position: relative;
+        left: 0.25rem;
     }
+}
+
+
+
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, tr { 
+        display: block; 
+        width: 30rem;
+	}
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	tr { border: 1px solid #ccc; }
 }
