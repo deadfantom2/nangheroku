@@ -1,34 +1,61 @@
 import { Injectable } from "@angular/core";
 import * as jwt_decode from "jwt-decode";
+import { Subject } from "rxjs";
+import { RoutesService } from "./_outils";
 
 @Injectable()
 export class TokenService {
-  constructor() { }
+  public isAuthenticated = false;
+  public token: string;
+  public tokenTimer: any;
+  public authStatusListener = new Subject<boolean>();
 
-  public setSession(authResult) {
-    const expiresAt = Date.now() + 120000; // expire in 2 minutes
-    localStorage.setItem("id_token", authResult.token);
-    localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
-    this.setPayload();
+  constructor(private _routesService: RoutesService) {}
+
+  public getToken() {
+    return this.token;
   }
 
-  public isLoggedIn() {
-    return Date.now() < this.getExpiration() ? true : false;
+  public getIsAuth() {
+    return this.isAuthenticated;
+  }
+
+  public getAuthStatusListener() {
+    return this.authStatusListener.asObservable();
+  }
+
+  public autoAuthUser() {
+    const authInformation = this.getAuthData();
+    if (!authInformation) {
+      return;
+    }
+    const now = new Date();
+    const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
+    if (expiresIn > 0) {
+      this.token = authInformation.token;
+      this.isAuthenticated = true;
+      this.setAuthTimer(expiresIn / 1000);
+      this.authStatusListener.next(true);
+    }
   }
 
   public logout() {
-    localStorage.removeItem("id_token");
-    localStorage.removeItem("expires_at");
-    localStorage.removeItem("payload");
+    this.token = null;
+    this.isAuthenticated = false;
+    this.authStatusListener.next(false);
+    clearTimeout(this.tokenTimer);
+    this.clearAuthData();
+    this._routesService.navigateToRoute("/");
   }
 
-  private getExpiration() {
-    const expiration = localStorage.getItem("expires_at");
-    const expiresAt = JSON.parse(expiration);
-    return expiresAt;
+  public setAuthTimer(duration: number) {
+    console.log("Setting timer: " + duration);
+    this.tokenTimer = setTimeout(() => {
+      this.logout();
+    }, duration * 1000);
   }
 
-  private decodedJWT() {
+  public decodedJWT() {
     const tokenLocal = localStorage.getItem("id_token");
     let payload;
     if (tokenLocal) {
@@ -36,15 +63,34 @@ export class TokenService {
     }
     return payload; // return expire value of JWT
   }
-
   public getPayload() {
     const userData = localStorage.getItem("payload");
     return JSON.parse(userData);
   }
-  private setPayload() {
+  public saveAuthData(token: string, expirationDate: Date) {
+    localStorage.setItem("id_token", token);
+    localStorage.setItem("expiration", expirationDate.toISOString());
     const tokenDecoded = this.decodedJWT();
-    return localStorage.setItem("payload", JSON.stringify(tokenDecoded));
+    localStorage.setItem("payload", JSON.stringify(tokenDecoded));
   }
 
+  private clearAuthData() {
+    localStorage.removeItem("id_token");
+    localStorage.removeItem("expiration");
+    localStorage.removeItem("payload");
+  }
 
+  private getAuthData() {
+    const token = localStorage.getItem("id_token");
+    const expirationDate = localStorage.getItem("expiration");
+    const payload = localStorage.getItem("payload");
+    if (!token || !expirationDate || !payload) {
+      return;
+    }
+    return {
+      token: token,
+      expirationDate: new Date(expirationDate),
+      payload: payload
+    };
+  }
 }

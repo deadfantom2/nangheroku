@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class TableService {
-  constructor() { }
+  constructor() {}
 
   public getColumns(): object {
     return [
@@ -10,7 +10,6 @@ export class TableService {
       { property: "surname", text: "Surname" },
       { property: "age", text: "Age" },
       { property: "email", text: "Email" },
-      { property: "img", text: "Image" },
       { property: "roles", text: "Roles" },
       { property: "isVerified", text: "Activation" },
       { property: "createdAt", text: "Creation date" },

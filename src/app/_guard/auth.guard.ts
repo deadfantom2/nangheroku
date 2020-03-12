@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
   constructor(
     private _routesService: RoutesService,
     private _tokenService: TokenService
-  ) { }
+  ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const token = this._tokenService.isLoggedIn();
+    const token = this._tokenService.getIsAuth();
     if (token) {
       console.log("true token guard");
       return true;

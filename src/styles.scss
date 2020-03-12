@@ -16,16 +16,6 @@ body {
     padding: 0;
 }
 
-/* SCROLL */
-body::-webkit-scrollbar {
-  width: 1rem;   /* largeur scroll */
-}
-body::-webkit-scrollbar-track {
-  background: #1e1e24;   /* couleur de scroll */
-}
-body::-webkit-scrollbar-thumb {
-  background: #6649b8;   /* couleur de pointeur dans scroll */
-}
 
 img {
     width: 5rem;
@@ -68,5 +58,25 @@ img {
 .solar #solarIcon {
   display: block;
 }
-  
+  /* SCROLL */
+body::-webkit-scrollbar {
+  width: 1rem; /* largeur scroll */
+}
+body::-webkit-scrollbar-track {
+  background: #1e1e24; /* couleur de scroll */
+  border-radius: 10px;
+  border: 1px solid #aeaeb5
+}
+body::-webkit-scrollbar-thumb {
+  background: #6649b8; /* couleur de pointeur dans scroll */
+  border-radius: 10px;
+  border: 1px solid #aeaeb5
+}
 
+
+body::-webkit-scrollbar-thumb:hover {
+  background: red
+}
+body::-webkit-scrollbar-thumb:active {
+  background: #aeaeb5; /* When you selected scroll*/
+}
