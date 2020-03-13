@@ -21,9 +21,9 @@ import { ValidationFormComponent } from "../../pages";
     ],
     exports: [],
     imports: [
+        CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        CommonModule,
         AuthRoutingModule,
     ]
 })

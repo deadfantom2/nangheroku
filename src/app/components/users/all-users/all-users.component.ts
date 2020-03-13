@@ -101,9 +101,9 @@ export class AllUsersComponent implements OnInit {
   }
 
   /** FILE */
-  fileToUpload: File = null;
-  public handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
-    this._usersService.addProfilePicture(files.item(0), 'profile');
-  }
+  // fileToUpload: File = null;
+  // public handleFileInput(files: FileList) {
+  //   this.fileToUpload = files.item(0);
+  //   this._usersService.addProfilePicture(files.item(0), 'profile');
+  // }
 }

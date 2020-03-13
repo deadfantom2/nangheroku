@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 import { EntitiesService } from "./entities.service";
 import { ApiService } from "../../api.service";
 import { Observable, BehaviorSubject } from "rxjs";
-import { User } from "../../../_models";
+import { User, File } from "../../../_models";
 import { ToastService } from "../../_outils";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UsersService extends EntitiesService {
@@ -18,9 +19,9 @@ export class UsersService extends EntitiesService {
   private listUser: User[] = [];
   public tempUsers: User[] = [];
 
-  private formData: FormData = new FormData();
+  // private formData: FormData = new FormData();
 
-  constructor(_apiService: ApiService, private _toast: ToastService) {
+  constructor(_apiService: ApiService, private _toast: ToastService,private http: HttpClient) {
     super(_apiService);
 
     this.objectAllUsers = new BehaviorSubject(null) as BehaviorSubject<User[]>;
@@ -138,13 +139,13 @@ export class UsersService extends EntitiesService {
 
   /** Create or Update: a User image */
   public addProfilePicture(file: any, route: string, user: User): void {
-    console.log(user)
-    this.formData.append("fileInput", file);
+    const formData = new FormData();
+    formData.append("fileInput", file, file);
     console.log(file);
     console.log(user);
     this._apiService
-      .put("upload/" + route, this.formData, {
-        name: file.name,
+      .put("upload/" + route, formData, {
+        name: file,
         route: route
       })
       .subscribe(
@@ -152,18 +153,13 @@ export class UsersService extends EntitiesService {
           console.log("res: ", res);
           console.log("user: ", user);
           if (route === "profile") {
-            
-
-            this.listUser.img[0].name = res.fileName
+            // this.listUser.img[0].name = res.fileName
             console.log("profile: ", this.listUser);
             // console.log("userSelected: ", userSelected)
             // console.log("userSelected: ", userSelected.isVerified)
             // console.log("userSelected: ", userSelected.img)
             // console.log("userSelected: ", userSelected.img[0])
             // userSelected.img[0].name = res.fileName;
-
-
-
           } else {
             console.log("else");
           }
@@ -174,4 +170,49 @@ export class UsersService extends EntitiesService {
         }
       );
   }
+
+
+
+
+  /** ALL FIELS UPLAOAD TEST */
+  public files: File[] = []; 
+  obFileService: any;
+
+  doFileUpload(formData: FormData, file: File) {
+    return this.http.put("http://localhost:3000/upload/photos",  {
+      name: file.name,
+      route: file.route
+    }); 
+  }
+
+  uploadFiles(uploadRef: any){
+    uploadRef.nativeElement.value = '';
+    console.log("uploadRef: ", uploadRef)
+    console.log("this.files: ", this.files)
+    this.files.forEach(file => {
+      this.uploadFile(file);
+    }); 
+  }
+
+  uploadFile(file) {
+    console.log(file)
+    const formData = new FormData();
+    formData.append('fileInput', file);
+    console.log(formData.append('fileInput', file))
+    this.doFileUpload(formData,file).pipe().subscribe(res => console.log(res))
+
+  }
+
+
+
+
+
+
+
 }
+
+
+
+
+
+

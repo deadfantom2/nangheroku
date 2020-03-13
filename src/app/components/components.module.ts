@@ -4,12 +4,10 @@ import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { ComponentsRoutingModule } from "./components-routing.module";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 // Components
+import { NavComponent } from './layout/nav/nav.component';
 import { ComponentsComponent } from "./components.component";
 import { AllUsersComponent } from "./users/all-users/all-users.component";
 import { AllOrdersComponent } from "./orders/all-orders/all-orders.component";
@@ -32,6 +30,7 @@ import {
 
 @NgModule({
   declarations: [
+    NavComponent,
     ComponentsComponent,
     AllUsersComponent,
     AllOrdersComponent,
@@ -52,9 +51,6 @@ import {
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatButtonModule,
     ScrollingModule
   ],
   entryComponents: [FilterModalComponent]

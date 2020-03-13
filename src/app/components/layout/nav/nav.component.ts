@@ -30,6 +30,11 @@ export class NavComponent implements OnInit, OnDestroy {
     this.authListenerSubs.unsubscribe();
   }
 
+  // Log Out user
+  public logout(): void {
+    this._tokenService.logout();
+  }
+
   // Change the theme on site
   public changeTheme(): void {
     this._themeService.toggleTheme();

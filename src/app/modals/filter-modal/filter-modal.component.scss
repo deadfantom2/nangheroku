@@ -3,7 +3,7 @@
 }
 
 .upload-Modal {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.4); // background fond dark
     position: fixed;
     top: 0;
     left: 0;
@@ -12,8 +12,36 @@
     z-index: 9999;
 }
 
-.modal-body {
-    height: 250vh;
-
-
+.modal {
+    border: 1px solid red;
+    background-color: white;
+    width: 30vw;
+    height: 50vh;
+    position: absolute;
+    left: 30%;
+    top:25%;
+    overflow-y: scroll;
 }
+
+
+/* SCROLL */
+.modal::-webkit-scrollbar {
+    width: 1rem; /* largeur scroll */
+  }
+  .modal::-webkit-scrollbar-track {
+    background: #1e1e24; /* couleur de scroll */
+    border-radius: 10px;
+    border: 1px solid #aeaeb5
+  }
+  .modal::-webkit-scrollbar-thumb {
+    background: #6649b8; /* couleur de pointeur dans scroll */
+    border-radius: 10px;
+    border: 1px solid #aeaeb5
+  }
+  .modal::-webkit-scrollbar-thumb:hover {
+    background: red
+  }
+  .modal::-webkit-scrollbar-thumb:active {
+    background: #aeaeb5; /* When you selected scroll*/
+  }
+
