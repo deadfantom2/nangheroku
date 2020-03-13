@@ -93,14 +93,17 @@ export class UserEditComponent implements OnInit {
 
 
 
-  showPreview(event){
-    console.log(event.target.files)
-  }
   isSubmited: boolean = false;
-  fileName: string;
+  fileName: File;
   routes: string;
+  showPreview(event){
+    console.log(event.target.files.item(0))
+    this.fileName = event.target.files.item(0)
+  }
   onSubmitTOTO(formValue, user){
-    this.fileName = formValue.file.split(`\\`)[formValue.file.split(`\\`).length-1];
+    console.log(this.fileName)
+    this.fileName = this.fileName;
+    // this.fileName = formValue.file.split(`\\`)[formValue.file.split(`\\`).length-1];
     this.routes = formValue.types;
     this.isSubmited = true;
     console.log(this.fileName)

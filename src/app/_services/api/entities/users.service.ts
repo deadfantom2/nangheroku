@@ -140,12 +140,12 @@ export class UsersService extends EntitiesService {
   /** Create or Update: a User image */
   public addProfilePicture(file: any, route: string, user: User): void {
     const formData = new FormData();
-    formData.append("fileInput", file, file);
+    formData.append("fileInput", file);
     console.log(file);
     console.log(user);
     this._apiService
       .put("upload/" + route, formData, {
-        name: file,
+        name: file.name,
         route: route
       })
       .subscribe(
