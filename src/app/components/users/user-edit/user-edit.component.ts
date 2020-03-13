@@ -22,7 +22,7 @@ export class UserEditComponent implements OnInit {
     private _usersService: UsersService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
   formTemplate: FormGroup
   ngOnInit() {
     this.getUser();
@@ -95,23 +95,45 @@ export class UserEditComponent implements OnInit {
 
   isSubmited: boolean = false;
   fileName: File;
+  files: File[] = []
   routes: string;
-  showPreview(event){
-    console.log(event.target.files.item(0))
-    this.fileName = event.target.files.item(0)
+  showPreview(event) {
+    // if(event.target.files.length > 1){
+    this.files = event.target.files;
+    // }
+    // this.fileName = event.target.files.item(0)
   }
-  onSubmitTOTO(formValue, user){
-    console.log(this.fileName)
+  onSubmitTOTO(formValue, user) {
     this.fileName = this.fileName;
     // this.fileName = formValue.file.split(`\\`)[formValue.file.split(`\\`).length-1];
     this.routes = formValue.types;
-    this.isSubmited = true;
-    console.log(this.fileName)
+    console.log(this.files)
+    console.log(this.files.length)
     console.log(formValue)
-    this._usersService.addProfilePicture(
-      this.fileName,
-      this.routes,
-      user
-    );
+
+    if (this.files.length === 1) {
+      console.log(this.files)
+      this._usersService.addProfilePicture(
+        this.files[0],
+        this.routes,
+        user
+      );
+    }
+    if (this.files.length > 1) {
+      for (let i = 0; i < this.files.length; i++) {
+        this._usersService.addProfilePicture(
+          this.files[i],
+          this.routes,
+          user
+        );
+      }
+      console.log('sdjkfhkjsdfhkjsdfhkzjfghjke')
+    }
+    // this._usersService.addProfilePicture(
+    //   this.fileName,
+    //   this.routes,
+    //   user
+    // );
   }
+
 }

@@ -8,7 +8,7 @@ export class UrlFilePipe implements PipeTransform {
 
     let url = "http://localhost:3000/image";
 
-    console.log("file: ", file, " --- args: ", args)
+    // console.log("file: ", file, " --- args: ", args)
     if (!file) {
       console.log("nety")
       return url + "/profile/nonimage";
