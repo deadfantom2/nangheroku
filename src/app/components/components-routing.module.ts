@@ -5,11 +5,13 @@ import { UserEditComponent } from "./users/user-edit/user-edit.component";
 import { AllOrdersComponent } from "./orders/all-orders/all-orders.component";
 import { TestrouteComponent } from "./testroute/testroute.component";
 import { AuthGuard, AdminGuard } from "../_guard";
-import { ComponentsComponent } from './components.component';
+import { ComponentsComponent } from "./components.component";
 
 const componentsRoutes: Routes = [
   {
-    path: '', component: ComponentsComponent, children: [
+    path: "",
+    component: ComponentsComponent,
+    children: [
       {
         path: "users",
         component: AllUsersComponent,
@@ -40,6 +42,4 @@ const componentsRoutes: Routes = [
   imports: [RouterModule.forChild(componentsRoutes)],
   exports: [RouterModule]
 })
-export class ComponentsRoutingModule { }
-
-
+export class ComponentsRoutingModule {}

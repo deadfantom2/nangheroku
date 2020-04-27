@@ -1,3 +1,35 @@
 main {
-    margin-left: 6rem;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 36, 30, 1) 0%,
+    rgba(26, 238, 209, 1) 0%,
+    rgba(51, 207, 215, 1) 13%,
+    rgba(217, 0, 255, 1) 100%
+  );
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+article {
+  width: 100vw;
+  // height: 10rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: space-evenly;
+
+  h3 {
+    color: white;
+    cursor: pointer;
+    &:hover {
+      font-size: 1.5rem;
+      backface-visibility: none;
+    }
+  }
 }

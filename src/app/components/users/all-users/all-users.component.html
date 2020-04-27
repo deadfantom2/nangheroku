@@ -1,111 +1,144 @@
-<form [formGroup]="form" (ngSubmit)="createUser()" class="text-left">
-  <div class="form-group">
-    <input formControlName="email" placeholder="Your email" type="text" />
-    <span
-      class="text-danger"
-      *ngIf="
-        form.get('email').touched && form.get('email').hasError('required')
-      "
-      >Email is required</span
-    >
-    <span
-      class="text-danger"
-      *ngIf="
-        form.get('email').touched && form.get('email').hasError('minlength')
-      "
-      >Email isn't long enough, minimum of 11 characters</span
-    >
-    <span
-      class="text-danger"
-      *ngIf="
-        form.get('email').touched && form.get('email').hasError('maxlength')
-      "
-      >Email is long enough, maximum 50 characters</span
-    >
-  </div>
-  <div class="form-group">
-    <input
-      formControlName="password"
-      placeholder="You Password"
-      type="password"
-    />
-    <span
-      class="text-danger"
-      *ngIf="
-        form.get('password').touched &&
-        form.get('password').hasError('required')
-      "
-      >Password is required</span
-    >
-    <span
-      class="text-danger"
-      *ngIf="
-        form.get('password').touched &&
-        form.get('password').hasError('minlength')
-      "
-      >Password isn't long enough, minimum 4 characters</span
-    >
-    <span
-      class="text-danger"
-      *ngIf="
-        form.get('password').touched &&
-        form.get('password').hasError('maxlength')
-      "
-      >Password is long enough, maximum 100 characters</span
-    >
-  </div>
+<div class="all__users">
+  <table class="fixed_header">
+    <thead>
+      <tr>
+        <th
+          *ngFor="let header of columns; let i = index"
+          (click)="doSortByHeader(header.property)"
+          (dblclick)="doFilterModalByHeader(header.property)"
+        >
+          <span
+            >{{ header.text }}
+            <i
+              class="fa"
+              [ngClass]="{
+                'fa-sort': tabSortHeaderName != header.property,
+                'fa-sort-asc': tabSortHeaderName == header.property && isDesc,
+                'fa-sort-desc': tabSortHeaderName == header.property && !isDesc
+              }"
+            ></i>
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let user of users$
+            | async
+            | filterBy: { property: tabFilterHeaderName, userItem: userObject }
+            | sortBy: { property: tabSortHeaderName, direction: direction }
+        "
+        class="col redAsync"
+        app-user-page
+        [user]="user"
+        [columns]="columns"
+        (changeRole)="changeRoleUser(user, $event)"
+        (changeAccess)="changeAccessUser(user)"
+        (deleteById)="deleteUser(user)"
+      ></tr>
+    </tbody>
+  </table>
+  <app-filter-modal
+    [users]="users$"
+    [property]="tabFilterHeaderName"
+    (filterByHeader)="filterItem($event)"
+  ></app-filter-modal>
 
-  <div class="form-group">
-    <button [disabled]="form.invalid || form.disabled" type="submit">
-      Sign up
-    </button>
-  </div>
-</form>
+  <form
+    [formGroup]="createForm"
+    (ngSubmit)="createUser()"
+    class="form__add_user"
+  >
+    <h4>Create an user</h4>
+    <div class="form-group">
+      <input
+        type="text"
+        formControlName="email"
+        placeholder="Your email"
+        [class.is-invalid]="getEmail.invalid && getEmail.touched"
+      />
+      <app-user-form
+        [validator-type]="getEmail"
+        [minSize]="11"
+        [maxSize]="50"
+        [message-type]="'Email'"
+      ></app-user-form>
+    </div>
 
-<!-- <input type="file" (change)="handleFileInput($event.target.files)" /> -->
+    <div class="form-group">
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Your Password"
+        [class.is-invalid]="getPassword.invalid && getPassword.touched"
+      />
 
-<table class="fixed_header">
-  <thead>
-    <tr>
-      <th
-        *ngFor="let header of columns; let i = index"
-        (click)="doSortByHeader(header.property)"
-        (dblclick)="doFilterByHeader(header.property)"
+      <app-user-form
+        [validator-type]="getPassword"
+        [minSize]="4"
+        [maxSize]="100"
+        [message-type]="'Password'"
+      ></app-user-form>
+    </div>
+
+    <div class="form-group">
+      <input
+        type="text"
+        formControlName="name"
+        placeholder="Your Name"
+        [class.is-invalid]="getName.invalid && getName.touched"
+      />
+
+      <app-user-form
+        [validator-type]="getName"
+        [minSize]="3"
+        [maxSize]="50"
+        [message-type]="'Name'"
+      ></app-user-form>
+    </div>
+
+    <div class="form-group">
+      <input
+        type="text"
+        formControlName="surname"
+        placeholder="Your Surname"
+        [class.is-invalid]="getSurname.invalid && getSurname.touched"
+      />
+
+      <app-user-form
+        [validator-type]="getSurname"
+        [minSize]="3"
+        [maxSize]="50"
+        [message-type]="'Surname'"
+      ></app-user-form>
+    </div>
+
+    <div class="form-group">
+      <input
+        type="text"
+        formControlName="age"
+        placeholder="Your Age"
+        [class.is-invalid]="getAge.invalid && getAge.touched"
+      />
+
+      <app-user-form
+        [validator-type]="getAge"
+        [minSize]="16"
+        [maxSize]="99"
+        [message-type]="'Age'"
+      ></app-user-form>
+    </div>
+
+    <div class="form-group">
+      <button
+        [disabled]="!createForm.valid"
+        [ngClass]="!createForm.valid ? 'disabled' : 'notDisabled'"
+        class="btn__create"
+        type="submit"
       >
-        <span
-          >{{ header.text }}
-          <i
-            class="fa"
-            [ngClass]="{
-              'fa-sort': tabSortHeaderName != header.property,
-              'fa-sort-asc': tabSortHeaderName == header.property && isDesc,
-              'fa-sort-desc': tabSortHeaderName == header.property && !isDesc
-            }"
-          ></i>
-        </span>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr
-      *ngFor="
-        let user of users$
-          | async
-          | filterBy: { property: tabFilterHeaderName, userItem: userObject }
-          | sortBy: { property: tabSortHeaderName, direction: direction }
-      "
-      class="col redAsync"
-      app-user-page
-      [user]="user"
-      [columns]="columns"
-      (changeRole)="changeRoleUser(user, $event)"
-      (changeAccess)="changeAccessUser(user)"
-      (deleteById)="deleteUser(user)"
-    ></tr>
-  </tbody>
-</table>
-<app-filter-modal
-  [users]="users$"
-  [property]="tabFilterHeaderName"
-  (filterByHeader)="filterItem($event)"
-></app-filter-modal>
+        Create an user
+      </button>
+    </div>
+  </form>
+</div>

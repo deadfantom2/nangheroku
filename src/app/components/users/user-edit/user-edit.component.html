@@ -1,51 +1,67 @@
-<div *ngIf="user$ | async as user">
+<div *ngIf="user$ | async as user" class="user">
+  <div class="user__info">
+    <p *ngFor="let img of user.img">
+      <img
+        [src]="
+          img.name
+            | urlFile: { type: 'profile', userId: user._id, userImg: img }
+        "
+      />
+    </p>
+    <p>Name: {{ user.name }}</p>
+    <p>Surname: {{ user.surname }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Age: {{ user.age }}</p>
 
-  <form [formGroup]="formTemplate" (ngSubmit)="onSubmitTOTO(formTemplate.value, user)">
-  <!-- <form [formGroup]="form" (ngSubmit)="uploadClick()"> -->
-  <!-- <form [formGroup]="form" (ngSubmit)="onSubmit(user)"> -->
-    <!-- <input
-      type="file"
-      name="file"
-      (change)="handleFileInput($event.target.files)"
-    /> handleFileInput--> 
-    <input type="file" formControlName="file" (change)="showPreview($event)"
-     multiple="multiple">
+    <form [formGroup]="formImage" (ngSubmit)="onSubmit(formImage.value, user)">
+      <div class="form-group">
+        <input
+          type="file"
+          multiple="multiple"
+          class="custom__file-input"
+          formControlName="file"
+          (change)="showPreview($event)"
+          [class.is-invalid]="getFile.invalid && getFile.touched"
+        />
+        <app-user-form
+          [validator-type]="getFile"
+          [message-type]="'File'"
+        ></app-user-form>
+      </div>
 
+      <div class="form-group">
+        <select
+          formControlName="types"
+          [class.is-invalid]="getTypes.invalid && getTypes.touched"
+        >
+          <option [ngValue]="null" disabled>Choose your city</option>
+          <option *ngFor="let option of options" [value]="option.name">
+            {{ option.name }}
+          </option>
+        </select>
+        <app-user-form
+          [validator-type]="getTypes"
+          [message-type]="'Type'"
+        ></app-user-form>
+      </div>
 
-
-    <select formControlName="types" >
-    <!-- <select name="types" (change)="handleType($event)"> -->
-      <option>Select type of file</option>
-      <option value="profile">profile</option>
-      <option value="files">files</option>
-      <option value="photos">photos</option>
-    </select>
-
-    <button type="submit">
-      Add
-    </button>
-  </form>
-
-  <!--  -->
-
-  <!-- <button class="btn btn-success btn-xs" (click)="uploadClick()">Add</button> -->
-  <!--  -->
-
-
-  <p>Name: {{ user.name }}</p>
-  <p>surname: {{ user.surname }}</p>
-  <p>Emmail: {{ user.email }}</p>
-  <p>Age: {{ user.age }}</p>
-  <p *ngFor="let img of user.img">
-    <img [src]="img.name | urlFile: { type: 'profile', userId: user._id }" />
-    {{img.name}}
-  </p>
-  <p *ngFor="let photo of user.photos">
-    <img [src]="photo | urlFile: { type: 'photos', userId: user._id }" />
-  </p>
-  <p *ngFor="let file of user.files">
-    <img [src]="file | fileType: { type: 'files' }" />
-    <span>dd{{file.file_id.name}}</span>
-  </p>
-
+      <button type="submit" [disabled]="!formImage.valid">
+        <i
+          class="fas fa-plus-circle"
+          [ngClass]="!formImage.valid ? 'disabled' : 'notDisabled'"
+        ></i>
+      </button>
+    </form>
+  </div>
+  <div class="user__photos">
+    <p *ngFor="let photo of user.photos">
+      <img [src]="photo | urlFile: { type: 'photos', userId: user._id }" />
+    </p>
+  </div>
+  <div class="user__files">
+    <p *ngFor="let file of user.files">
+      <img [src]="file | fileType: { type: 'files' }" />
+      <span>dd{{ file.file_id.name }}</span>
+    </p>
+  </div>
 </div>

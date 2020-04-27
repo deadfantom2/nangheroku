@@ -1,33 +1,27 @@
 :root {
-    font-size: 1rem;
-    font-family: 'Open Sans';
-    --text-primary: #b6b6b6;
-    --text-secondary: #ececec;
-    --bg-primary: #23232e;
-    --bg-secondary: #141418;
-    --border-primary: #23232e;
-    --border-secondary: #141418;
-    --transition-speed: 600ms;
-  }
+  font-size: 1rem;
+  font-family: "Open Sans";
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+  --border-primary: #23232e;
+  --border-secondary: #141418;
+  --transition-speed: 600ms;
+}
 
 html,
 body {
-    color: black;
-    background-color: white;
-    margin: 0;
-    padding: 0;
+  color: black;
+  background-color: white;
+  margin: 0;
+  padding: 0;
 }
-
 
 img {
-    width: 5rem;
-    height: 5rem;
+  width: 5rem;
+  height: 5rem;
 }
-
-main {
-  margin-left: 6rem;
-}
-
 
 /* VARIABLES THEMES */
 .dark {
@@ -35,24 +29,24 @@ main {
   --text-secondary: #ececec;
   --bg-primary: #23232e;
   --bg-secondary: #141418;
-  --border-primary: #23232e;
-  --border-secondary: #141418;
+  --border-primary: #b6b6b6;
+  --border-secondary: #ececec;
 }
 .light {
   --text-primary: #1f1f1f;
   --text-secondary: #000000;
   --bg-primary: #ffffff;
   --bg-secondary: #ffffff;
-  --border-primary: #e4e4e4;
-  --border-secondary: #e4e4e4;
+  --border-primary: #b6b6b6;
+  --border-secondary: #ececec;
 }
 .solar {
   --text-primary: #576e75;
   --text-secondary: #35535c;
   --bg-primary: #fdf6e3;
   --bg-secondary: #f5e5b8;
-  --border-primary: #fdf6e3;
-  --border-secondary: #f5e5b8;
+  --border-primary: #b6b6b6;
+  --border-secondary: #ffffff;
 }
 
 /* BUTTONS THEME */
@@ -76,15 +70,16 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-track {
   background: #1e1e24; /* couleur de scroll */
   border-radius: 10px;
-  border: 1px solid #aeaeb5
+  border: 1px solid #aeaeb5;
+  height: 75vh;
 }
 body::-webkit-scrollbar-thumb {
   background: #6649b8; /* couleur de pointeur dans scroll */
   border-radius: 10px;
-  border: 1px solid #aeaeb5
+  border: 1px solid #aeaeb5;
 }
 body::-webkit-scrollbar-thumb:hover {
-  background: red
+  background: red;
 }
 body::-webkit-scrollbar-thumb:active {
   background: #aeaeb5; /* When you selected scroll*/

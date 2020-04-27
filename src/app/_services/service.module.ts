@@ -11,13 +11,36 @@ import {
   ModalService,
   ThemeService,
   DateService,
-  AuthService,
+  AuthUserService,
   UsersService,
   UserValidationService
 } from "./";
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from "angularx-social-login";
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider(
+      "408547218884-v9lqonin31c1bpm0r5soid7044sup2ok.apps.googleusercontent.com"
+    )
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("1636795539811222")
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, SocialLoginModule],
   providers: [
     ApiService,
     EntitiesService,
@@ -29,10 +52,14 @@ import {
     ModalService,
     ThemeService,
     DateService,
-    AuthService,
+    AuthUserService,
     UsersService,
-    UserValidationService
+    UserValidationService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
   ],
   declarations: []
 })
-export class ServiceModule { }
+export class ServiceModule {}

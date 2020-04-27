@@ -1,0 +1,8 @@
+<div *ngIf="link$ | async as link" class="activation">
+  <h1 *ngIf="!link.success" class="activation_error">
+    {{ link.message }} Redirecting in {{ timeLeft }}
+  </h1>
+  <h1 *ngIf="link.success" class="activation_succes">
+    {{ link.message }} Redirecting in {{ timeLeft }}
+  </h1>
+</div>

@@ -6,7 +6,7 @@ import { ModalService } from "src/app/_services";
 @Component({
   selector: "app-filter-modal",
   templateUrl: "./filter-modal.component.html",
-  styleUrls: ["./filter-modal.component.scss"]
+  styleUrls: ["./filter-modal.component.scss"],
 })
 export class FilterModalComponent implements OnInit {
   @Input("users") public users$: Observable<User[]>;
@@ -17,15 +17,30 @@ export class FilterModalComponent implements OnInit {
 
   constructor(public _modal: ModalService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // console.log("users$: ", this.users$);
+  }
 
-  public filterByProperty(property: string, user: User): void {
-    this.filterByHeader.emit({ property: property, user: user });
+  public filterByProperty(event: any, property: string): void {
+    console.log(event, property);
+    this.filterByHeader.emit({
+      property: property,
+      userPropertyValue: this._getActiveChekboxContent(event.target.elements),
+    });
     this.closeModal();
   }
 
-  public filter(event: any): void {
-    // this.submitFilter.emit(event);
+  public _getActiveChekboxContent(checkboxes: any) {
+    console.log("checkboxes1: ", checkboxes);
+    console.log(
+      "checkboxes2: ",
+      [...checkboxes]
+        .filter((checkbox) => checkbox.checked)
+        .map((checkbox) => checkbox.value)
+    );
+    return [...checkboxes]
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => checkbox.value);
   }
 
   public closeModal(): void {

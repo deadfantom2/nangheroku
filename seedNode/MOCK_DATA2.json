@@ -3,12 +3,11 @@
         "name": "Valentyn",
         "surname": "Sch",
         "age": 44,
-        "email": "cameratest811@gmail.com",
+        "email": "cameratest811@gmail.coms",
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "ADMIN_ROLE",
-        "google": true
+        "roles": "ADMIN_ROLE"
     },
     {
         "name": "Dunlap",
@@ -18,8 +17,7 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "ADMIN_ROLE",
-        "google": false
+        "roles": "ADMIN_ROLE"
     },
     {
         "name": "Mia",
@@ -29,8 +27,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "ADMIN_ROLE",
-        "google": false
+        "roles": "ADMIN_ROLE"
+
     },
     {
         "name": "Pitts",
@@ -40,8 +38,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Hester",
         "surname": "Rush",
@@ -50,8 +48,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Espinoza",
         "surname": "Austin",
@@ -60,8 +58,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Jana",
         "surname": "Stanley",
@@ -70,8 +68,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Underwood",
         "surname": "Dillard",
@@ -80,8 +78,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Bell",
         "surname": "Burke",
@@ -90,8 +88,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Susie",
         "surname": "Cross",
@@ -100,8 +98,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Terra",
         "surname": "Pitts",
@@ -110,8 +108,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Franks",
         "surname": "Adkins",
@@ -120,8 +118,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Clara",
         "surname": "Moss",
@@ -130,8 +128,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Krista",
         "surname": "Mcdaniel",
@@ -140,8 +138,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Petra",
         "surname": "Vincent",
@@ -150,8 +148,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Maryanne",
         "surname": "Grant",
@@ -160,8 +158,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "April",
         "surname": "Pickett",
@@ -170,8 +168,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Alisa",
         "surname": "Dodson",
@@ -180,8 +178,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Reid",
         "surname": "Reyes",
@@ -190,8 +188,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Campbell",
         "surname": "Bennett",
@@ -200,8 +198,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Prince",
         "surname": "Bradford",
@@ -210,8 +208,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Annette",
         "surname": "Durham",
@@ -220,8 +218,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Fay",
         "surname": "Wolfe",
@@ -230,8 +228,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Jerry",
         "surname": "Peterson",
@@ -240,8 +238,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Vincent",
         "surname": "Mccullough",
@@ -250,8 +248,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Barbra",
         "surname": "Harris",
@@ -260,8 +258,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Pearl",
         "surname": "Bowen",
@@ -270,8 +268,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Candice",
         "surname": "Byrd",
@@ -280,8 +278,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Murray",
         "surname": "Pruitt",
@@ -290,8 +288,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Dolly",
         "surname": "Lewis",
@@ -300,8 +298,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Mueller",
         "surname": "Casey",
@@ -310,8 +308,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Booker",
         "surname": "Gillespie",
@@ -320,8 +318,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Muriel",
         "surname": "Walters",
@@ -330,8 +328,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Dennis",
         "surname": "Woods",
@@ -340,8 +338,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Estes",
         "surname": "Newman",
@@ -350,8 +348,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Kelley",
         "surname": "Hatfield",
@@ -360,8 +358,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Merle",
         "surname": "Holden",
@@ -370,8 +368,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "May",
         "surname": "Jackson",
@@ -380,8 +378,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Freida",
         "surname": "Medina",
@@ -390,8 +388,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Dawn",
         "surname": "Hunt",
@@ -400,8 +398,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Regina",
         "surname": "Odom",
@@ -410,8 +408,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Mayra",
         "surname": "Stuart",
@@ -420,8 +418,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Bender",
         "surname": "Calderon",
@@ -430,8 +428,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Fitzpatrick",
         "surname": "Battle",
@@ -440,8 +438,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Delgado",
         "surname": "Morrison",
@@ -450,8 +448,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Isabel",
         "surname": "Flynn",
@@ -460,8 +458,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Garrett",
         "surname": "Mann",
@@ -470,8 +468,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Pratt",
         "surname": "Gamble",
@@ -480,8 +478,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Schwartz",
         "surname": "Leblanc",
@@ -490,8 +488,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Eunice",
         "surname": "Moreno",
@@ -500,8 +498,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Maryellen",
         "surname": "Curry",
@@ -510,8 +508,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Velma",
         "surname": "Bartlett",
@@ -520,8 +518,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Mae",
         "surname": "Randolph",
@@ -530,8 +528,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Boone",
         "surname": "Hawkins",
@@ -540,8 +538,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Briggs",
         "surname": "Pratt",
@@ -550,8 +548,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Sims",
         "surname": "Lloyd",
@@ -560,8 +558,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Lynne",
         "surname": "Carroll",
@@ -570,8 +568,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Karla",
         "surname": "Bradley",
@@ -580,8 +578,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Gross",
         "surname": "Becker",
@@ -590,8 +588,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Kane",
         "surname": "Brady",
@@ -600,8 +598,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "William",
         "surname": "Brennan",
@@ -610,8 +608,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Ruiz",
         "surname": "Riggs",
@@ -620,8 +618,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Nellie",
         "surname": "Barrett",
@@ -630,8 +628,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Brandie",
         "surname": "Molina",
@@ -640,8 +638,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Katy",
         "surname": "Duran",
@@ -650,8 +648,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Molina",
         "surname": "Norton",
@@ -660,8 +658,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Loretta",
         "surname": "Alvarado",
@@ -670,8 +668,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Bernard",
         "surname": "Barber",
@@ -680,8 +678,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Bradford",
         "surname": "Duffy",
@@ -690,8 +688,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Charity",
         "surname": "Carpenter",
@@ -700,8 +698,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Kramer",
         "surname": "Dawson",
@@ -710,8 +708,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Leigh",
         "surname": "Schroeder",
@@ -720,8 +718,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Lorie",
         "surname": "Hensley",
@@ -730,8 +728,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Martinez",
         "surname": "Hayes",
@@ -740,8 +738,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Davenport",
         "surname": "Gordon",
@@ -750,8 +748,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Neva",
         "surname": "Mayer",
@@ -760,8 +758,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Delacruz",
         "surname": "Small",
@@ -770,8 +768,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Joan",
         "surname": "Murphy",
@@ -780,8 +778,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Robin",
         "surname": "Serrano",
@@ -790,8 +788,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Arlene",
         "surname": "Blanchard",
@@ -800,8 +798,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Farmer",
         "surname": "Matthews",
@@ -810,8 +808,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Cortez",
         "surname": "Gibson",
@@ -820,8 +818,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Faith",
         "surname": "Benson",
@@ -830,8 +828,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Florence",
         "surname": "Ellis",
@@ -840,8 +838,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Deanne",
         "surname": "Howell",
@@ -850,8 +848,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Margie",
         "surname": "Potter",
@@ -860,8 +858,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Clayton",
         "surname": "Trujillo",
@@ -870,8 +868,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Lilian",
         "surname": "Patrick",
@@ -880,8 +878,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Rosemarie",
         "surname": "Wiggins",
@@ -890,8 +888,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Fannie",
         "surname": "Harper",
@@ -900,8 +898,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Aguirre",
         "surname": "Fitzgerald",
@@ -910,8 +908,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Kelly",
         "surname": "Lynch",
@@ -920,8 +918,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Abby",
         "surname": "Chandler",
@@ -930,8 +928,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Cox",
         "surname": "Stevenson",
@@ -940,8 +938,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Mathews",
         "surname": "Massey",
@@ -950,8 +948,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Erin",
         "surname": "Good",
@@ -960,8 +958,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Carolina",
         "surname": "Spears",
@@ -970,8 +968,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Frye",
         "surname": "Dorsey",
@@ -980,8 +978,8 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": true,
-        "roles": "USER_ROLE",
-        "google": true
+        "roles": "USER_ROLE"
+
     }, {
         "name": "Rosanna",
         "surname": "Luna",
@@ -990,7 +988,7 @@
         "password": "frfr",
         "img": "http://placehold.it/32x32",
         "isVerified": false,
-        "roles": "USER_ROLE",
-        "google": false
+        "roles": "USER_ROLE"
+
     }
 ]

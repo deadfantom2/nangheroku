@@ -1,46 +1,40 @@
-<div class="upload-Modal animated fadeIn" [ngClass]="_modal.cache">
-  <div class="modal" style="display: block;" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Filter by {{ property }}</h5>
-          <button
-            (click)="closeModal()"
-            type="button"
-            class="close"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <form (ngSubmit)="filter($event)">
-            <button type="submit">OK</button>
-            <p
-              *ngFor="
-                let user of users$
-                  | async
-                  | sortBy: { property: property, direction: -1 }
-              "
-              (click)="filterByProperty(property, user)"
-            >
-              <input type="checkbox" [value]="user[property]" />
-              {{ user[property] }}
-            </p>
-          </form>
-        </div>
-
-        <div class="modal-footer">
-          <button
-            (click)="closeModal()"
-            type="button"
-            class="btn btn-secondary"
-          >
-            Close:
-          </button>
-        </div>
-      </div>
+<div class="upload-modal" [ngClass]="_modal.cache">
+  <div class="modal" style="display: block;">
+    <!--  -->
+    <div class="modal-header">
+      <h2 class="modal-title">Filter by {{ property }}</h2>
+      <span (click)="closeModal()" class="modal-close"
+        ><i class="fas fa-times"></i
+      ></span>
     </div>
+
+    <div class="modal-body">
+      <form (ngSubmit)="filterByProperty($event, property)" class="form-body">
+        <span
+          class="propery__value"
+          *ngFor="
+            let user of users$
+              | async
+              | sortBy: { property: property, direction: -1 }
+              | filterBy: { property: property, userItem: user }
+          "
+        >
+          <input type="checkbox" [value]="user[property]" />
+          {{ user[property] }}
+        </span>
+        <button class="btn__form" type="submit">
+          Ok
+        </button>
+      </form>
+    </div>
+
+    <!--  -->
+    <div class="modal-footer">
+      <button (click)="closeModal()" type="button">
+        Close
+      </button>
+    </div>
+
+    <!--  -->
   </div>
 </div>

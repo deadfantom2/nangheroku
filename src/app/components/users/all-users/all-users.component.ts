@@ -1,20 +1,37 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl,
+} from "@angular/forms";
 import { Observable } from "rxjs";
-import { UsersService, TableService, ModalService } from "../../../_services";
+import {
+  UsersService,
+  TableService,
+  ModalService,
+  UserValidationService,
+} from "../../../_services";
 import { User } from "../../../_models/user";
 
 @Component({
   selector: "app-all-users",
   templateUrl: "./all-users.component.html",
-  styleUrls: ["./all-users.component.scss"]
+  styleUrls: ["./all-users.component.scss"],
 })
 export class AllUsersComponent implements OnInit {
   // Async Observable data stream
   public users$: Observable<User[]>;
 
-  // Form and Table
-  public form: FormGroup;
+  // Form
+  public createForm: FormGroup;
+  public getEmail: AbstractControl;
+  public getPassword: AbstractControl;
+  public getName: AbstractControl;
+  public getSurname: AbstractControl;
+  public getAge: AbstractControl;
+
+  // Table
   public columns: object; // table headers name
   public isDesc: boolean = false;
   public tabSortHeaderName: string;
@@ -25,26 +42,23 @@ export class AllUsersComponent implements OnInit {
   private preventSimpleClick: boolean = false;
 
   constructor(
+    private _userValidationService: UserValidationService,
     private _usersService: UsersService,
     private _tableService: TableService,
     private _modal: ModalService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.columns = this._tableService.getColumns();
     this.getAllUsers();
-    this.form = new FormGroup({
-      email: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(11),
-        Validators.maxLength(50)
-      ]),
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(100)
-      ])
-    });
+    this.createForm = this._userValidationService.createUserForm;
+    this._userValidationService.dynamicForm = this.createForm;
+    this.createForm.reset();
+    this.getEmail = this._userValidationService.getEmail;
+    this.getPassword = this._userValidationService.getPassword;
+    this.getName = this._userValidationService.getName;
+    this.getSurname = this._userValidationService.getSurname;
+    this.getAge = this._userValidationService.getAge;
   }
 
   /** GET ALL USERS */
@@ -57,7 +71,13 @@ export class AllUsersComponent implements OnInit {
 
   /** CREATE ONE USER  */
   public createUser(): void {
-    this._usersService.addUser(this.form.value);
+    console.log(this.createForm.value);
+    this._usersService.addUser(this.createForm.value);
+    if (this.createForm.valid) {
+      setTimeout(() => {
+        this.createForm.reset();
+      }, 500);
+    }
   }
 
   /** PATCH ACCOUNT ACTIVATION USER  */
@@ -89,7 +109,7 @@ export class AllUsersComponent implements OnInit {
   }
 
   /** FILTERING */
-  public doFilterByHeader(header: string): void {
+  public doFilterModalByHeader(header: string): void {
     this.preventSimpleClick = true;
     clearTimeout(this.timer);
     this.tabFilterHeaderName = header;
@@ -97,13 +117,8 @@ export class AllUsersComponent implements OnInit {
   }
 
   public filterItem(option: any): void {
-    this.userObject = option.user;
+    // Filter item
+    console.log("filterItem option: ", option);
+    this.userObject = option.userPropertyValue;
   }
-
-  /** FILE */
-  // fileToUpload: File = null;
-  // public handleFileInput(files: FileList) {
-  //   this.fileToUpload = files.item(0);
-  //   this._usersService.addProfilePicture(files.item(0), 'profile');
-  // }
 }

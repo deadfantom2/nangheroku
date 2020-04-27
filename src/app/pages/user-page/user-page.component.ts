@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { Router } from '@angular/router';
-import { DateService, UsersService } from "../../_services";
+import { Router } from "@angular/router";
+import { DateService } from "../../_services";
 import { User } from "../../_models/user";
 
 @Component({
@@ -16,18 +16,26 @@ export class UserPageComponent implements OnInit {
   @Output() public changeRole = new EventEmitter<string>();
   @Output() public deleteById = new EventEmitter<User[]>();
 
-  constructor(
-    private _usersService: UsersService,
-    private _dateService: DateService,
-    private routers: Router
-  ) { }
+  constructor(private _dateService: DateService, private routers: Router) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   /** Change name of roles or activation */
   public changeName(name: String) {
     if (typeof name === "boolean") {
       return name ? "Activated" : "Not activated";
+    }
+
+    if (typeof name === "string") {
+      if (name[0] === "S") {
+        return "Simple";
+      }
+      if (name[0] === "G") {
+        return "Google";
+      }
+      if (name[0] === "F") {
+        return "Facebook";
+      }
     }
   }
 
@@ -37,7 +45,7 @@ export class UserPageComponent implements OnInit {
   }
 
   public editUser(user: User): void {
-    this.routers.navigate(['user', user._id])
+    this.routers.navigate(["user", user._id]);
   }
 
   public editAccessUser(): void {
@@ -50,6 +58,4 @@ export class UserPageComponent implements OnInit {
   public deleteUser(): void {
     this.deleteById.emit();
   }
-
-
 }

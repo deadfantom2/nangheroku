@@ -23,11 +23,12 @@ app.put("/:type", async (req, res) => {
   }
 
   const type = req.params.type;
+  const imageUserId = req.query.imageUserId;
   const archive = req.files.fileInput; // Initialize name for input = fileInput
   const typeRoutes = ["profile", "photos", "files"]; // Type of routes
   const extensionsImages = ["png", "jpg", "jpeg", "gif"]; // Type's file extensions images
   const extensionsFiles = ["pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx"]; // Type's file extensions files
-
+  console.log(archive);
   // Formating name for the file
   const coupeNomImage = archive.name.split(".");
   const extention = coupeNomImage[coupeNomImage.length - 1];
@@ -54,7 +55,6 @@ app.put("/:type", async (req, res) => {
       }
     }
     if (type === "files") {
-      console.log("filesfkfkkfkffk");
       if (extensionsFiles.indexOf(extention) < 0) {
         return res.status(400).json({
           success: false,
@@ -63,7 +63,15 @@ app.put("/:type", async (req, res) => {
       }
     }
 
-    const pathFolders = "./uploads/" + type + "/" + req.userData.id;
+    console.log("req.query.imaimageUserIdgeId: ", req.query.imageUserId);
+
+    let userId;
+    if (req.userData.id === imageUserId) {
+      userId = req.userData.id;
+    } else {
+      userId = imageUserId;
+    }
+    const pathFolders = "./uploads/" + type + "/" + userId;
     console.log("pathFolders: ", pathFolders);
     const path = pathFolders + "/" + imageArchive;
     const existPath = await fs.existsSync(pathFolders);
@@ -71,7 +79,7 @@ app.put("/:type", async (req, res) => {
       await fs.mkdirSync(pathFolders);
     }
     await archive.mv(path);
-    downloadByType(type, imageArchive, req, res);
+    downloadByType(type, imageArchive, userId, req, res);
   } catch (error) {
     console.log("err: ", error);
     if (error) {
@@ -83,29 +91,32 @@ app.put("/:type", async (req, res) => {
   }
 });
 
-async function downloadByType(type, imageArchive, req, res) {
+async function downloadByType(type, imageArchive, userId, req, res) {
   if (type === "profile") {
     let typeMessage = "created";
-    const userOne = await User.findById({ _id: req.userData.id });
-    if (userOne.img.length !== 0) {
+    const userOne = await User.findById({ _id: userId });
+    if (userOne.img.length !== 0 && !userOne.img[0].link) {
+      console.log("aaaaaaaaaaaaaaa");
       typeMessage = "updated";
       const oldpath =
-        "./uploads/" + type + "/" + req.userData.id + "/" + userOne.img[0].name;
+        "./uploads/" + type + "/" + userId + "/" + userOne.img[0].name;
+      console.log(oldpath);
       if (fs.existsSync(oldpath)) {
         fs.unlinkSync(oldpath); // Delete the last picture by ID in folder
       }
     }
 
     // $set = reset object, delete object and after create, exemple: [{}]
-    const updateUserImage = await User.updateOne(
-      { _id: req.userData.id },
+    await User.updateOne(
+      { _id: userId },
       {
         $set: {
           img: {
             name: imageArchive,
             route: type
           }
-        }
+        },
+        $unset: { link: "" }
       }
     );
     return res.status(201).json({
@@ -119,7 +130,7 @@ async function downloadByType(type, imageArchive, req, res) {
       const body = {
         name: imageArchive,
         route: type,
-        _userId: req.userData.id
+        _userId: userId
       };
       const newFile = await File.create(body);
       if (newFile) resolve(newFile);
@@ -127,7 +138,7 @@ async function downloadByType(type, imageArchive, req, res) {
     }).then(async file => {
       // $push add object everytime, exemple: [{},{},{}]
       const updateFilesUser = await User.updateOne(
-        { _id: req.userData.id },
+        { _id: userId },
         {
           $push: {
             [type]: {
@@ -146,22 +157,3 @@ async function downloadByType(type, imageArchive, req, res) {
 }
 
 module.exports = app;
-
-// dla seba pypsik privlikatelnoi dla seba
-// ei nravotsa kogda ona vugladit storinee v etoi odejde chem v drygoi
-// kogda nakrashenu gybu
-
-// tebe nravitsa kogda y teba strijka krasivee  kogda tu odenish svoe lubimoe kogda namazit djinsi
-
-// s ogolennumi nogami na kablykax eshe i v takom cvete arkom tu ne kak ne bydesh vugladet stroinee, A SEKSYALNEE DA!!
-// stroinee mojno vugladet esli odet' bruki, platie, tyfli
-// tvoi podrygi tak ne odelis
-
-// dla seba odevaeshsa, devyska kotoraa ogolaet chasti tela:
-//   > intyitivno zazuvaet smotret na nix pokazuvaa svou dostypnost
-//   > vesna, templo: xochetsa pokazat svou seksyalnost, privlech vnimanie
-
-// a ne odevaus vuzuvaushe, s parnami esli on ne gai takoe ne prokatuvaet
-
-// mojno odetsa po drygomy i vugladit stroino i krasivo,
-//   a tu vsachiski odevaesh to shto vuzovet vnimanie i skaju eshe shto eto ne tak

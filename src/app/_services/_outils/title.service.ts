@@ -9,13 +9,13 @@ export class TitleService {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title
-  ) { }
+  ) {}
 
   initTitle() {
     const appTitle = this.titleService.getTitle();
     this.router.events
       .pipe(
-        filter(event => {
+        filter((event) => {
           return event instanceof NavigationEnd;
         }),
         map(() => {

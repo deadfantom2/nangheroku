@@ -1,6 +1,6 @@
-td { 
-  padding: 6px; 
-  text-align: left; 
+td {
+  padding: 6px;
+  text-align: left;
 }
 
 span {
@@ -13,6 +13,11 @@ span {
   display: flex;
   justify-content: center;
   justify-content: space-evenly;
+}
+
+select {
+  border-radius: 0.25rem 0.25rem 0 0;
+  font-size: 0.75rem;
 }
 
 .fas {
@@ -37,31 +42,63 @@ span {
   }
 }
 
+.Simple {
+  background-color: white;
+  border-radius: 0.25rem;
+  cursor: none;
+}
 
-@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
-  td { 
-    display: block; 
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-    padding-left: 50%; 
-    &:before { 
+.Google {
+  background-color: red;
+  border-radius: 0.25rem;
+}
+
+.Facebook {
+  background-color: blue;
+  border-radius: 0.25rem;
+}
+
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  td {
+    display: block;
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    &:before {
       position: absolute;
       top: 6px;
       left: 6px;
-      width: 45%; 
-      padding-right: 10px; 
+      width: 45%;
+      padding-right: 10px;
       white-space: nowrap;
     }
-	}
-	
+  }
+
   /* Label the data */
-	td:nth-of-type(1):before { content: "Name"; }
-	td:nth-of-type(2):before { content: "Surname"; }
-	td:nth-of-type(3):before { content: "Age"; }
-	td:nth-of-type(4):before { content: "Email"; }
-	td:nth-of-type(5):before { content: "Roles"; }
-	td:nth-of-type(6):before { content: "Activation"; }
-	td:nth-of-type(7):before { content: "Creation date"; }
-	td:nth-of-type(8):before { content: "Actions"; }
+  td:nth-of-type(1):before {
+    content: "Name";
+  }
+  td:nth-of-type(2):before {
+    content: "Surname";
+  }
+  td:nth-of-type(3):before {
+    content: "Age";
+  }
+  td:nth-of-type(4):before {
+    content: "Email";
+  }
+  td:nth-of-type(5):before {
+    content: "Roles";
+  }
+  td:nth-of-type(6):before {
+    content: "Activation";
+  }
+  td:nth-of-type(7):before {
+    content: "Creation date";
+  }
+  td:nth-of-type(8):before {
+    content: "Actions";
+  }
 }

@@ -1,21 +1,35 @@
-<form [formGroup]="loginForm" (ngSubmit)="doLoginUser()">
-  <div>
-    <label>Email</label>
-    <input
-      [class.is-invalid]="getEmail.invalid && getEmail.touched"
-      type="text"
-      formControlName="email"
-    />
+<div class="login">
+  <div class="login-header">
+    <span>Authentification</span>
   </div>
-  <div>
-    <label>Password</label>
-    <input
-      [class.is-invalid]="getPassword.invalid && getPassword.touched"
-      formControlName="password"
-      type="password"
-    />
+
+  <div class="login-body">
+    <form [formGroup]="loginForm" (ngSubmit)="doLoginUser()">
+      <div>
+        <input type="text" placeholder="Email" formControlName="email" />
+      </div>
+      <div>
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+      </div>
+
+      <div class="btns__body">
+        <button class="btn__login" [disabled]="!loginForm.valid" type="submit">
+          <i
+            class="fas fa-sign-in-alt"
+            [ngClass]="!loginForm.valid ? 'disabled' : 'notDisabled'"
+          ></i>
+        </button>
+        <span>Forgot password?</span>
+      </div>
+    </form>
   </div>
-  <button [disabled]="!loginForm.valid" type="submit">
-    Login
-  </button>
-</form>
+
+  <div class="login-footer">
+    <span>Dont' have an account?</span>
+    <span (click)="navigateToPage('register')">Sign up here</span>
+  </div>
+</div>

@@ -1,62 +1,165 @@
+.all__users {
+  margin: 2rem 0 2rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
 table {
-    // width: 100%; 
-    border-collapse: collapse; 
-    margin-top: 2rem;
-    width: 50rem;
+  width: 75rem;
+  border: 0px;
+  border-collapse: collapse;
 }
 
-th { 
-    background: var(--bg-primary);   // background thead header
-    color: var(--text-primary);   // color text thead header 
-    border: 1px solid var(--border-primary);   // background border header 
-    font-weight: bold; 
-    padding: 6px; 
-    text-align: left; 
+thead {
+  th:first-child {
+    border-radius: 1rem 0 0 0;
+  }
+  th:last-child {
+    border-radius: 0 1rem 0 0;
+  }
+
+  th {
+    background: var(--bg-primary); // background thead header
+    color: var(--text-primary); // color text thead header
+    font-weight: bold;
+    padding: 6px;
+    text-align: left;
     &:last-of-type > span .fa {
-        display: none;
+      display: none;
     }
+  }
 }
 
+tbody {
+  overflow-y: scroll;
+}
 tbody > tr {
-    background-color: var(--bg-secondary);   // background tbody row
-    color: var(--text-primary);   // text color tbody row
-    border: 1px solid var(--border-secondary);   // border color tbody row
-    &:hover {
-        cursor: pointer;
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-        border-left: 0.25rem solid #12bee4;
-    }
+  background-color: var(--bg-secondary); // background tbody row
+  color: var(--text-secondary); // text color tbody row
+  border: 1px solid var(--border-secondary); // border color tbody row
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    border-left: 0.25rem solid #12bee4;
+  }
 }
 
 span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.25rem;
-    font-size: 0.75rem;
-    font-family: "Open Sans";
-    font-weight: bold;
-    line-height: 1rem;
-    cursor: pointer;
-    & > i {
-        position: relative;
-        left: 0.25rem;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25rem;
+  font-size: 0.75rem;
+  font-family: "Open Sans";
+  font-weight: bold;
+  line-height: 1rem;
+  cursor: pointer;
+  & > i {
+    position: relative;
+    left: 0.25rem;
+  }
 }
 
+.form__add_user {
+  width: 20rem;
+  height: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  background-color: var(--bg-secondary);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 2rem;
+  right: 2rem;
 
+  h4 {
+    color: var(--text-primary);
+  }
 
-@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
-	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, tr { 
-        display: block; 
-        width: 30rem;
-	}
-	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-	tr { border: 1px solid #ccc; }
+  .form-group {
+    height: 4.5rem;
+
+    &:last-of-type {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  input {
+    width: 17rem;
+    height: 2rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: none;
+    border-bottom: 1px solid var(--bg-primary);
+
+    &:hover {
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+      cursor: text;
+    }
+  }
+
+  .btn__create {
+    width: 17rem;
+    height: 2rem;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border-radius: 6px;
+    border: 1px solid var(--bg-secondary);
+
+    &.disabled {
+      cursor: no-drop;
+    }
+
+    &.notDisabled {
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1780px),
+  (min-device-width: 1780px) and (max-device-width: 1780px) {
+  .all__users {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .form__add_user {
+    position: initial;
+    margin-bottom: 2rem;
+  }
+}
+
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  .all__users {
+    display: flex;
+    flex-wrap: wrap-reverse;
+  }
+  /* Force table to not be like tables anymore */
+  table,
+  thead,
+  tbody,
+  th,
+  tr {
+    display: block;
+    width: 30rem;
+  }
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  tr {
+    border: 1px solid #ccc;
+  }
 }

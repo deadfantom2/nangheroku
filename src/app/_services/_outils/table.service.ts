@@ -12,6 +12,7 @@ export class TableService {
       { property: "email", text: "Email" },
       { property: "roles", text: "Roles" },
       { property: "isVerified", text: "Activation" },
+      { property: "socialAuth", text: "Sociale Auth" },
       { property: "createdAt", text: "Creation date" },
       { property: "", text: "Actions" }
     ];

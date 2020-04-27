@@ -6,10 +6,14 @@ export class User {
   public email: string;
   public password: string;
   public isVerified?: boolean;
-  public img?: [{
-    name?: string;
-    route?: string;
-  }]
+  public socialAuth?: string;
+  public img?: [
+    {
+      name?: string;
+      link?: string;
+      route?: string;
+    }
+  ];
   public roles?: string;
   public token?: string;
   public createdAt?: Date;

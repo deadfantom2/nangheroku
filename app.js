@@ -78,7 +78,6 @@ app.post("/fakeusers", async (req, res) => {
     user.password = item.password;
     user.isVerified = item.isVerified;
     user.roles = item.roles;
-    user.google = item.google;
     user.save();
   });
   res.json({ users: "ok" });

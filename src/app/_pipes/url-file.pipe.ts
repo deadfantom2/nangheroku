@@ -1,17 +1,20 @@
 import { Pipe, PipeTransform } from "@angular/core";
+import { environment } from "src/environments/environment";
 
 @Pipe({
   name: "urlFile"
 })
 export class UrlFilePipe implements PipeTransform {
   transform(file: any, args: any) {
+    let url = environment.apiUrl + "/image";
 
-    let url = "http://localhost:3000/image";
-
-    // console.log("file: ", file, " --- args: ", args)
+    console.log("file: ", file);
+    console.log("args", args);
     if (!file) {
-      console.log("nety")
-      return url + "/profile/nonimage";
+      if (args.userImg.link) {
+        return (url = args.userImg.link);
+      }
+      url + "/profile/nofolder/noimage";
     }
 
     // if (file.indexOf('https') >= 0) {
@@ -20,19 +23,21 @@ export class UrlFilePipe implements PipeTransform {
 
     switch (args.type) {
       case "profile":
-        url += "/profile/" + args.userId + '/' + file;
+        if (args.userImg.name !== "") {
+          url += "/profile/" + args.userId + "/" + file;
+        } else {
+          return args.userImg.name.link;
+        }
         break;
       case "files":
-        url += "/files/" + args.userId + '/' + file.file_id.name;
-        console.log(file.file_id.name.split('.')[1])
+        url += "/files/" + args.userId + "/" + file.file_id.name;
         break;
       case "photos":
-        url += "/photos/" + args.userId + '/' + file.file_id.name;
+        url += "/photos/" + args.userId + "/" + file.file_id.name;
         break;
       default:
         url += "/profile/";
     }
-    return url
-
+    return url;
   }
 }

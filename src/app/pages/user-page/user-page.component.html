@@ -36,6 +36,11 @@
   >
     <span>{{ changeName(user[col.property]) }}</span>
   </div>
+  <div *ngIf="col.property === 'socialAuth'" class="social">
+    <span [ngClass]="changeName(user[col.property])">{{
+      changeName(user[col.property])
+    }}</span>
+  </div>
   <div *ngIf="col.property === 'createdAt'">
     <span>{{ changeDateToDDMMYYYY(user[col.property]) }}</span>
   </div>

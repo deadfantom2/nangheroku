@@ -1,0 +1,31 @@
+<div *ngIf="type.invalid && type.touched">
+  <small *ngIf="type.errors?.required" class="text-danger"
+    ><i class="fas fa-star"></i> {{ message }} must be required!</small
+  >
+  <small *ngIf="type.errors?.minlength" class="text-danger"
+    ><i class="fas fa-star"></i> {{ message }} must be minimum
+    {{ minSize }} characters!</small
+  >
+  <small *ngIf="type.errors?.maxlength" class="text-danger"
+    ><i class="fas fa-star"></i> {{ message }} must be maximum
+    {{ maxSize }} characters!</small
+  >
+
+  <small *ngIf="type.errors?.min" class="text-danger"
+    ><i class="fas fa-star"></i> {{ message }} must be minimum
+    {{ minSize }}!</small
+  >
+  <small *ngIf="type.errors?.max" class="text-danger"
+    ><i class="fas fa-star"></i> {{ message }} must be maximum
+    {{ maxSize }}!</small
+  >
+  <small *ngIf="type.errors?.pattern" class="text-danger"
+    ><i class="fas fa-star"></i> {{ message }} format is't correct!</small
+  >
+</div>
+
+<div *ngIf="type.valid && type.touched">
+  <small *ngIf="!type.errors" class="text-success">
+    <i class="fas fa-check"></i>{{ message }} OK</small
+  >
+</div>

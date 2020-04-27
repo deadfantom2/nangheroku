@@ -1,4 +1,131 @@
-.img {
-    height: "1rem";
-    width: "1rem";
+.user {
+  height: 100vh - 3.4vh;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+  &__info,
+  &__files,
+  &__photos {
+    width: 25rem;
+    height: 15rem;
+    padding: 1rem 2rem;
+    box-shadow: 0px 0px 73px -6px rgba(0, 0, 0, 1);
+    background-color: white;
+    border-radius: 1rem;
+  }
+
+  &__info {
+    p {
+      margin: 0;
+      padding-top: 10px;
+      &:first-of-type > img {
+        position: relative;
+        float: right;
+      }
+    }
+  }
+
+  form {
+    height: 6rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+
+    .form-group {
+      width: 10rem;
+    }
+  }
+  input {
+    cursor: pointer;
+  }
+  select {
+    cursor: pointer;
+  }
+  button {
+    height: 0;
+    background-color: transparent;
+    border: none;
+    & .notDisabled {
+      color: rgb(101, 101, 226);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    & .disabled {
+      color: #bfbfbf;
+      font-size: 1.5rem;
+      cursor: no-drop;
+    }
+  }
+  .fas {
+    font-size: 1.5rem;
+    color: red;
+  }
+
+  &__photos {
+    overflow-y: scroll;
+  }
+
+  &__files {
+    overflow-y: scroll;
+  }
+}
+
+.custom__file-input {
+  background-image: url("../../../../assets/svg/download.svg");
+  background-repeat: no-repeat;
+  color: transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
+  &:hover::before {
+    border-color: black;
+    color: blue;
+  }
+  &:active {
+    outline: 0;
+    &::before {
+      background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+    }
+  }
+  &::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+}
+*
+
+/* SCROLL */
+::-webkit-scrollbar {
+  width: 1rem; /* largeur scroll */
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary); /* couleur de scroll */
+  border-radius: 1rem;
+  border: 1px solid #aeaeb5;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-secondary); /* couleur de pointeur dans scroll */
+  border-radius: 1rem;
+  border: 1px solid #aeaeb5;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: red;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #aeaeb5; /* When you selected scroll*/
+}
+
+@media only screen and (max-width: 600px) {
+  .user {
+    height: 100vh;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+    display: flex;
+    flex-direction: row;
+    overflow-y: hidden;
+  }
 }

@@ -8,43 +8,48 @@ const nameValidator = [
     validator: "matches",
     arguments: /^(([a-zA-Z]{3,20})+[ ]+([a-zA-Z]{3,20})+)+$/,
     message:
-      "Name must be at least 3 characters, max 30, no special characters or numbers, must have space in between name."
+      "Name must be at least 3 characters, max 30, no special characters or numbers, must have space in between name.",
   }),
   validate({
     validator: "isLength",
     arguments: [3, 20],
-    message: "Name should be between {ARGS[0]} and {ARGS[1]} characters"
-  })
+    message: "Name should be between {ARGS[0]} and {ARGS[1]} characters",
+  }),
 ];
 // E-mail Validator
 const emailValidator = [
   validate({
     validator: "isEmail",
-    message: "E-mail is not a valid."
+    message: "E-mail is not a valid.",
   }),
   validate({
     validator: "isLength",
     arguments: [11, 50],
-    message: "Email should be between {ARGS[0]} and {ARGS[1]} characters"
-  })
+    message: "Email should be between {ARGS[0]} and {ARGS[1]} characters",
+  }),
 ];
 // Password Validator
 const passwordValidator = [
   validate({
     validator: "isLength",
     arguments: [4, 100],
-    message: "Password should be between {ARGS[0]} and {ARGS[1]} characters"
-  })
+    message: "Password should be between {ARGS[0]} and {ARGS[1]} characters",
+  }),
 ];
 // Role Validator
 const rolesValidator = {
   values: ["ADMIN_ROLE", "USER_ROLE"],
-  message: "{VALUE} ce nest pas une role valide!"
+  message: "{VALUE} ce nest pas une role valide!",
 };
 // Image, Photo, File route Validator
 const imageRoutesValidator = {
   values: ["profile", "files", "photos"],
-  message: "{VALUE} it's fail route!"
+  message: "{VALUE} it's fail route!",
+};
+// SIMPLE, GOOGLE, FACEBOOK social auth Validator
+const socialValidator = {
+  values: ["SIMPLE", "GOOGLE", "FACEBOOK"],
+  message: "{VALUE} it's fail route!",
 };
 
 const UserSchema = mongoose.Schema(
@@ -55,37 +60,40 @@ const UserSchema = mongoose.Schema(
     email: { type: String, required: true, validate: emailValidator },
     password: { type: String, required: true, validate: passwordValidator },
     roles: { type: String, default: "USER_ROLE", enum: rolesValidator },
-    google: { type: Boolean, default: false },
-    isVerified: { type: Boolean, default: true },
+    socialAuth: { type: String, default: "SIMPLE", enum: socialValidator },
+    isVerified: { type: Boolean, default: false },
+    passwordResetToken: String,
+    passwordResetExpires: Date,
     img: [
       {
-        name: String,
-        route: { type: String, enum: imageRoutesValidator }
-      }
+        name: { type: String, default: "" },
+        link: { type: String },
+        route: { type: String, default: "profile" },
+      },
     ],
     photos: [
       {
-        file_id: { type: mongoose.Schema.Types.ObjectId, ref: "FileModel" }
-      }
+        file_id: { type: mongoose.Schema.Types.ObjectId, ref: "FileModel" },
+      },
     ],
     files: [
       {
-        file_id: { type: mongoose.Schema.Types.ObjectId, ref: "FileModel" }
-      }
+        file_id: { type: mongoose.Schema.Types.ObjectId, ref: "FileModel" },
+      },
     ],
     orders: [
       {
-        order_id: { type: mongoose.Schema.Types.ObjectId, ref: "OrderModel" }
-      }
+        order_id: { type: mongoose.Schema.Types.ObjectId, ref: "OrderModel" },
+      },
     ],
     passwordResetToken: String,
-    passwordResetExpires: Date
+    passwordResetExpires: Date,
   },
   { timestamps: true }
 );
 
 // Saves the user's password hashed (plain text password storage is not good)
-UserSchema.pre("save", async function(next) {
+UserSchema.pre("save", async function (next) {
   try {
     var user = this;
     if (this.isModified("password") || this.isNew) {

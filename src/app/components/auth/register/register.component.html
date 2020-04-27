@@ -1,48 +1,82 @@
-<form [formGroup]="registerForm" (ngSubmit)="doRegisterUser()">
-  <div>
-    <label>Email</label>
-    <input
-      [class.is-invalid]="getEmail.invalid && getEmail.touched"
-      type="text"
-      formControlName="email"
-    />
-    <app-span-form-message
-      [validator-type]="getEmail"
-      [minSize]="11"
-      [maxSize]="50"
-      [message-type]="'Email'"
-    ></app-span-form-message>
+<div class="register">
+  <div class="register-header">
+    <span>Register</span>
   </div>
 
-  <div>
-    <label>Password</label>
-    <input
-      [class.is-invalid]="getPassword.invalid && getPassword.touched"
-      formControlName="password"
-      type="password"
-    />
+  <div class="register-body">
+    <form [formGroup]="registerForm" (ngSubmit)="doRegisterUser()">
+      <div>
+        <input
+          type="text"
+          placeholder="Email"
+          [class.is-invalid]="getEmail.invalid && getEmail.touched"
+          formControlName="email"
+        />
+        <app-span-form-message
+          [validator-type]="getEmail"
+          [minSize]="11"
+          [maxSize]="50"
+          [message-type]="'Email'"
+        ></app-span-form-message>
+      </div>
 
-    <app-span-form-message
-      [validator-type]="getPassword"
-      [minSize]="4"
-      [maxSize]="100"
-      [message-type]="'Password'"
-    ></app-span-form-message>
+      <div>
+        <input
+          type="password"
+          placeholder="password"
+          [class.is-invalid]="getPassword.invalid && getPassword.touched"
+          formControlName="password"
+        />
+
+        <app-span-form-message
+          [validator-type]="getPassword"
+          [minSize]="4"
+          [maxSize]="100"
+          [message-type]="'Password'"
+        ></app-span-form-message>
+      </div>
+
+      <div>
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          [class.is-invalid]="registerForm.errors?.misMatch"
+          formControlName="confirmPassword"
+        />
+        <small *ngIf="registerForm.errors?.misMatch" class="text-danger"
+          >Password not match!</small
+        >
+      </div>
+
+      <!-- <re-captcha
+        formControlName="recaptcha"
+        (resolved)="resolved($event)"
+        siteKey="6LdL2eQUAAAAAA_IFtloCJJbJpXQ5bMwf02BvQDV"
+      ></re-captcha> -->
+
+      <div class="btns__body">
+        <button
+          type="submit"
+          class="btn__register"
+          [disabled]="!registerForm.valid"
+        >
+          <i
+            class="fas fa-sign-in-alt"
+            [ngClass]="!registerForm.valid ? 'disabled' : 'notDisabled'"
+          ></i>
+        </button>
+        <span (click)="navigateToPage('login')">Connect to your account?</span>
+      </div>
+    </form>
   </div>
 
-  <div>
-    <label>Confirm Password</label>
-    <input
-      [class.is-invalid]="registerForm.errors?.misMatch"
-      formControlName="confirmPassword"
-      type="password"
-    />
-    <small *ngIf="registerForm.errors?.misMatch" class="text-danger"
-      >Password not match!</small
-    >
+  <div class="register-footer">
+    <span>Create an account with </span>
+    <button class="google" (click)="signGoogle()">
+      <i class="fab fa-google"></i>
+    </button>
+    <button class="facebook" (click)="signFacebook()">
+      <i class="fab fa-facebook-square"></i>
+    </button>
   </div>
-
-  <button [disabled]="!registerForm.valid" type="submit">
-    Regiser
-  </button>
-</form>
+</div>
